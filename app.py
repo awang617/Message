@@ -59,8 +59,12 @@ def login():
             if check_password_hash(user.password, form.password.data):
                 login_user(user)    # creates a session and logs in the user
                 flash('You have been logged in!', 'success')
-                # update the user's plants with new days till_next_water
-                return redirect(url_for('profile'))
+                order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False)
+                if order.exists():
+                    return redirect(url_for('profile'))
+                else:
+                    newOrder = models.Order.create_order(user=user)
+                    return redirect(url_for('profile'))
             else:
                 flash('Email or password incorrect.', 'danger')
     return render_template("login.html", form=form)
@@ -78,6 +82,7 @@ def signup():
             password=form.password.data
         )
         user = models.User.get(models.User.email== form.email.data)
+        models.Order.create_order(user=user)
         login_user(user)
         # redirect user to index
         return redirect(url_for('profile'))
@@ -100,7 +105,11 @@ def profile():
 @app.route('/shop', methods=["GET"])
 @login_required
 def shop():
-    return render_template("shop.html")
+    
+    product = models.Product.select()
+    
+
+    return render_template("shop.html", product=product)
 
 @app.route('/cart', methods=["GET"])
 @login_required
@@ -109,4 +118,65 @@ def cart():
 
 if __name__ == '__main__':
     models.initialize()
+    # try:
+        # models.Category.create(category_name="bouquet")
+        # models.Category.create(category_name="plant")
+        # bouquet = models.Category.get(models.Category.category_name == "bouquet")
+        # plant = models.Category.get(models.Category.category_name == "plant")
+        # models.Product.create(
+        #     name="Roses are Red",
+        #     description="Everyone knows red roses means love. This classic bouquet is perfect for romantic occasions.",
+        #     image="https://cdn.azflorist.com/wp-content/uploads/20190128091943/E2-4305D.jpg",
+        #     plant="red rose",
+        #     meaning="love",
+        #     price=40,
+        #     category=bouquet
+        # )
+        # models.Product.create(
+        #     name="Prettily Presuming",
+        #     description="Be careful when giving or recieving this beautiful bloom, as snapdragons mean presumption. Perhaps there is someone sets themselves too highly, or took you for granted. A snapdragon may snap them into place.",
+        #     image="https://cdn1.harryanddavid.com/wcsstore/HarryAndDavid/images/catalog/17_31841_30E_01ex.jpg",
+        #     plant="snapdragon",
+        #     meaning="Presumption",
+        #     price=35,
+        #     category=bouquet
+        # )
+        # models.Product.create(
+        #     name="Return of Happiness",
+        #     description="These delicate flowers are perfect if you wish for a return of joy. Send it after an argument has pass or as a homecoming gift.",
+        #     image="https://i.pinimg.com/originals/64/7e/b5/647eb574340a0351ba55e3d1d91fae77.jpg",
+        #     plant="lily of the valley",
+        #     meaning="Return of happiness",
+        #     price=49,
+        #     category=bouquet
+        # )
+        # models.Product.create(
+        #     name="Ardent Love",
+        #     description="Don't let its prickly exterior fool you. Cactus means ardent love, and is a great alternative if your partner thinks roses are cliche. Best of all, they are easy to care for and live long lives.",
+        #     image="https://cdn.shopify.com/s/files/1/0130/1052/products/DSC_0340_1024x1024@2x.jpg?v=1517494867",
+        #     plant="cactus",
+        #     meaning="ardent love",
+        #     price="19",
+        #     category=plant
+        # )
+        # models.Product.create(
+        #     name="Prosper",
+        #     description="A gift imbued with the best wishes of prosperity and good health.",
+        #     image="https://cdn.shopify.com/s/files/1/0207/8508/products/2018-Sage-Bush-001_1_1024x1024.jpg?v=1537882781",
+        #     plant="sage",
+        #     meaning="good health and long life",
+        #     price=15,
+        #     category=plant
+        # )
+        # models.Product.create(
+        #     name="Lavender",
+        #     description="Although its scent is soothing its meaning is not. Lavender means mistrust, so be wary who you send one to.",
+        #     image="https://bouqs-production-weblinc.netdna-ssl.com/product_images/lavender/Original/5c3d2db061707040b4002757/detail.jpg?c=1547513264",
+        #     plant="lavender",
+        #     meaning="mistrust",
+        #     price=22,
+        #     category=plant
+        # )
+    # except ValueError:
+    #     pass
     app.run(debug=DEBUG, port=PORT)
