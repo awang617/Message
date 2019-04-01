@@ -5,17 +5,18 @@ from models import User
 from wtforms import StringField, PasswordField, TextAreaField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Regexp, ValidationError, Length, EqualTo, Email
 
-
-def name_exists(form, field):
-    # if the user already exists
-    if User.select().where(User.username == field.data).exists():
-        raise ValidationError("User with this username already exists!")
-
-
 def email_exists(form, field):
     if User.select().where(User.email == field.data).exists():
         raise ValidationError("Someone with this email is already signed up!")
 
+
+class AccountForm(Form):
+    email = StringField(
+        'Email', 
+        validators=[DataRequired(), 
+        Email()
+        ]
+    )
 
 class RegisterForm(Form):
     fname = StringField(
@@ -24,22 +25,27 @@ class RegisterForm(Form):
             DataRequired(),
             Regexp(
                 r'^[a-zA-Z_]+$',
-                message=(
-                    "Cannot contain numbers or special characters"
-                )
+                message=("Cannot contain numbers or special characters")
+            )
         ]
     )
-    fname = StringField(
+    lname = StringField(
         'Last Name',
         validators=[
             DataRequired(),
             Regexp(
                 r'^[a-zA-Z_]+$',
-                message=(
-                    "Cannot contain numbers or special characters"
-                )
+                message=("Cannot contain numbers or special characters")
+            )
         ]
     )
+    email = StringField(
+        'Email',
+        validators=[
+            DataRequired(),
+            Email(),
+            email_exists
+        ])
     password = PasswordField(
         'Password',
         validators=[
@@ -51,16 +57,8 @@ class RegisterForm(Form):
         'Confirm Password',
         validators=[DataRequired()]
     )
-
-class Account(Form):
-    email = StringField(
-        'Email', 
-        validators=[DataRequired(), 
-        Email()]
-        )
-
-
 class LoginForm(Form):
+    email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
 
 class ReviewForm(Form):
@@ -77,23 +75,39 @@ class ReviewForm(Form):
         validators=DataRequired()
     )
 
-class EditUserForm(Form):
-    username = StringField(
-        'Username',
-        validators=[
-            DataRequired(),
-            Regexp(
-                r'^[a-zA-Z0-9_]+$',
-                message=(
-                    "Username should be one word, letters, numbers, and underscores only.")
-            ),
-            name_exists
-        ])
-    email = StringField(
-        'Email',
-        validators=[
-            DataRequired(),
-            Email(),
-            email_exists
-        ])
+# class RegisterForm(Form):
+#     fname = StringField(
+#         'First Name',
+#         validators=[
+#             DataRequired(),
+#             Regexp(
+#                 r'^[a-zA-Z_]+$',
+#                 message=("Cannot contain numbers or special characters")
+#             )
+#         ]
+#     )
+#     lname = StringField(
+#         'Last Name',
+#         validators=[
+#             DataRequired(),
+#             Regexp(
+#                 r'^[a-zA-Z_]+$',
+#                 message=("Cannot contain numbers or special characters")
+#             ]
+#     )
+#     password = PasswordField(
+#         'Password',
+#         validators=[
+#             DataRequired(),
+#             Length(min=2),
+#             EqualTo('password2', message='Passwords must match')
+#         ]
+#     )
+#     password2 = PasswordField(
+#         'Confirm Password',
+#         validators=[DataRequired()]
+#     )
+
+
+
 
