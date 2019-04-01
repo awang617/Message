@@ -11,10 +11,10 @@ class User(UserMixin, Model):
     lname = CharField()
     email = CharField(unique=True)
     password = CharField(max_length=100)
-    # street_address = CharField()
-    # city = CharField()
-    # state = CharField()
-    # postal_code = IntegerField()
+    street_address = CharField(default="")
+    city = CharField(default="")
+    state = CharField(default="")
+    postal_code = CharField(default="")
     join_date = DateTimeField(default=datetime.datetime.now())
 
     @classmethod
@@ -35,13 +35,15 @@ class User(UserMixin, Model):
 
 class Category(Model):
     category_name = CharField(unique=True)
+
     class Meta:
         database = DATABASE
 
 class Product(Model):
-    name = CharField()
+    name = CharField(unique=True)
     description = CharField()
     image = CharField()
+    plant = CharField()
     meaning = CharField()
     price = IntegerField()
     category = ForeignKeyField(model=Category, backref='product')
@@ -55,6 +57,16 @@ class Order(Model):
     total_cost = IntegerField(default=0)
     date_created = DateTimeField(default=datetime.datetime.now())
     purchased = BooleanField(default=False)
+
+    @classmethod
+    def create_order(cls, user):
+        try:
+            cls.create(
+                user = user
+            )
+        except:
+            raise ValueError("order error")
+
     class Meta:
         database = DATABASE
 

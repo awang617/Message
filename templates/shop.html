@@ -2,4 +2,31 @@
 
 {% block content %}
 <h1>This is the shop page</h1>
+
+<div class="container"></div>
+<div class="row">
+{% for item in product %}
+    <div class="col-sm-4 col-6">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image">            
+                    <img src="{{item.image}}" alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                <div class="media-content">
+                    <p class="title is-4">{{item.name}}</p>
+                </div>
+                </div>
+            
+                <div class="media-right">
+                    ${{item.price}}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+</div>
 {% endblock %}
