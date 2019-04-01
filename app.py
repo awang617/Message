@@ -46,17 +46,6 @@ def after_request(response):
 def index():
     return render_template("index.html")
 
-# @app.route('/account')
-# def account():
-#     form = forms.AccountForm()
-#     if form.validate_on_submit():
-#         try: 
-#             user=models.User.get(models.User.email == form.email.data)
-#             if user:
-#                 return redirect(url_for('login'))
-#             else: 
-#                 return redirect(url_for('signup'))
-#     return render_template('account.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -71,7 +60,7 @@ def login():
                 login_user(user)    # creates a session and logs in the user
                 flash('You have been logged in!', 'success')
                 # update the user's plants with new days till_next_water
-                return redirect(url_for('index'))
+                return redirect(url_for('profile'))
             else:
                 flash('Email or password incorrect.', 'danger')
     return render_template("login.html", form=form)
@@ -91,7 +80,7 @@ def signup():
         user = models.User.get(models.User.email== form.email.data)
         login_user(user)
         # redirect user to index
-        return redirect(url_for('index'))
+        return redirect(url_for('profile'))
     return render_template("signup.html", form=form)
 
 @app.route('/logout')
@@ -100,6 +89,23 @@ def signup():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+@app.route('/profile')
+@login_required
+def profile():
+    user = current_user
+    return render_template("profile.html", user=user)
+
+@app.route('/shop', methods=["GET"])
+@login_required
+def shop():
+    return render_template("shop.html")
+
+@app.route('/cart', methods=["GET"])
+@login_required
+def cart():
+    return render_template("cart.html")
 
 if __name__ == '__main__':
     models.initialize()
