@@ -46,6 +46,7 @@ class Product(Model):
     plant = CharField()
     meaning = CharField()
     price = IntegerField()
+    data_name= CharField()
     category = ForeignKeyField(model=Category, backref='product')
 
     class Meta:
@@ -73,7 +74,7 @@ class Order(Model):
 class OrderDetails(Model):
     order = ForeignKeyField(model=Order, backref='order_details')
     product = ForeignKeyField(model=Product, backref='order_details')
-    quantity = IntegerField()
+    quantity = IntegerField(default=1)
 
     class Meta:
         database = DATABASE
