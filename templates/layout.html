@@ -5,11 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Bulma CSS -->
     <!-- <link rel=“stylesheet” href=“https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css“> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
      <!-- Animations-->
     <link rel=“stylesheet” href=“https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css”>
 </head>
@@ -42,7 +42,7 @@
                 <a class="navbar-item" href="{{url_for('login')}}">Login</a>
                 <a class="navbar-item" href="{{url_for('signup')}}">Signup</a>
                 {% endif %}
-                
+
                 <a class="navbar-item" href="{{url_for('cart')}}" title="cart">Cart</a>
             </div>
         </div>
