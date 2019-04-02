@@ -2,4 +2,11 @@
 
 {% block content %}
 <h1>This is the cart page</h1>
+
+{% for item in cart %}
+<p>{{item.product.name}} , {{item.quantity}}</p>
+<a href="/add_to_cart/{{item.product.id}}">+</a>
+<a href="/subtract_from_cart/{{item.id}}">-</a>
+<a href="/remove_from_cart/{{item.id}}">Remove</a>
+{% endfor %}
 {% endblock %}
