@@ -121,6 +121,12 @@ def increment_total(price):
     order.total_cost += price
     order.save()
 
+def decrement_total(price):
+    user = current_user
+    order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
+    order.total_cost -= price
+    order.save()
+
 @app.route('/add_to_cart/<productid>', methods=["GET", "POST", "PUT"])
 @login_required
 def add_to_cart(productid):
@@ -129,14 +135,11 @@ def add_to_cart(productid):
     order_details = models.OrderDetails.select(models.Product, models.OrderDetails).join(models.Product).where(models.OrderDetails.order_id == order, models.OrderDetails.product_id == productid)
     if order_details.exists():
         existing_order_details = order_details.get()
-        print("quantity", order_details.get().quantity)
         existing_order_details.quantity += 1
         existing_order_details.save()
-        print("$",existing_order_details.product.price)
         existing_order_details.subtotal += existing_order_details.product.price
         existing_order_details.save()
         increment_total(existing_order_details.product.price)
-        print("quantity after", existing_order_details.quantity, existing_order_details.product.price)
         return redirect(url_for("cart"))
     else:
         user = current_user
@@ -160,8 +163,11 @@ def subtract_from_cart(order_details_id):
         if existing_order_details.quantity > 1:
             existing_order_details.quantity -= 1
             existing_order_details.save()
+            existing_order_details.subtotal -= existing_order_details.product.price
+            decrement_total(existing_order_details.product.price)
             return redirect(url_for("cart"))
         else:
+            decrement_total(existing_order_details.product.price)
             existing_order_details.delete_instance()
             return redirect(url_for("cart"))
     else:
@@ -175,7 +181,10 @@ def remove_from_cart(order_details_id):
     except:
         raise Exception("remove from cart error")
     if remove_order:
+        remove_order.order.total_cost -= remove_order.subtotal
+        remove_order.order.save()
         remove_order.delete_instance()
+        
         return redirect(url_for("cart"))
     else:
         return ("error")
@@ -184,11 +193,17 @@ def remove_from_cart(order_details_id):
 @login_required
 def cart():
     user = current_user
-    order = models.Order.select(models.Order.id).where(models.Order.user == user.id)
-    cart = models.OrderDetails.select(models.Product, models.OrderDetails).join(models.Product).where(models.OrderDetails.order_id == order)
+    order = models.Order.select().where(models.Order.user == user.id).get()
+    cart = models.OrderDetails.select().where(models.OrderDetails.order_id == order.id)
     for item in cart:
+        print(item.id)
         print(item.product.name)
-    return render_template("cart.html", cart=cart)
+        print(item.order.total_cost)
+    return render_template("cart.html", cart=cart, order=order)
+
+@app.route('/checkout', methods=["GET", "PUT"])
+def checkout():
+    pass
 
 if __name__ == '__main__':
     models.initialize()
