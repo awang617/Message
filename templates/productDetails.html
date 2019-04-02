@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>This is the product details page</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <img src="{{product.image}}" class="image-fluid">
+        </div>
+        <div class="col-6">
+            <h3>{{product.name}}</h3>
+            <p>{{product.description}}</p>
+            <p>${{product.price}}</p>
+            <p><small>{{product.plant|capitalize}}: <i>{{product.meaning}}</i></small></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
