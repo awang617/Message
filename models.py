@@ -47,6 +47,7 @@ class Product(Model):
     meaning = CharField()
     price = IntegerField()
     data_name= CharField()
+    average_rating = FloatField(default=0)
     category = ForeignKeyField(model=Category, backref='product')
 
     class Meta:
@@ -75,6 +76,18 @@ class OrderDetails(Model):
     order = ForeignKeyField(model=Order, backref='order_details')
     product = ForeignKeyField(model=Product, backref='order_details')
     quantity = IntegerField(default=1)
+    subtotal = IntegerField()
+
+    @classmethod
+    def create_order_details(cls, order, product, subtotal):
+        try:
+            cls.create(
+                order=order,
+                product=product,
+                subtotal=subtotal
+            )
+        except:
+            raise ValueError("add to cart error")
 
     class Meta:
         database = DATABASE
