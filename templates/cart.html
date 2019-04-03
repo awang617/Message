@@ -11,5 +11,9 @@
 <a href="/remove_from_cart/{{item.id}}" class="button">Remove</a>
 {% endfor %}
 <p>Total: ${{order.total_cost}}</p>
-<a class="button">Checkout</a>
+{% if cart %}
+<a href="/checkout" class="button">Checkout</a>
+{% endif %}
+<a href="/shop" class="button">Continue Shopping</a>
+
 {% endblock %}

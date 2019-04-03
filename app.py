@@ -95,12 +95,25 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+def time_of_day(hour):
+    return (
+        "morning" if 5 <= hour <= 11
+        else
+        "afternoon" if 12 <= hour <= 17
+        else
+        "evening" if 18 <= hour <= 22
+        else
+        "night"
+    )
 
 @app.route('/profile')
 @login_required
 def profile():
     user = current_user
-    return render_template("profile.html", user=user)
+    current_hour = datetime.datetime.now().hour
+    print(current_hour)
+    greeting = time_of_day(current_hour)
+    return render_template("profile.html", user=user, greeting=greeting)
 
 @app.route('/shop', methods=["GET"])
 @login_required
@@ -131,7 +144,7 @@ def decrement_total(price):
 @login_required
 def add_to_cart(productid):
     user = current_user
-    order = models.Order.select(models.Order.id).where(models.Order.user == user.id)
+    order = models.Order.select(models.Order.id).where(models.Order.user == user.id, models.Order.purchased==False)
     order_details = models.OrderDetails.select(models.Product, models.OrderDetails).join(models.Product).where(models.OrderDetails.order_id == order, models.OrderDetails.product_id == productid)
     if order_details.exists():
         existing_order_details = order_details.get()
@@ -162,6 +175,7 @@ def subtract_from_cart(order_details_id):
             existing_order_details.quantity -= 1
             existing_order_details.save()
             existing_order_details.subtotal -= existing_order_details.product.price
+            existing_order_details.save()
             decrement_total(existing_order_details.product.price)
             return redirect(url_for("cart"))
         else:
@@ -191,14 +205,22 @@ def remove_from_cart(order_details_id):
 @login_required
 def cart():
     user = current_user
-    order = models.Order.select().where(models.Order.user == user.id).get()
+    order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
     cart = models.OrderDetails.select().where(models.OrderDetails.order_id == order.id)
     
     return render_template("cart.html", cart=cart, order=order)
 
 @app.route('/checkout', methods=["GET", "PUT"])
 def checkout():
-    pass
+    user = current_user
+    order = models.Order.get(models.Order.user_id == user.id, models.Order.purchased == False)
+    print(order.purchased)
+    order.purchased = True
+    order.save()
+    order.order_date = datetime.datetime.now()
+    order.save()
+    models.Order.create_order(user=user.id)
+    return redirect(url_for("cart"))
 
 if __name__ == '__main__':
     models.initialize()
