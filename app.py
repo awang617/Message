@@ -111,9 +111,37 @@ def time_of_day(hour):
 def profile():
     user = current_user
     current_hour = datetime.datetime.now().hour
-    print(current_hour)
     greeting = time_of_day(current_hour)
-    return render_template("profile.html", user=user, greeting=greeting)
+    return render_template("dashboard.html", user=user, greeting=greeting)
+
+
+@app.route('/profile/orders', methods=["GET"])
+@login_required
+def order_history():
+    user = current_user
+    current_hour = datetime.datetime.now().hour
+    greeting = time_of_day(current_hour)
+    orders = models.Order.select().where(models.Order.user_id == user.id, models.Order.purchased == True)
+    return render_template("orderHistory.html", user=user, greeting=greeting, orders=orders)
+
+@app.route('/profile/orders/view_details/<orderid>', methods=["GET"])
+@login_required
+def view_details(orderid):
+    user = current_user
+    current_hour = datetime.datetime.now().hour
+    greeting = time_of_day(current_hour)
+    order = models.Order.get(models.Order.id == orderid)
+    print(order)
+    details = models.OrderDetails.select().where(models.OrderDetails.order_id == orderid)
+    return render_template("viewDetails.html", user=user, greeting=greeting, order=order, details=details)
+
+@app.route('/profile/reviews', methods=["GET"])
+@login_required
+def reviews():
+    user = current_user
+    current_hour = datetime.datetime.now().hour
+    greeting = time_of_day(current_hour)
+    return render_template("reviews.html", user=user, greeting=greeting)
 
 @app.route('/shop', methods=["GET"])
 @login_required
@@ -124,9 +152,11 @@ def shop():
 @app.route('/shop/<data_name>', methods=["GET"])
 @login_required
 def product_details(data_name):
+    form = forms.ReviewForm()
     product = models.Product.get(models.Product.data_name == data_name)
+    reviews = models.Review.select().where(models.Review.product_id == product.id)
     print(product)
-    return render_template("productDetails.html", product=product)
+    return render_template("productDetails.html", product=product, form=form, reviews=reviews)
 
 def increment_total(price):
     user = current_user

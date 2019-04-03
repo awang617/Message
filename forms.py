@@ -9,15 +9,6 @@ def email_exists(form, field):
     if User.select().where(User.email == field.data).exists():
         raise ValidationError("Someone with this email is already signed up!")
 
-
-class AccountForm(Form):
-    email = StringField(
-        'Email', 
-        validators=[DataRequired(), 
-        Email()
-        ]
-    )
-
 class RegisterForm(Form):
     fname = StringField(
         'First Name',
@@ -62,52 +53,9 @@ class LoginForm(Form):
     password = PasswordField('Password', validators=[DataRequired()])
 
 class ReviewForm(Form):
-    title = StringField(
-        'Title',
-        validators=DataRequired()
-    )
-    rating = SelectField(
-        'Rating',
-        choices=[('1', '2', '3', '4', '5')]
-    )
-    content = StringField(
-        'Review',
-        validators=DataRequired()
-    )
-
-# class RegisterForm(Form):
-#     fname = StringField(
-#         'First Name',
-#         validators=[
-#             DataRequired(),
-#             Regexp(
-#                 r'^[a-zA-Z_]+$',
-#                 message=("Cannot contain numbers or special characters")
-#             )
-#         ]
-#     )
-#     lname = StringField(
-#         'Last Name',
-#         validators=[
-#             DataRequired(),
-#             Regexp(
-#                 r'^[a-zA-Z_]+$',
-#                 message=("Cannot contain numbers or special characters")
-#             ]
-#     )
-#     password = PasswordField(
-#         'Password',
-#         validators=[
-#             DataRequired(),
-#             Length(min=2),
-#             EqualTo('password2', message='Passwords must match')
-#         ]
-#     )
-#     password2 = PasswordField(
-#         'Confirm Password',
-#         validators=[DataRequired()]
-#     )
-
+    title = StringField('Title', validators=[DataRequired()])
+    rating = SelectField('Rating', choices=[('1', '1'), ('2','2'), ('3', '3'), ('4', '4'), ('5', '5')])
+    content = TextAreaField('Review', validators=[DataRequired()])
 
 
 
