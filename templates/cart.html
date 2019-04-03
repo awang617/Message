@@ -4,7 +4,7 @@
 <h1>This is the cart page</h1>
 
 {% for item in cart %}
-<p>{{item.product.name}}</p>
+<p>{{item.product.name}} ${{item.subtotal}}</p>
 <a href="/add_to_cart/{{item.product.id}}" class="button">+</a>
 {{item.quantity}}
 <a href="/subtract_from_cart/{{item.id}}" class="button">-</a>
