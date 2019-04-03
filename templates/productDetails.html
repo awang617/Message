@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% from 'macros.html' import render_field %}
 
 {% block content %}
 <h1>This is the product details page</h1>
@@ -14,6 +15,43 @@
             <p><small>{{product.plant|capitalize}}: <i>{{product.meaning}}</i></small></p>
             <a href="/add_to_cart/{{product.id}}"class="button">Add to cart</a>
         </div>
+    </div>
+    <div class="row">
+        <h2>Reviews</h2>
+    </div>
+    <div class="row">
+        <h3>{{product.average_rating}}</h3>
+    </div>
+    
+    <div class="row">
+        <h4>Submit a review</h4>
+        <form method="POST" action="" class="form form-group">
+            {{ form.hidden_tag() }}
+            {% for field in form %}
+                {{ render_field(field) }}
+            {% endfor %}
+            <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
+        </form>
+    </div>
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="row">
+                    <h5>{{review.title}} {{review.user.fname}} {{review.user.lname}}</h5>
+                    <p>{{review.rating}}</p>
+                    <p>{{review.content}}</p>
+                    <p>{{review.date_posted.strftime('%m-%d-%Y')}}</p>
+                    {% if current_user.id == review.user_id %}
+                    <a class="button">Edit</a>
+                    <a class="button is-danger">Delete</a>
+                    {% endif%}
+                </div>
+            {% endfor %}
+        {% else %}
+        <div class="order-1">
+            Be the first to review this product!
+        </div>
+        {% endif %}
+    
     </div>
 </div>
 

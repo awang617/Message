@@ -149,13 +149,32 @@ def shop():
     product = models.Product.select()
     return render_template("shop.html", product=product)
 
-@app.route('/shop/<data_name>', methods=["GET"])
+def average(reviews):
+    ratings = []
+    for review in reviews:
+        ratings.append(review.rating)
+    return sum(ratings)/len(ratings)
+
+@app.route('/shop/<data_name>', methods=["GET", "POST"])
 @login_required
 def product_details(data_name):
     form = forms.ReviewForm()
+    user = current_user
     product = models.Product.get(models.Product.data_name == data_name)
     reviews = models.Review.select().where(models.Review.product_id == product.id)
-    print(product)
+    if form.validate_on_submit():
+        models.Review.create(
+            user=user.id,
+            product=product,
+            title=form.title.data,
+            rating=form.rating.data,
+            content=form.content.data
+        )
+        avg = "%.2f" % average(reviews)
+        product.average_rating = avg
+        product.save()
+        return redirect(url_for("product_details", data_name=data_name))
+    # print(product)
     return render_template("productDetails.html", product=product, form=form, reviews=reviews)
 
 def increment_total(price):

@@ -98,6 +98,7 @@ class Review(Model):
     title = CharField()
     rating = IntegerField()
     content = CharField()
+    date_posted = DateTimeField(default=datetime.datetime.now())
 
     class Meta:
         database = DATABASE
