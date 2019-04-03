@@ -3,11 +3,22 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-5">
-            <h2> Good afternoon, {{user.fname}}</h2>
-            <h3> {{user.email}} </h3>
+        <div class="col-sm-3">
+            <h2> Good {{greeting}}, {{user.fname}}</h2>
+            
+            <aside class="menu">
+                <p class="menu-label">
+                    Profile
+                </p>
+                <ul class="menu-list">
+                    <li><a href="{{url_for('profile')}}">Dashboard</a></li>
+                    <li><a>Order History</a></li>
+                    <li><a>Your Reviews</a></li>
+                    <li><a href="{{url_for('logout')}}">Log Out</a></li>
+                </ul>
+            </aside>
         </div>
-        <div class="col-7">
+        <div class="col-sm-7">
             some information goes here
         </div>
     </div>
