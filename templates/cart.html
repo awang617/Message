@@ -4,15 +4,15 @@
 <h1>This is the cart page</h1>
 
 {% for item in cart %}
-<p>{{item.product.name}} ${{item.subtotal}}</p>
-<a href="/add_to_cart/{{item.product.id}}" class="button">+</a>
-{{item.quantity}}
-<a href="/subtract_from_cart/{{item.id}}" class="button">-</a>
-<a href="/remove_from_cart/{{item.id}}" class="button">Remove</a>
+    <p>{{item.product.name}} ${{item.subtotal}}</p>
+    <a href="/add_to_cart/{{item.product.id}}" class="button">+</a>
+    {{item.quantity}}
+    <a href="/subtract_from_cart/{{item.id}}" class="button">-</a>
+    <a href="/remove_from_cart/{{item.id}}" class="button">Remove</a>
 {% endfor %}
 <p>Total: ${{order.total_cost}}</p>
 {% if cart %}
-<a href="/checkout" class="button">Checkout</a>
+    <a href="/checkout" class="button">Checkout</a>
 {% endif %}
 <a href="/shop" class="button">Continue Shopping</a>
 
