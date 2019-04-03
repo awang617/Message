@@ -144,9 +144,7 @@ def add_to_cart(productid):
     else:
         user = current_user
         product = models.Product.select().where(models.Product.id == productid).get()
-        print("product", product.id)
         order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
-        print("order", order.id)
         try:
             models.OrderDetails.create_order_details(order.id, product.id, product.price)
             increment_total(product.price)
@@ -195,10 +193,7 @@ def cart():
     user = current_user
     order = models.Order.select().where(models.Order.user == user.id).get()
     cart = models.OrderDetails.select().where(models.OrderDetails.order_id == order.id)
-    for item in cart:
-        print(item.id)
-        print(item.product.name)
-        print(item.order.total_cost)
+    
     return render_template("cart.html", cart=cart, order=order)
 
 @app.route('/checkout', methods=["GET", "PUT"])
