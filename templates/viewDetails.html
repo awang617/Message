@@ -1,0 +1,16 @@
+{% extends 'profile.html' %}
+
+{% block profile %}
+<a href="/profile/orders">&#8592; Back</a>
+<h1>Order Details</h1>
+<h3>Order date: {{order.order_date.strftime('%m-%d-%Y')}}</h3>
+<h3>Total: ${{order.total_cost}}</h3>
+{% for detail in details %}
+    <div>
+        <p>{{detail.product.name}}</p>
+        <p>QTY: {{detail.quantity}}</p>
+        <p>${{detail.subtotal}}</p>
+        <a class="button" href="/add_to_cart/{{detail.product.id}}">Add to cart</a>
+    </div>
+{% endfor %}
+{% endblock %}

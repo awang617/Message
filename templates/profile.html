@@ -12,14 +12,17 @@
                 </p>
                 <ul class="menu-list">
                     <li><a href="{{url_for('profile')}}">Dashboard</a></li>
-                    <li><a>Order History</a></li>
-                    <li><a>Your Reviews</a></li>
+                    <li><a href="{{url_for('order_history')}}">Order History</a></li>
+                    <li><a href="{{url_for('reviews')}}">Your Reviews</a></li>
                     <li><a href="{{url_for('logout')}}">Log Out</a></li>
                 </ul>
             </aside>
         </div>
-        <div class="col-sm-7">
-            some information goes here
+        <div class="col-sm-9">
+            <div class="container">
+                {% block profile %}
+                {% endblock %}
+            </div>
         </div>
     </div>
 </div>
