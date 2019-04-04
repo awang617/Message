@@ -2,8 +2,7 @@
 {% from 'macros.html' import render_field %}
 
 {% block content %}
-<h1>This is the product details page</h1>
-<div class="container">
+<div class="container" data-id={{product.id}}>
     <div class="row">
         <div class="col-6">
             <img src="{{product.image}}" class="image-fluid">
@@ -14,6 +13,7 @@
             <p>${{product.price}}</p>
             <p><small>{{product.plant|capitalize}}: <i>{{product.meaning}}</i></small></p>
             <a href="/add_to_cart/{{product.id}}"class="button">Add to cart</a>
+            <a href="/shop" class="button">Continue Shopping</a>
         </div>
     </div>
     <div class="row">
@@ -22,28 +22,41 @@
     <div class="row">
         <h3>{{product.average_rating}}</h3>
     </div>
-    
-    <div class="row">
-        <h4>Submit a review</h4>
-        <form method="POST" action="" class="form form-group">
-            {{ form.hidden_tag() }}
-            {% for field in form %}
-                {{ render_field(field) }}
-            {% endfor %}
-            <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
-        </form>
+</div>
+
+<div class="chart-container" style="position: relative">
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+
+<div class="container">
+    <button class="button review-form">Submit a review</button>
+    <div class="row hidden">
+        <div class="col-4">
+            <form method="POST" action="" class="form form-group">
+                {{ form.hidden_tag() }}
+                {% for field in form %}
+                    {{ render_field(field) }}
+                {% endfor %}
+                <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
+            </form>
+        </div>
     </div>
+    <div class="row">
+    
         {% if reviews %}
             {% for review in reviews %}
-                <div class="row">
-                    <h5>{{review.title}} {{review.user.fname}} {{review.user.lname}}</h5>
-                    <p>{{review.rating}}</p>
+                <div class="col-8">
+                    <div class="card">
+                    <h5>{{review.title}}</h5>
+                    <p>Written by: {{review.user.fname}} {{review.user.lname}}</p>
+                    <p>Rating: {{review.rating}}</p>
                     <p>{{review.content}}</p>
-                    <p>{{review.date_posted.strftime('%m-%d-%Y')}}</p>
+                    <p>Post date: {{review.date_posted.strftime('%m-%d-%Y')}}</p>
                     {% if current_user.id == review.user_id %}
                     <a href="/edit_review/{{review.id}}" class="button">Edit</a>
                     <a href="/delete_review/{{review.id}}"class="button is-danger">Delete</a>
                     {% endif%}
+                </div>
                 </div>
             {% endfor %}
         {% else %}
@@ -54,5 +67,7 @@
     
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="{{ url_for('static', filename='productDetails.js') }}"></script>
 
 {% endblock %}
