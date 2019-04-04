@@ -154,6 +154,7 @@ def review_details(reviewid):
     return render_template("reviewDetails.html", user=user, greeting=greeting, review=review)
 
 @app.route('/delete_review/<reviewid>', methods=["GET", "DELETE", "PUT"])
+@login_required
 def delete_review(reviewid):
     try:
         delete_review = models.Review.get(models.Review.id == reviewid)
@@ -173,6 +174,17 @@ def delete_review(reviewid):
         return redirect(url_for('reviews'))
     else:
         return("error")
+
+@app.route('/edit_review/<reviewid>', methods=["GET", "PUT"])
+@login_required
+def edit_review(reviewid):
+    form = forms.ReviewForm()
+    review = models.Review.get(models.Review.id == reviewid)
+    # if form.validate_on_submit():
+    #     review.title = form.title.data
+    #     review.rating = form.rating.data
+    #     review.content = form.content.data
+    return render_template("editReview.html", form=form)
 
 
 @app.route('/shop', methods=["GET"])
