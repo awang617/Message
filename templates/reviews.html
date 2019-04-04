@@ -2,4 +2,23 @@
 
 {% block profile %}
 <h1>Your Reviews</h1>
+
+{% if reviews %}
+{% for review in reviews %}
+    <div class="row">
+        <div class="card">
+            <p>{{review.title}}</p>
+            <p>{{review.product.name}}</p>
+            <p>{{review.rating}}</p>
+            <p>Post Date: {{review.date_posted.strftime('%m-%d-%Y')}}</p>
+            <a href="/profile/reviews/review_details/{{review.id}}"class="button">Review Details</a>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>You have not written any reviews.</p>
+    <a class="button" href="/shop">Continue Shopping</a>
+    {% endif %}
+
+
 {% endblock %}

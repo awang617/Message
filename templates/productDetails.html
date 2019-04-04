@@ -42,7 +42,7 @@
                     <p>{{review.date_posted.strftime('%m-%d-%Y')}}</p>
                     {% if current_user.id == review.user_id %}
                     <a class="button">Edit</a>
-                    <a class="button is-danger">Delete</a>
+                    <a href="/delete_review/{{review.id}}"class="button is-danger">Delete</a>
                     {% endif%}
                 </div>
             {% endfor %}

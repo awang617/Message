@@ -141,7 +141,39 @@ def reviews():
     user = current_user
     current_hour = datetime.datetime.now().hour
     greeting = time_of_day(current_hour)
-    return render_template("reviews.html", user=user, greeting=greeting)
+    reviews = models.Review.select().where(models.Review.user_id == user.id)
+    return render_template("reviews.html", user=user, greeting=greeting, reviews=reviews)
+
+@app.route('/profile/reviews/review_details/<reviewid>', methods=["GET"])
+@login_required
+def review_details(reviewid):
+    user = current_user
+    current_hour = datetime.datetime.now().hour
+    greeting = time_of_day(current_hour)
+    review = models.Review.get(models.Review.id == reviewid)
+    return render_template("reviewDetails.html", user=user, greeting=greeting, review=review)
+
+@app.route('/delete_review/<reviewid>', methods=["GET", "DELETE", "PUT"])
+def delete_review(reviewid):
+    try:
+        delete_review = models.Review.get(models.Review.id == reviewid)
+    except:
+        raise Exception("delete review error")
+    if delete_review:
+        print("this review's rating", delete_review.rating)
+        product = models.Product.get(models.Product.id == delete_review.product_id)
+        print("current product average", product.average_rating)
+        delete_review.delete_instance()
+        reviews = models.Review.select().where(models.Review.product_id == product.id)
+        avg = "%.2f" % average(reviews)
+        print("variable avg",avg)
+        product.average_rating = avg
+        product.save()
+        print("new product average", product.average_rating)
+        return redirect(url_for('reviews'))
+    else:
+        return("error")
+
 
 @app.route('/shop', methods=["GET"])
 @login_required
@@ -152,7 +184,10 @@ def shop():
 def average(reviews):
     ratings = []
     for review in reviews:
+        print("from average(), ratings", review.rating)
         ratings.append(review.rating)
+    if len(ratings)==0:
+        return 0
     return sum(ratings)/len(ratings)
 
 @app.route('/shop/<data_name>', methods=["GET", "POST"])

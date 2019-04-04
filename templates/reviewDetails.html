@@ -1,0 +1,11 @@
+{% extends 'profile.html' %}
+
+{% block profile %}
+<a href="/profile/reviews">&#8592; Back</a>
+<h1>{{review.title}}</h1>
+<p>{{review.content}}</p>
+<p>Your rating: {{review.rating}}</p>
+<p>Post date: {{review.date_posted.strftime('%m-%d-%Y')}}</p>
+<a class="button">Edit</a>
+<a href="/delete_review/{{review.id}}"class="button is-danger">Delete</a>
+{% endblock %}
