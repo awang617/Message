@@ -114,6 +114,37 @@ def profile():
     greeting = time_of_day(current_hour)
     return render_template("dashboard.html", user=user, greeting=greeting)
 
+@app.route('/profile/edit', methods=["GET", "POST"])
+@login_required
+def edit_profile():
+    user = current_user
+    current_hour = datetime.datetime.now().hour
+    greeting = time_of_day(current_hour)
+    form = forms.EditProfileForm()
+    if form.validate_on_submit():
+        user.fname=form.fname.data
+        user.lname=form.lname.data
+        user.email=form.email.data
+        user.save()
+        return redirect(url_for("profile"))
+    return render_template("editProfile.html", form=form, user=user, greeting=greeting)
+
+@app.route('/profile/address', methods=["GET", "POST"])
+@login_required
+def edit_address():
+    user = current_user
+    current_hour = datetime.datetime.now().hour
+    greeting = time_of_day(current_hour)
+    form = forms.EditAddressForm()
+    if form.validate_on_submit():
+        user.street_address=form.street_address.data
+        user.city=form.city.data
+        user.state=form.state.data
+        user.postal_code=form.postal_code.data
+        user.save()
+        return redirect(url_for("profile"))
+    return render_template("editAddress.html", form=form, user=user, greeting=greeting)
+
 
 @app.route('/profile/orders', methods=["GET"])
 @login_required
@@ -175,15 +206,23 @@ def delete_review(reviewid):
     else:
         return("error")
 
-@app.route('/edit_review/<reviewid>', methods=["GET", "PUT"])
+@app.route('/edit_review/<reviewid>', methods=["GET", "POST"])
 @login_required
 def edit_review(reviewid):
-    form = forms.ReviewForm()
+    form = forms.EditReviewForm()
     review = models.Review.get(models.Review.id == reviewid)
-    # if form.validate_on_submit():
-    #     review.title = form.title.data
-    #     review.rating = form.rating.data
-    #     review.content = form.content.data
+    product = models.Product.get(models.Product.id == review.product_id)
+    reviews = models.Review.select().where(models.Review.product_id == product.id)
+    if form.validate_on_submit():
+        print("validated")
+        review.title = form.title.data
+        review.rating = form.rating.data
+        review.content = form.content.data
+        review.save()
+        avg = "%.2f" % average(reviews)
+        product.average_rating = avg
+        product.save()
+        return redirect(url_for("shop"))
     return render_template("editReview.html", form=form)
 
 
@@ -224,6 +263,31 @@ def product_details(data_name):
     # print(product)
     return render_template("productDetails.html", product=product, form=form, reviews=reviews)
 
+@app.route('/rating_votes/<productid>', methods=["GET"])
+def rating_votes(productid):
+    reviews = models.Review.select().where(models.Review.product_id == productid)
+    count_5 = 0
+    count_4 = 0
+    count_3 = 0
+    count_2 = 0
+    count_1 = 0
+    for review in reviews:
+        print(review.rating)
+        if review.rating == 5:
+            count_5 += 1
+        elif review.rating == 4:
+            count_4 += 1
+        elif review.rating == 3:
+            count_3 += 1
+        elif review.rating == 2:
+            count_2 += 1
+        elif review.rating == 1:
+            count_1 += 1
+    data = [count_5, count_4, count_3, count_2, count_1]
+    print(data)
+    return repr(data)
+
+
 def increment_total(price):
     user = current_user
     order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
@@ -245,7 +309,6 @@ def add_to_cart(productid):
     if order_details.exists():
         existing_order_details = order_details.get()
         existing_order_details.quantity += 1
-        existing_order_details.save()
         existing_order_details.subtotal += existing_order_details.product.price
         existing_order_details.save()
         increment_total(existing_order_details.product.price)
@@ -269,7 +332,6 @@ def subtract_from_cart(order_details_id):
         existing_order_details = order_details.get()
         if existing_order_details.quantity > 1:
             existing_order_details.quantity -= 1
-            existing_order_details.save()
             existing_order_details.subtotal -= existing_order_details.product.price
             existing_order_details.save()
             decrement_total(existing_order_details.product.price)
@@ -312,7 +374,6 @@ def checkout():
     order = models.Order.get(models.Order.user_id == user.id, models.Order.purchased == False)
     print(order.purchased)
     order.purchased = True
-    order.save()
     order.order_date = datetime.datetime.now()
     order.save()
     models.Order.create_order(user=user.id)
