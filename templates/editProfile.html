@@ -1,0 +1,30 @@
+{% extends "profile.html" %}
+{% from "macros.html" import field_error %}
+
+{% block profile %}
+<h2>Edit Profile</h2>
+<a href="/profile">&#8592; Back</a>
+<form method="POST" action="" class="form form-group">
+    {{ form.hidden_tag() }}
+    
+    <div class="form-input">
+        {{ field_error(form.fname) }}
+        {{form.fname.label}}
+        {{form.fname(value=user.fname)}}
+    </div>
+    <div class="form-input">
+        {{ field_error(form.lname) }}
+        {{form.lname.label}}
+        {{form.lname(value=user.lname)}}
+    </div>
+    <div class="form-input">
+        {{ field_error(form.email) }}
+        {{form.email.label}}
+        {{form.email(value=user.email)}}
+    </div>
+    
+    <button class="button" type="submit">Edit Profile</button>
+        <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
+</form>
+
+{% endblock %}
