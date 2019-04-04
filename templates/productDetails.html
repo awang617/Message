@@ -4,10 +4,10 @@
 {% block content %}
 <div class="container" data-id={{product.id}}>
     <div class="row">
-        <div class="col-6">
+        <div class="col-sm-6">
             <img src="{{product.image}}" class="image-fluid">
         </div>
-        <div class="col-6">
+        <div class="col-sm-6">
             <h3>{{product.name}}</h3>
             <p>{{product.description}}</p>
             <p>${{product.price}}</p>
@@ -16,36 +16,39 @@
             <a href="/shop" class="button">Continue Shopping</a>
         </div>
     </div>
-    <div class="row">
-        <h2>Reviews</h2>
-    </div>
-    <div class="row">
-        <h3>{{product.average_rating}}</h3>
-    </div>
 </div>
+
+<section class="reviews">
+    <h2>Reviews</h2>
+    <h3>{{product.average_rating}}</h3>
+</section>
 
 <div class="chart-container" style="position: relative">
     <canvas id="myChart" width="400" height="400"></canvas>
 </div>
 
 <div class="container">
-    <button class="button review-form">Submit a review</button>
-    <div class="row hidden">
-        <div class="col-4">
-            <form method="POST" action="" class="form form-group">
-                {{ form.hidden_tag() }}
-                {% for field in form %}
-                    {{ render_field(field) }}
-                {% endfor %}
-                <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
-            </form>
+    <div class=" ">
+        <button class="button review-form">Submit a review</button>
+        <div class="row hidden review">
+            <div class="col-sm-4">
+                <form method="POST" action="" class="form form-group">
+                    {{ form.hidden_tag() }}
+                    {% for field in form %}
+                        {{ render_field(field) }}
+                    {% endfor %}
+                    <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
+                </form>
+                <button class="button cancel-review">Cancel</button>
+            </div>
         </div>
     </div>
-    <div class="row">
+
+    <div class="row justify-content-center">
     
         {% if reviews %}
             {% for review in reviews %}
-                <div class="col-8">
+                <div class="col-sm-8">
                     <div class="card">
                     <h5>{{review.title}}</h5>
                     <p>Written by: {{review.user.fname}} {{review.user.lname}}</p>

@@ -1,12 +1,24 @@
 
-
 .navbar-brand{
     display: flex;
 }
 
 .chart-container {
     height:167px; 
-    width:167px;
+    width:200px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reviews {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.button-review {
+    text-align: center;
+    margin: 0 auto;
 }
 
 .hidden {

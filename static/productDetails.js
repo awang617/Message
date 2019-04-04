@@ -1,10 +1,18 @@
 $(document).ready(function() {
+    console.log("working")
 
     $('.review-form').on('click', function(event) {
         event.preventDefault();
+        // $(this).siblings('.review').removeClass('hidden')
+        $(this).siblings('.review').slideDown()
+
     })
 
-    console.log("working")
+    $('.cancel-review').on('click', function(event) {
+        event.preventDefault();
+        $(this).parents('.review').slideUp()
+    })
+
     productid = $('[data-id]').attr('data-id')
     console.log(productid)
     $.ajax({
@@ -39,6 +47,11 @@ $(document).ready(function() {
             },
             options: {
                 scales: {
+                    xAxes:[{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
@@ -47,7 +60,6 @@ $(document).ready(function() {
                 }
             }
         });
-        $('#myChart').css("height: 200px; width: 200px")
     
 
     }
