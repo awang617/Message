@@ -3,6 +3,7 @@
   {% if field.errors %} {% for error in field.errors %}
   <div class="notification error">{{ error }}</div>
   {% endfor %} {% endif %}
+  <label>{{field.label.text}}</label>
   {{ field(placeholder = field.label.text, class="form-control mb-3") }}
 </div>
 {% endmacro %}
