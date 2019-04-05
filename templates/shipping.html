@@ -11,32 +11,32 @@
     <div class="form-input">
         {{ field_error(form.recipient_fname) }}
         {{form.recipient_fname.label}}
-        {{form.recipient_fname(value=order.recipient_fname)}}
+        {{form.recipient_fname(value=order.recipient_fname, class="form-control")}}
     </div>
     <div class="form-input">
         {{ field_error(form.recipient_lname) }}
         {{form.recipient_lname.label}}
-        {{form.recipient_lname(value=order.recipient_lname)}}
+        {{form.recipient_lname(value=order.recipient_lname, class="form-control")}}
     </div>
     <div class="form-input">
         {{ field_error(form.recipient_street_address) }}
         {{form.recipient_street_address.label}}
-        {{form.recipient_street_address(value=order.recipient_street_address)}}
+        {{form.recipient_street_address(value=order.recipient_street_address, class="form-control")}}
     </div>
     <div class="form-input">
         {{ field_error(form.recipient_city) }}
         {{form.recipient_city.label}}
-        {{form.recipient_city(value=order.recipient_city)}}
+        {{form.recipient_city(value=order.recipient_city, class="form-control")}}
     </div>
     <div class="form-input">
         {{ field_error(form.recipient_state) }}
         {{form.recipient_state.label}}
-        {{form.recipient_state(value=order.recipient_state)}}
+        {{form.recipient_state(value=order.recipient_state, class="form-control")}}
     </div>
     <div class="form-input">
         {{ field_error(form.recipient_postal_code) }}
         {{form.recipient_postal_code.label}}
-        {{form.recipient_postal_code(value=order.recipient_postal_code)}}
+        {{form.recipient_postal_code(value=order.recipient_postal_code, class="form-control")}}
     </div>
     
     <button class="button" type="submit">Payment Information</button>

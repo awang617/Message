@@ -8,6 +8,7 @@
             <img src="{{product.image}}" class="image-fluid">
         </div>
         <div class="col-sm-6">
+            <a href="/shop">&#8592; Back</a>
             <h3>{{product.name}}</h3>
             <p>{{product.description}}</p>
             <p>${{product.price}}</p>
@@ -18,38 +19,38 @@
     </div>
 </div>
 
-<section class="reviews">
-    <h2>Reviews</h2>
-    <h3>{{product.average_rating}}</h3>
-</section>
 
-<div class="chart-container" style="position: relative">
-    <canvas id="myChart" width="400" height="400"></canvas>
-</div>
 
-<div class="container">
-    <div class=" ">
-        <button class="button review-form">Submit a review</button>
-        <div class="row hidden review">
-            <div class="col-sm-4">
-                <form method="POST" action="" class="form form-group">
-                    {{ form.hidden_tag() }}
-                    {% for field in form %}
+<div class="container reviews">
+    <div class="row">
+        <div class="col-sm-4">
+                <h2>Reviews</h2>
+                <h3>{{product.average_rating}}</h3>
+            <div class="chart-container" style="position: relative">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+            
+            <button class="button review-form">Submit a review</button>
+            <div class="row hidden review">
+                <div class="">
+                    <form method="POST" action="" class="form form-group">
+                        {{ form.hidden_tag() }}
+                        {% for field in form if field.widget.input_type != 'hidden'%}
                         {{ render_field(field) }}
-                    {% endfor %}
-                    <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
-                </form>
-                <button class="button cancel-review">Cancel</button>
+                        {% endfor %}
+                        <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
+                    </form>
+                    <button class="button cancel-review">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row justify-content-center">
+        <div class="col-sm-8">
     
         {% if reviews %}
             {% for review in reviews %}
-                <div class="col-sm-8">
-                    <div class="card">
+                <div class=>
+                    <div class="card review-card">
                     <h5>{{review.title}}</h5>
                     <p>Written by: {{review.user.fname}} {{review.user.lname}}</p>
                     <p>Rating: {{review.rating}}</p>
@@ -63,13 +64,15 @@
                 </div>
             {% endfor %}
         {% else %}
-        <div class="order-1">
-            Be the first to review this product!
-        </div>
+        
+            <h3>Be the first to review this product!</h3>
+        
         {% endif %}
     
+        </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="{{ url_for('static', filename='productDetails.js') }}"></script>
 
