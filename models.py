@@ -58,6 +58,12 @@ class Order(Model):
     order_date = DateTimeField(default=datetime.datetime.now())
     total_cost = IntegerField(default=0)
     date_created = DateTimeField(default=datetime.datetime.now())
+    recipient_fname = CharField(default="")
+    recipient_lname = CharField(default="")
+    recipient_street_address = CharField(default="")
+    recipient_city = CharField(default="")
+    recipient_state = CharField(default="")
+    recipient_postal_code = CharField(default="")
     purchased = BooleanField(default=False)
 
     @classmethod
