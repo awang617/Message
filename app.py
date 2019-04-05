@@ -230,7 +230,7 @@ def edit_review(reviewid):
 @login_required
 def shop():
     product = models.Product.select()
-    return render_template("shop.html", product=product)
+    return render_template("products.html", product=product)
 
 def average(reviews):
     ratings = []
@@ -241,7 +241,13 @@ def average(reviews):
         return 0
     return sum(ratings)/len(ratings)
 
-@app.route('/shop/<data_name>', methods=["GET", "POST"])
+@app.route('/shop/<category>', methods=["GET"])
+@login_required
+def shop_products(category):
+    product = models.Product.select(models.Product).join(models.Category).where(models.Category.category_name == category)
+    return render_template("products.html", product=product)
+
+@app.route('/shop/product/<data_name>', methods=["GET", "POST"])
 @login_required
 def product_details(data_name):
     form = forms.ReviewForm()
