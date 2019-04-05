@@ -1,20 +1,22 @@
 {% extends 'profile.html' %}
 
 {% block profile %}
-<h1>Dashboard</h1>
-<div>
-    <label class="menu-label">Name</label>
-    <p>{{user.fname}} {{user.lname}}</p>
-    <label class="menu-label">Email</label>
-    <p>{{user.email}}</p>
-    <a href="/profile/edit" class="button">Edit Profile</a>
-</div>
-<div>
-    <label class="menu-label">Address</label>
-    <p>{{user.street_address}}</p>
-    <p>{{user.city}}</p>
-    <p>{{user.state}}</p>
-    <p>{{user.postal_code}}</p>
-    <a href="/profile/address" class="button">Edit Address</a>
-</div>
+<h2>Dashboard</h2>
+    <div class="row">
+        <div class="col-6">
+            <label class="menu-label">Name</label>
+            <p>{{user.fname}} {{user.lname}}</p>
+            <label class="menu-label">Email</label>
+            <p>{{user.email}}</p>
+            <a href="/profile/edit" class="button">Edit Profile</a>
+        </div>
+        <div class="col-6">
+            <label class="menu-label">Address</label>
+            <p>{{user.street_address}}</p>
+            <p>{{user.city}}</p>
+            <p>{{user.state}}</p>
+            <p>{{user.postal_code}}</p>
+            <a href="/profile/address" class="button">Edit Address</a>
+        </div>
+    </div>
 {% endblock %}
