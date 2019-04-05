@@ -84,7 +84,58 @@ class EditProfileForm(Form):
 class EditAddressForm(Form):
     street_address = StringField("Street Address", validators=[DataRequired()])
     city = StringField("City", validators=[DataRequired()])
-    state = StringField("State",validators=[DataRequired()])
+    state = SelectField("State",validators=[DataRequired()], choices=[
+        ('Alabama', 'AL'),
+        ('Alaska','AK'),
+        ('Arkansas', 'AR'),
+        ('Arizona', 'AZ'),
+        ('California', 'CA'),
+        ('Colorado', 'CO'),
+        ('Connecticut', 'CT'),
+        ('Delaware', 'DE'),
+        ('Florida', 'FL'),
+        ('Georgia', 'GA'),
+        ('Hawaii', 'HI'),
+        ('Idaho', 'ID'),
+        ('Illinois', 'IL'),
+        ('Indiana', 'IN'),
+        ('Iowa', 'IA'),
+        ('Kansas', 'KS'),
+        ('Kentucky', 'KY'),
+        ('Louisiana', 'LA'),
+        ('Maine', 'ME'),
+        ('Maryland', 'MD'),
+        ('Massachusetts', 'MA'),
+        ('Michigan', 'MI'),
+        ('Minnesota', 'MN'),
+        ('Mississippi', 'MS'),
+        ('Missouri', 'MO'),
+        ('Montana', 'MT'),
+        ('Nebraska', 'NE'),
+        ('Nevada', 'NV'),
+        ('New Hampshire', 'NH'),
+        ('New Jersey', 'NJ'),
+        ('New Mexico', 'NM'),
+        ('New York', 'NY'),
+        ('North Carolina', 'NC'),
+        ('North Dakota', 'ND'),
+        ('Ohio', 'OH'),
+        ('Oklahoma', 'OK'),
+        ('Oregon', 'OR'),
+        ('Pennsylvania', 'PA'),
+        ('Rhode Island', 'RI'),
+        ('South Carolina', 'SC'),
+        ('South Dakota', 'SD'),
+        ('Tennessee', 'TN'),
+        ('Texas', 'TX'),
+        ('Utah', 'UT'),
+        ('Vermont', 'VT'),
+        ('Virginia', 'VA'),
+        ('Washington', 'WA'),
+        ('West Virginia', 'WV'),
+        ('Wisconsin', 'WI'),
+        ('Wyoming', 'WY')
+    ])
     postal_code = StringField(
         "ZIP Code", 
         validators=[
@@ -105,4 +156,86 @@ class EditReviewForm(Form):
     rating = SelectField('Rating', choices=[('5', '5'), ('4','4'), ('3', '3'), ('2', '2'), ('1', '1')])
     content = TextAreaField('Review', validators=[DataRequired()])
 
-
+class ShippingForm(Form):
+    recipient_fname = StringField(
+        'First Name',
+        validators=[
+            DataRequired(),
+            Regexp(
+                r'^[a-zA-Z_]+$',
+                message=("Cannot contain numbers or special characters")
+            )
+        ]
+    )
+    recipient_lname = StringField(
+        'Last Name',
+        validators=[
+            DataRequired(),
+            Regexp(
+                r'^[a-zA-Z_]+$',
+                message=("Cannot contain numbers or special characters")
+            )
+        ]
+    )
+    recipient_street_address = StringField("Street Address", validators=[DataRequired()])
+    recipient_city = StringField("City", validators=[DataRequired()])
+    recipient_state = SelectField("State",validators=[DataRequired()], choices=[
+        ('Alabama', 'AL'),
+        ('Alaska','AK'),
+        ('Arkansas', 'AR'),
+        ('Arizona', 'AZ'),
+        ('California', 'CA'),
+        ('Colorado', 'CO'),
+        ('Connecticut', 'CT'),
+        ('Delaware', 'DE'),
+        ('Florida', 'FL'),
+        ('Georgia', 'GA'),
+        ('Hawaii', 'HI'),
+        ('Idaho', 'ID'),
+        ('Illinois', 'IL'),
+        ('Indiana', 'IN'),
+        ('Iowa', 'IA'),
+        ('Kansas', 'KS'),
+        ('Kentucky', 'KY'),
+        ('Louisiana', 'LA'),
+        ('Maine', 'ME'),
+        ('Maryland', 'MD'),
+        ('Massachusetts', 'MA'),
+        ('Michigan', 'MI'),
+        ('Minnesota', 'MN'),
+        ('Mississippi', 'MS'),
+        ('Missouri', 'MO'),
+        ('Montana', 'MT'),
+        ('Nebraska', 'NE'),
+        ('Nevada', 'NV'),
+        ('New Hampshire', 'NH'),
+        ('New Jersey', 'NJ'),
+        ('New Mexico', 'NM'),
+        ('New York', 'NY'),
+        ('North Carolina', 'NC'),
+        ('North Dakota', 'ND'),
+        ('Ohio', 'OH'),
+        ('Oklahoma', 'OK'),
+        ('Oregon', 'OR'),
+        ('Pennsylvania', 'PA'),
+        ('Rhode Island', 'RI'),
+        ('South Carolina', 'SC'),
+        ('South Dakota', 'SD'),
+        ('Tennessee', 'TN'),
+        ('Texas', 'TX'),
+        ('Utah', 'UT'),
+        ('Vermont', 'VT'),
+        ('Virginia', 'VA'),
+        ('Washington', 'WA'),
+        ('West Virginia', 'WV'),
+        ('Wisconsin', 'WI'),
+        ('Wyoming', 'WY')
+    ])
+    recipient_postal_code = StringField(
+        "ZIP Code", 
+        validators=[
+            DataRequired(),
+            Regexp(
+                r'^(\d{5})$',
+                message=("Must be a five digit ZIP Code.")
+    )])
