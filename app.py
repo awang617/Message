@@ -222,7 +222,7 @@ def edit_review(reviewid):
         avg = "%.2f" % average(reviews)
         product.average_rating = avg
         product.save()
-        return redirect(url_for("shop"))
+        return redirect(url_for("reviews"))
     return render_template("editReview.html", form=form)
 
 
