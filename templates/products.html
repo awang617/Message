@@ -1,0 +1,28 @@
+{% extends "shop.html" %}
+
+{% block shop %}
+
+{% for item in product %}
+    <div class="col-sm-4 col-6">
+        <a class="card" href="/shop/product/{{item.data_name}}">
+            <div class="card-image">
+                <figure class="image">            
+                    <img src="{{item.image}}" alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                <div class="media-content">
+                    <p class="title is-4">{{item.name}}</p>
+                </div>
+                        <div class="media-right">
+                            ${{item.price}}
+                        </div>
+                </div>
+            
+            </div>
+        </a>
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -2,29 +2,15 @@
 
 {% block content %}
 <div class="container"></div>
-<div class="row">
-{% for item in product %}
-    <div class="col-sm-4 col-6">
-        <a class="card" href="/shop/{{item.data_name}}">
-            <div class="card-image">
-                <figure class="image">            
-                    <img src="{{item.image}}" alt="Placeholder image">
-                </figure>
-            </div>
-            <div class="card-content">
-                <div class="media">
-                <div class="media-content">
-                    <p class="title is-4">{{item.name}}</p>
-                </div>
-                        <div class="media-right">
-                            ${{item.price}}
-                        </div>
-                </div>
-            
-            </div>
-        </a>
+    <div class="row justify-content-center">
+        <a href="/shop" class="button">Shop all</a>
+        <a href="/shop/bouquet" class="button">Bouquets</a>
+        <a href="/shop/plant" class="button">Plants</a>
     </div>
-{% endfor %}
-</div>
+    <div class="row">
+        {% block shop %}
+
+        {% endblock %}
+    </div>
 </div>
 {% endblock %}
