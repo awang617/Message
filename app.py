@@ -368,7 +368,49 @@ def cart():
     
     return render_template("cart.html", cart=cart, order=order)
 
+@app.route('/shipping', methods=["GET", "POST"])
+@login_required
+def shipping():
+    form = forms.ShippingForm()
+    user = current_user
+    order = models.Order.get(models.Order.user_id == user.id, models.Order.purchased == False)
+    if form.validate_on_submit():
+        order.recipient_fname=form.recipient_fname.data
+        order.recipient_lname=form.recipient_lname.data
+        order.recipient_street_address=form.recipient_street_address.data
+        order.recipient_city=form.recipient_city.data
+        order.recipient_state=form.recipient_state.data
+        order.recipient_postal_code=form.recipient_postal_code.data
+        order.save()
+        return redirect("payment")
+    return render_template("shipping.html", order=order, form=form)
+
+
+@app.route('/payment', methods=["GET", "POST"])
+@login_required
+def payment():
+    form = forms.EditAddressForm()
+    user = current_user
+    if form.validate_on_submit():
+        user.street_address=form.street_address.data
+        user.city=form.city.data
+        user.state=form.state.data
+        user.postal_code=form.postal_code.data
+        user.save()
+        return redirect("confirm_order")
+    return render_template("payment.html", user=user, form=form)
+
+@app.route('/confirm_order', methods=["GET"])
+@login_required
+def confirm_order():
+    user = current_user
+    order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
+    cart = models.OrderDetails.select().where(models.OrderDetails.order_id == order.id)
+    return render_template("confirmation.html", user=user, order=order, cart=cart)
+
+
 @app.route('/checkout', methods=["GET", "PUT"])
+@login_required
 def checkout():
     user = current_user
     order = models.Order.get(models.Order.user_id == user.id, models.Order.purchased == False)
@@ -377,7 +419,12 @@ def checkout():
     order.order_date = datetime.datetime.now()
     order.save()
     models.Order.create_order(user=user.id)
-    return redirect(url_for("cart"))
+    return redirect(url_for("thank_you"))
+
+@app.route('/thank_you', methods=["GET", "PUT"])
+@login_required
+def thank_you():
+    return render_template("thankyou.html")
 
 if __name__ == '__main__':
     models.initialize()
