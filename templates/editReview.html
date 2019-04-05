@@ -3,13 +3,24 @@
 
 {% block content %}
 
-<form method="POST" action="" class="form form-group">
-    {{ form.hidden_tag() }}
-    {% for field in form %}
-        {{ render_field(field) }}
-    {% endfor %}
-    <button class="button" type="submit">Edit Review</button>
-        <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
-</form>
+<div class="container">
+    <div class="row justify-content-center">
+        <h2>Edit Review</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <form method="POST" action="" class="form form-group">
+                {{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden'%}
+                    {{ render_field(field) }}
+                {% endfor %}
+                <button class="button" type="submit">Edit Review</button>
+                    <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
+            </form>
+        </div>
+    </div>
+    
+
+</div>
 
 {% endblock %}
