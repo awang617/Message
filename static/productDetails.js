@@ -21,15 +21,18 @@ $(document).ready(function() {
         success: onSuccess,
         error: onError
     })
+    function add(a,b){
+        return a+b
+    }
 
     function onSuccess(response) {
         console.log(response)
         let ratings= []
-        for(var i=0; i< response.length; i++){
-            if (!isNaN(response[i]) && response[i] !== " "){
-                console.log(response[i])
-                ratings.push(parseInt(response[i]))
-            }
+        let str = response.replace(/[\[\]']+/g, '')
+        str = str.replace(/\s/g, '')
+        let part = str.split(',')
+        for(var i=0; i< part.length; i++){
+            ratings.push(parseInt(part[i]))
         }
         console.log(ratings)
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -38,7 +41,7 @@ $(document).ready(function() {
             data: {
                 labels: ['5', '4', '3', '2', '1'],
                 datasets: [{
-                    label: 'Reviews',
+                    label: 'Reviews ('+ ratings.reduce(add) +')',
                     data: ratings,
                     backgroundColor: 'gray',
                     borderColor: 'gray',

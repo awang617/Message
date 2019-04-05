@@ -283,9 +283,9 @@ def rating_votes(productid):
             count_2 += 1
         elif review.rating == 1:
             count_1 += 1
-    data = [count_5, count_4, count_3, count_2, count_1]
+    data = [count_5,count_4,count_3,count_2,count_1]
     print(data)
-    return repr(data)
+    return str(data)
 
 
 def increment_total(price):
