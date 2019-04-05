@@ -6,10 +6,10 @@
 {% if reviews %}
 {% for review in reviews %}
     <div class="row">
-        <div class="card">
-            <p>{{review.title}}</p>
-            <p>{{review.product.name}}</p>
-            <p>{{review.rating}}</p>
+        <div class="col card">
+            <p>Product name: {{review.product.name}}</p>
+            <p>Title: {{review.title}}</p>
+            <p>Your rating: {{review.rating}}</p>
             <p>Post Date: {{review.date_posted.strftime('%m-%d-%Y')}}</p>
             <a href="/profile/reviews/review_details/{{review.id}}"class="button">Review Details</a>
         </div>
