@@ -12,7 +12,7 @@
 
 .reviews {
     text-align: center;
-    margin: 20px 0;
+    margin: 40px auto;
 }
 
 .button-review {
@@ -22,6 +22,10 @@
 
 .hidden {
     display: none;
+}
+
+.review-card {
+    margin-top: 20px;
 }
 
 @media screen and (max-width:1087px){
