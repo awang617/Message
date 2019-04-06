@@ -1,10 +1,15 @@
 {% macro render_field(field) %}
-<div class="field">
+<div class="form-group row justify-content-center">
+
   {% if field.errors %} {% for error in field.errors %}
   <div class="notification error">{{ error }}</div>
   {% endfor %} {% endif %}
-  <label>{{field.label.text}}</label>
-  {{ field(placeholder = field.label.text, class="form-control mb-3") }}
+  {% if field.widget.input_type != 'hidden' %}
+    {{field.label(class="col-sm-2")}}
+  {% endif %}
+  <div class=col-sm-4>
+    {{ field(placeholder = field.label.text, class="form-control") }}
+  </div>
 </div>
 {% endmacro %}
 

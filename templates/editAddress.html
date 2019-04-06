@@ -2,34 +2,43 @@
 {% from "macros.html" import field_error %}
 
 {% block profile %}
-<h2>Edit Profile</h2>
+<h2>Edit Address</h2>
 <a href="/profile">&#8592; Back</a>
+<div class="container">
 <form method="POST" action="" class="form form-group">
     {{ form.hidden_tag() }}
     
-    <div class="form-input">
+    <div class="form-group row">
         {{ field_error(form.street_address) }}
-        {{form.street_address.label}}
-        {{form.street_address(value=user.street_address)}}
+        {{form.street_address.label(class="col-sm-2 col-form-label")}}
+        <div class="col-sm-10">
+            {{form.street_address(value=user.street_address, class="form-control")}}
+        </div>
     </div>
-    <div class="form-input">
+    <div class="form-group row">
         {{ field_error(form.city) }}
-        {{form.city.label}}
-        {{form.city(value=user.city)}}
+        {{form.city.label(class="col-sm-2 col-form-label")}}
+        <div class="col-sm-10">
+            {{form.city(value=user.city, class="form-control")}}
+        </div>
     </div>
-    <div class="form-input">
+    <div class="form-group row">
         {{ field_error(form.state) }}
-        {{form.state.label}}
-        {{form.state(value=user.state)}}
+        {{form.state.label(class="col-sm-2 col-form-label")}}
+        <div class="col-sm-2">
+            {{form.state(value=user.state, class="form-control")}}
+        </div>
     </div>
-    <div class="form-input">
+    <div class="form-group row">
         {{ field_error(form.postal_code) }}
-        {{form.postal_code.label}}
-        {{form.postal_code(value=user.postal_code)}}
+        {{form.postal_code.label(class="col-sm-2 col-form-label")}}
+        <div class="col-sm-10">
+            {{form.postal_code(value=user.postal_code, class="form-control")}}
+        </div>
     </div>
     
     <button class="button" type="submit">Edit Address</button>
         <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
 </form>
-
+</div>
 {% endblock %}
