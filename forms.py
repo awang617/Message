@@ -82,7 +82,7 @@ class EditProfileForm(Form):
         ])
 
 class EditAddressForm(Form):
-    street_address = StringField("Street Address", validators=[DataRequired()])
+    street_address = StringField("Address", validators=[DataRequired()])
     city = StringField("City", validators=[DataRequired()])
     state = SelectField("State",validators=[DataRequired()], choices=[
         ('Alabama', 'AL'),
@@ -177,7 +177,7 @@ class ShippingForm(Form):
             )
         ]
     )
-    recipient_street_address = StringField("Street Address", validators=[DataRequired()])
+    recipient_street_address = StringField("Address", validators=[DataRequired()])
     recipient_city = StringField("City", validators=[DataRequired()])
     recipient_state = SelectField("State",validators=[DataRequired()], choices=[
         ('Alabama', 'AL'),
