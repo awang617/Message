@@ -2,17 +2,18 @@
 
 {% block content %}
 <div class="container">
-    <h2>Your Shopping Cart</h2>
-        <div class="row">
-            <div class="col-8">
+    <div class="row">
+        <div class="col-sm-8">
+                <h2>Your Shopping Cart</h2>
         {% if cart %}
             {% for item in cart %}
             <div class="cart-item row">
                 <div class="col-4">
-                    <img src="{{item.product.image}}" style="height: 200px; width:200px">
+                    <img src="{{item.product.image}}" class="image-fluid" style="height: auto; max-width:100%">
                 </div>
                 <div class="col-8">
                     <p>{{item.product.name}} ${{item.subtotal}}</p>
+                    <p><i>{{item.product.plant}}: {{item.product.meaning}}</i></p>
                     <p>
                         <a href="/add_to_cart/{{item.product.id}}" class="button">+</a>
                         {{item.quantity}}
@@ -28,12 +29,15 @@
         <a href="/shop" class="button">Continue Shopping</a>
     </div>
 
-    <div class="col-4">
+    <div class="col-sm-4">
         <h2>Your Order</h2>
         
         {% for item in cart %}
-            <p>{{item.product.name}}</p>
+        <div class="cart-orders">
+            <h5>{{item.product.name}}</h5>
             <p>QTY: {{item.quantity}}</p>
+            <p>${{item.subtotal}}</p>
+        </div>
         {% endfor %}
 
         <p>Total: ${{order.total_cost}}</p>
