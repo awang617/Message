@@ -1,8 +1,44 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Thank you!</h1>
+<div class="container">
+    <h2>Thank you for your order!</h2>
+    <div class="row">
+        <div class="col">
+            <h3>Your Order</h3>
+            {% for item in cart %}
+            <p>{{item.product.name}} ${{item.subtotal}}</p>
+            <img src="{{item.product.image}}" style="height:200px; width: 200px">
+            <p>QTY: {{item.quantity}}</p>
+            {% endfor %}
+            <p>Total: ${{order.total_cost}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h3>Shipping</h3>
+            <p>{{order.recipient_fname}} {{order.recipient_lname}}</p>
+            <p>{{order.recipient_street_address}}</p>
+            <p>{{order.recipient_city}}</p>
+            <p>{{order.recipient_state}}</p>
+            <p>{{order.recipient_postal_code}}</p>
+            <a href="/shipping">Edit</a>
+        </div>
 
+        <div class="col-6">
+            <h3>Billing</h3>
+            <p>{{user.fname}} {{user.lname}}</p>
+            <p>{{user.email}}</p>
+            <p>{{user.street_address}}</p>
+            <p>{{user.city}}</p>
+            <p>{{user.state}}</p>
+            <p>{{user.postal_code}}</p>
+            <a href="/payment">Edit</a>
+        </div>
+    </div>
 
+    <a href="/profile/orders" class="button">See your orders</a>
+    <a href="/shop" class="button">Continue Shopping</a>
+</div>
 
 {% endblock %}

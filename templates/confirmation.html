@@ -37,9 +37,21 @@
         </div>
     </div>
 
-    <a href="/checkout" class="button">Checkout</a>
+    <!-- <a href="/checkout" class="button">Checkout</a> -->
+    <form action="/checkout" method="POST">
+        <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_0ZSmd03Ao5L3zGGWFPb784cH00jsfe5W5S"
+            data-amount={{order.total_cost*100}}
+            data-name="Message"
+            data-description="Your order"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto">
+        </script>
+    </form>
     <a href="/cart" class="button">Return to Cart</a>
     <a href="/shop" class="button">Continue Shopping</a>
+
 </div>
 
 {% endblock %}
