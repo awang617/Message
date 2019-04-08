@@ -32,7 +32,7 @@
                 <span aria-hidden="true"></span>
             </a>
         </div>
-            
+        
         <div id="navbarBasic" class="navbar-menu">
             <div class="navbar-start">
                 <!-- <a class="navbar-item" href="{{url_for('index')}}" title="index" >Home</a> -->
@@ -64,8 +64,30 @@
     {% block content %} 
     {% endblock %}
     <footer>
-        <p>This is the footer</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <p>Some info here</p>
+                </div>
+
+                <div class="col-4">
+                    <p>Contact us!</p>
+                </div>
+                
+                <div class="col-4">
+                    <a href="/shop">Shop</a>
+                    <a href="/quiz">Quiz</a>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Signup</a>
+                </div>
+
+            </div>
+        </div>
+
     </footer>
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>

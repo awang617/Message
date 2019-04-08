@@ -1,7 +1,5 @@
 {% extends "layout.html" %}
 {% block content%}
-<h1>Message</h1>
-
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -10,13 +8,13 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-        <img src="{{ url_for('static', filename='watercolor.jpg') }}" class="d-block w-100" alt="...">
+        <img src="{{ url_for('static', filename='splash-2.jpg') }}" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-        <img src="{{ url_for('static', filename='plant-lg copy.jpg') }}" class="d-block w-100" alt="...">
+        <img src="{{ url_for('static', filename='splash-1.jpg') }}" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-        <img src="{{ url_for('static', filename='floral-bg.jpg') }}" class="d-block w-100" alt="...">
+        <img src="{{ url_for('static', filename='splash-3.jpg') }}" class="d-block w-100" alt="...">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -29,10 +27,31 @@
     </a>
 </div>
 
-<section id="history">History</section>
-<section id="featured">Featured Products</section>
-<section id="quiz">Quiz</section>
-<section id="reviews">Reviews</section>
+<div class="container">
+<section id="history">
+    <h2>History</h2>
+    <p>
+        Acacia for <i>secret love</i>, daffodil for <i>new beginnings</i>, wisteria for <i>welcome</i>, and camellia <i>for my destiny is in your hands.</i> In Victorian times, the language of flowers was used to convey romantic expressions but over time, many of these hidden meaning have become forgotten. Some flowers are quite frank in their meanings, a red rose for <i>love</i> and lily for <i>majesty</i>, but others may be unexpected, like cactus for <i>ardent love</i> or peony for <i>anger</i>. Inspired by the iris flower, <i>Message</i> is here to help you decipher the language of flowers. We have helped countless brides, couples, and pining hearts find a way to communicate through thoughtful bouquets that say more than just words alone. Let us help you find the right flower for what you want to say because every message is different.
+    </p>
+
+</section>
+
+<section id="featured">
+    <h2>Featured Products</h2>
+    <!-- hard code some products -->
+</section>
+
+<section id="quiz">
+    <h2>Quiz</h2>
+    <p>Curious about what flower suits you best? Take our personality quiz and find out what flower says the most about you. You may find the results surprising!</p>
+
+</section>
+
+<section id="reviews">
+    <h2>What do our favorite customers say?</h2>
+    <!-- hard code testimonials -->
+</section>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
