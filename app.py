@@ -5,12 +5,21 @@ from flask import render_template, flash, redirect, url_for
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_bcrypt import check_password_hash
 import datetime
+import os
 
 import models
 import forms
+import stripe
 
 DEBUG = True
 PORT = 8000
+
+stripe_keys = {
+  'secret_key':['sk_test_w7VS3zlXS8nbev96CqZyH5C700lNmo9fP0'],
+  'publishable_key':['pk_test_0ZSmd03Ao5L3zGGWFPb784cH00jsfe5W5S']
+}
+
+stripe.api_key = stripe_keys['secret_key']
 
 app = Flask(__name__)
 app.secret_key = "peonies"
@@ -327,6 +336,7 @@ def add_to_cart(productid):
         existing_order_details.subtotal += existing_order_details.product.price
         existing_order_details.save()
         increment_total(existing_order_details.product.price)
+        flash('Added to your cart!', 'success')
         return redirect(url_for("cart"))
     else:
         user = current_user
@@ -335,6 +345,7 @@ def add_to_cart(productid):
         try:
             models.OrderDetails.create_order_details(order.id, product.id, product.price)
             increment_total(product.price)
+            flash('Added to your cart!', 'success')
             return redirect(url_for("cart"))
         except:
             raise Exception("failed to add to cart")
@@ -415,16 +426,16 @@ def payment():
         return redirect("confirm_order")
     return render_template("payment.html", user=user, form=form)
 
-@app.route('/confirm_order', methods=["GET"])
+@app.route('/confirm_order', methods=["GET","POST"])
 @login_required
 def confirm_order():
     user = current_user
     order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
     cart = models.OrderDetails.select().where(models.OrderDetails.order_id == order.id)
-    return render_template("confirmation.html", user=user, order=order, cart=cart)
+    return render_template("confirmation.html", user=user, order=order, cart=cart, key=stripe_keys["publishable_key"])
 
 
-@app.route('/checkout', methods=["GET", "PUT"])
+@app.route('/checkout', methods=["GET", "PUT", "POST"])
 @login_required
 def checkout():
     user = current_user
@@ -434,12 +445,15 @@ def checkout():
     order.order_date = datetime.datetime.now()
     order.save()
     models.Order.create_order(user=user.id)
-    return redirect(url_for("thank_you"))
+    return redirect(url_for("thank_you", orderid=order.id))
 
-@app.route('/thank_you', methods=["GET", "PUT"])
+@app.route('/thank_you/<orderid>', methods=["GET", "PUT"])
 @login_required
-def thank_you():
-    return render_template("thankyou.html")
+def thank_you(orderid):
+    user = current_user
+    order = models.Order.get(models.Order.id == orderid)
+    cart = models.OrderDetails.select().where(models.OrderDetails.order_id == orderid)
+    return render_template("thankyou.html", user=user, order=order, cart=cart)
 
 if __name__ == '__main__':
     models.initialize()
