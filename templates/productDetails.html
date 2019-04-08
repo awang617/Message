@@ -57,21 +57,45 @@
                     <p>{{review.content}}</p>
                     <p>Post date: {{review.date_posted.strftime('%m-%d-%Y')}}</p>
                     {% if current_user.id == review.user_id %}
-                    <a href="/edit_review/{{review.id}}" class="button">Edit</a>
-                    <a href="/delete_review/{{review.id}}"class="button is-danger">Delete</a>
+                    <a href="{{url_for(('edit_review'), origin=review.product.data_name, reviewid=review.id) }}" class="button">Edit</a>
+                    <button type="button" class="button is-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete your review?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this review? (This action cannot be reversed.)
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="button btn-secondary" data-dismiss="modal">Cancel</button>
+                                <a href="{{url_for(('delete_review'), origin=review.product.data_name, reviewid=review.id) }}" class="button">Delete</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     {% endif%}
                 </div>
-                </div>
+            </div>
             {% endfor %}
-        {% else %}
-        
+            {% else %}
+            
             <h3>Be the first to review this product!</h3>
-        
-        {% endif %}
-    
+            
+            {% endif %}
+            
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="{{ url_for('static', filename='productDetails.js') }}"></script>
