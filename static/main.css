@@ -4,6 +4,13 @@
     width: 100%; */
 }
 
+footer {
+    background-color: #273a84;
+    color: white;
+    bottom: 0;
+    height: 20vh;
+}
+
 .chart-container {
     height:167px; 
     width:200px;
