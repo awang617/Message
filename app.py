@@ -46,6 +46,9 @@ def after_request(response):
 def index():
     return render_template("index.html")
 
+@app.route('/quiz')
+def quiz():
+    return render_template("quiz.html")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -184,9 +187,9 @@ def review_details(reviewid):
     review = models.Review.get(models.Review.id == reviewid)
     return render_template("reviewDetails.html", user=user, greeting=greeting, review=review)
 
-@app.route('/delete_review/<reviewid>', methods=["GET", "DELETE", "PUT"])
+@app.route('/<origin>/delete_review/<reviewid>', methods=["GET", "DELETE", "PUT"])
 @login_required
-def delete_review(reviewid):
+def delete_review(origin, reviewid):
     try:
         delete_review = models.Review.get(models.Review.id == reviewid)
     except:
@@ -202,13 +205,16 @@ def delete_review(reviewid):
         product.average_rating = avg
         product.save()
         print("new product average", product.average_rating)
-        return redirect(url_for('reviews'))
+        if origin == "profile":
+            return redirect(url_for('reviews'))
+        else:
+            return redirect(url_for("product_details", data_name=origin))
     else:
         return("error")
 
-@app.route('/edit_review/<reviewid>', methods=["GET", "POST"])
+@app.route('/<origin>/edit_review/<reviewid>', methods=["GET", "POST"])
 @login_required
-def edit_review(reviewid):
+def edit_review(origin, reviewid):
     form = forms.EditReviewForm()
     review = models.Review.get(models.Review.id == reviewid)
     product = models.Product.get(models.Product.id == review.product_id)
@@ -222,7 +228,10 @@ def edit_review(reviewid):
         avg = "%.2f" % average(reviews)
         product.average_rating = avg
         product.save()
-        return redirect(url_for("reviews"))
+        if origin == "profile":
+            return redirect(url_for('reviews'))
+        else:
+            return redirect(url_for("product_details", data_name=origin))
     return render_template("editReview.html", form=form)
 
 
