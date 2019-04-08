@@ -1,8 +1,57 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h2>This is a personality quiz</h2>
+<link rel="stylesheet" href="{{url_for('static', filename='quiz.css')}}">
 
+<h2>This is a quiz. For fun.</h2>
 
+<div class="container">
+<form id="quiz">
+    <div>
+        <h3>Question 1</h3>
+        <input type="radio" name="partner" value=2 required>azalea <br>
+        <input type="radio" name="partner" value=4 required>mistletoe <br>
+        <input type="radio" name="partner" value=1 required>bayleaf <br>
+        <input type="radio" name="partner" value=3 required>bluebell <br>
+        <button class="hide button next">Next</button>
+    </div>
+
+    <div class="hide">
+        <h3>Question 2</h3>
+        <input type="radio" name="color" value=4 required>mistletoe <br>
+        <input type="radio" name="color" value=3 required>bluebell <br>
+        <input type="radio" name="color" value=1 required>bayleaf <br>
+        <input type="radio" name="color" value=2 required>azalea<br>
+        <button class="hide button next">Next</button>
+    </div>
+
+    <div class="hide">
+        <h3>Question 3</h3>
+        <input type="radio" name="hobbies" value=3 required>bluebell <br>
+        <input type="radio" name="hobbies" value=2 required>azalea <br>
+        <input type="radio" name="hobbies" value=4 required>mistletoe <br>
+        <input type="radio" name="hobbies" value=1 required>bayleaf <br>
+        <button class="hide button next">Next</button>
+    </div>
+
+    <div class="hide">
+        <h3>Question 4</h3>
+        <input type="radio" name="element" value=3 required>bluebell <br>
+        <input type="radio" name="element" value=2 required>azalea <br>
+        <input type="radio" name="element" value=4 required>mistletoe <br>
+        <input type="radio" name="element" value=1 required>bayleaf <br>
+        <input type="submit" class="button" value="Finish Quiz">
+    </div>
+
+</form>
+
+<div class="hide" id="bayleaf">bay</div>
+<div class="hide" id="azalea">azalea</div>
+<div class="hide" id="bluebell">bluebell</div>
+<div class="hide" id="mistletoe">mistletoe</div>
+
+</div>
+
+<script src="{{url_for('static', filename='quiz.js')}}"></script>
 
 {% endblock %}
