@@ -1,5 +1,7 @@
 .navbar-brand{
-    display: flex;
+    display: flex!important;
+    /* justify-content: space-around;
+    width: 100%; */
 }
 
 .chart-container {
@@ -36,5 +38,14 @@
 @media screen and (max-width:1087px){
     .navbar {
         display: block;
+    }
+
+    .navbar-brand {
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    #navbarBasic{
+        width:100%;
     }
 }
