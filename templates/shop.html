@@ -2,25 +2,45 @@
 
 {% block content %}
 <style>
+    h1 {
+        margin-top: 14px;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+    }
+    .image-banner {
+        width: 100%;
+        border-bottom: 4px solid #273a84;
+        border-top: 4px solid #273a84
+    }
     .shop-links {
-        margin:10px;
+        text-transform: uppercase;
+        margin:20px;
         color: black;
     }
 
     .shop-links:hover {
         color: black;
     }
+    .product-cards {
+        margin-bottom: 20px;
+    }
 
     @media screen and (max-width: 540px){
+        .shop-links{
+            margin: 10px
+        }
         .card-content{
             padding:10px;
         }
     }
 </style>
 
+<div class="image-banner">
+    <img src="../static/shop-bg.jpg">
+</div>
 <div class="container">
     <div class="row justify-content-center">
-        <h4>Shop</h4>
+        <h1>Shop</h1>
     </div>
     <div class="row justify-content-center">
         <a href="/shop" class="shop-links">Shop all</a>
