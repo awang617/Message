@@ -1,7 +1,38 @@
 {% extends "layout.html" %}
-{% from 'macros.html' import render_field %}
+{% from 'macros.html' import review_field %}
 
 {% block content %}
+
+<style>
+    .review-form {
+        margin-bottom: 20px;
+    }
+    .chart-container {
+        height:167px; 
+        width:200px;
+        margin-bottom: 50px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .reviews {
+        text-align: center;
+        margin: 40px auto;
+    }
+    
+    .button-review {
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .review-card {
+        margin-top: 20px;
+    }
+</style>
+
 <div class="container" data-id={{product.id}}>
     <div class="row">
         <div class="col-sm-6">
@@ -31,17 +62,15 @@
             </div>
             
             <button class="button review-form">Submit a review</button>
-            <div class="row hidden review">
-                <div class="col">
-                    <form method="POST" action="" class="form form-group">
-                        {{ form.hidden_tag() }}
-                        {% for field in form if field.widget.input_type != 'hidden'%}
-                        {{ render_field(field) }}
-                        {% endfor %}
-                        <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
-                    </form>
-                    <button class="button cancel-review">Cancel</button>
-                </div>
+            <div class="hidden review">
+                <form method="POST" action="" class="form form-group">
+                    {{ form.hidden_tag() }}
+                    {% for field in form if field.widget.input_type != 'hidden'%}
+                    {{ review_field(field) }}
+                    {% endfor %}
+                    <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
+                </form>
+                <button class="button cancel-review">Cancel</button>
             </div>
         </div>
 

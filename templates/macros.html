@@ -19,3 +19,19 @@
   {% endfor %}
   {%endif%}
 {% endmacro%}
+
+{% macro review_field(field) %}
+<div class="form-group row justify-content-center">
+
+
+{% if field.errors %} {% for error in field.errors %}
+  <div class="notification error">{{ error }}</div>
+  {% endfor %} {% endif %}
+  {% if field.widget.input_type != 'hidden' and field.label != "Submit" %}
+    {{field.label(class="col-lg-2")}}
+  {% endif %}
+  <div class=col-lg-8>
+    {{ field(placeholder = field.label.text, class="form-control") }}
+  </div>
+</div>
+{% endmacro %}
