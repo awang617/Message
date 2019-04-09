@@ -9,6 +9,27 @@ body {
     letter-spacing: 5px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+label{
+    line-height: 3
+}
+
+.button, input[type=submit], textarea {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.form-control{
+    font-size: 14px;
+}
+
+a {
+    color:black
+}
+
 a.navbar-item {
     text-transform: uppercase;
 }
