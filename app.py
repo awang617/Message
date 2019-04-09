@@ -184,7 +184,7 @@ def reviews():
     user = current_user
     current_hour = datetime.datetime.now().hour
     greeting = time_of_day(current_hour)
-    reviews = models.Review.select().where(models.Review.user_id == user.id)
+    reviews = models.Review.select().where(models.Review.user_id == user.id).order_by(models.Review.date_posted.desc())
     return render_template("reviews.html", user=user, greeting=greeting, reviews=reviews)
 
 @app.route('/profile/reviews/review_details/<reviewid>', methods=["GET"])
@@ -271,7 +271,7 @@ def product_details(data_name):
     form = forms.ReviewForm()
     user = current_user
     product = models.Product.get(models.Product.data_name == data_name)
-    reviews = models.Review.select().where(models.Review.product_id == product.id)
+    reviews = models.Review.select().where(models.Review.product_id == product.id).order_by(models.Review.date_posted.desc())
     if form.validate_on_submit():
         models.Review.create(
             user=user.id,
