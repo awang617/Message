@@ -2,6 +2,7 @@ $(document).ready(
     console.log("quiz js")
 )
 
+
 $(`input[type='radio']`).on('click', function() {
     console.log("keyup")
     $(this).siblings('button').removeClass('hide')
