@@ -8,15 +8,38 @@
         background-size: cover;
     }
     .full-height {
-        height:80vh;
+        height: 90vh;
     }
     .quiz-container{
-        padding-top: 30px;
-        height: 60vh;
-        width: 60vw;
+        padding: 50px 30px;
+        /*height: 70vh;*/
+        width: 60%;
         background-color: white;
         border: 4px solid #273a84;
         text-align: center;
+    }
+    .quiz-intro p {
+        text-align: justify;
+    }
+    .answers {
+        text-align: justify;
+    }
+    
+    input[type=radio]{
+        margin-right:10px;
+    }
+    
+    .result-image {
+        width: 20vw;
+        height: auto;
+    }
+
+    .result-buttons {
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        padding-right: 30px;
+        padding-left: 30px;
     }
     
 </style>
@@ -27,99 +50,135 @@
     <div class="quiz-container container">
         <form id="quiz">
             <div class="quiz-intro">
-                <h2>This is a quiz. For fun.</h2>
-                <p>Have you ever wondered what flower you would be? Every flower has a different meaning. Take our quiz and find out which one you are!</p>
-                <button class="button next">Start</button>
+                <h2>What flower are you?</h2>
+                <p>Have you ever wondered what flower you would be? In the language of flowers, every flower and plant has a different meaning. Take our (non-scientific) quiz and find out which one suits you the most! We hope you enjoy learning about a new flower.</p>
+                <button class="button start">Start</button>
             </div>
-            <div class="question hide">
-                <h3>What qualities do you consider MOST important in a partner?</h3>
-                <input type="radio" name="partner" value=2 required>Reliable <br>
-                <input type="radio" name="partner" value=4 required>Passionate <br>
-                <input type="radio" name="partner" value=1 required>Sense of humor <br>
-                <input type="radio" name="partner" value=3 required>Dependable <br>
-                <button class="hide button next">Next</button>
-            </div>
-
-            <div class="question hide">
-                <h3>Which color do you prefer the most?</h3>
-                <input type="radio" name="color" value=4 required>Warm tones <br>
-                <input type="radio" name="color" value=3 required>Neutral tones <br>
-                <input type="radio" name="color" value=1 required>Cool tones <br>
-                <input type="radio" name="color" value=2 required>Bright tones<br>
-                <button class="hide button next">Next</button>
+            <div id="first" class="question hide">
+                <h4>What qualities do you consider MOST important in a partner?</h4>
+                <div class="answers">
+                    <input type="radio" name="partner" value=2 required>Cooperative - I need someone that can weather life's changes. <br>
+                    <input type="radio" name="partner" value=4 required>Passionate - Someone who can share my passion for life. <br>
+                    <input type="radio" name="partner" value=1 required>Sense of humor - It's important that we have lots of fun together.<br>
+                    <input type="radio" name="partner" value=3 required>Dependable - I want someone who will be there through thick and thin.<br>
+                    <button class="hide button next">Next</button>
+                </div>
             </div>
 
             <div class="question hide">
-                <h3>In your spare time, you would rather:</h3>
-                <input type="radio" name="hobbies" value=3 required>bluebell <br>
-                <input type="radio" name="hobbies" value=2 required>dogwood <br>
-                <input type="radio" name="hobbies" value=4 required>mistletoe <br>
-                <input type="radio" name="hobbies" value=1 required>cosmos <br>
-                <button class="hide button next">Next</button>
+                <h4>Which colors describes you best?</h4>
+                <div class="answers">
+                    <input type="radio" name="color" value=4 required>Warm tones - Strong, fiery colors suit me the most. <br>
+                    <input type="radio" name="color" value=3 required>Neutral tones - They are practical and also easy to wear. <br>
+                    <input type="radio" name="color" value=2 required>Bright tones - I love color, the more, the better. <br>
+                    <input type="radio" name="color" value=1 required>Cool tones - Blues and greens help me feel at ease <br>
+                    <button class="hide button next">Next</button>
+                </div>
             </div>
 
             <div class="question hide">
-                <h3>What qualities describe your strengths the best?</h3>
-                <input type="radio" name="strengths" value=3 required>bluebell <br>
-                <input type="radio" name="strengths" value=2 required>dogwood <br>
-                <input type="radio" name="strengths" value=4 required>mistletoe <br>
-                <input type="radio" name="strengths" value=1 required>cosmos <br>
-                <button class="hide button next">Next</button>
+                <h4>In your spare time, you would rather:</h4>
+                <div class="answers">
+                    <input type="radio" name="hobbies" value=3 required>Read a good book or indulge in a deep conversation. <br>
+                    <input type="radio" name="hobbies" value=2 required>I can stay home and watch TV or catch up with a friend. <br>
+                    <input type="radio" name="hobbies" value=1 required>Go out and explore nature. I hate being cooped up. <br>
+                    <input type="radio" name="hobbies" value=4 required>Hang out with all my friends and have a good time together. <br>
+                    <button class="hide button next">Next</button>
+                </div>
             </div>
 
             <div class="question hide">
-                <h3>At a party, you are:</h3>
-                <input type="radio" name="party" value=3 required>Arranger <br>
-                <input type="radio" name="party" value=2 required>Blooming <br>
-                <input type="radio" name="party" value=4 required>Centerpiece <br>
-                <input type="radio" name="party" value=1 required>Butterfly <br>
-                <button class="hide button next">Next</button>
+                <h4>What qualities describe your strengths the best?</h4>
+                <div class="answers">
+                    <input type="radio" name="strengths" value=2 required>Adaptable - I am flexible to whatever life throws at me. <br>
+                    <input type="radio" name="strengths" value=1 required>Carefree - I stay relaxed because there's no sense in worrying about everything. <br>
+                    <input type="radio" name="strengths" value=3 required>Loyal - I am steadfast in my relationships and in whatever tasks I have. <br>
+                    <input type="radio" name="strengths" value=4 required>Driven - I have the ambition to achieve and accomplish all my goals. <br>
+                    <button class="hide button next">Next</button>
+                </div>
             </div>
 
             <div class="question hide">
-                <h3>Which element speaks to you the most?</h3>
-                <input type="radio" name="element" value=3 required>Earth <br>
-                <input type="radio" name="element" value=2 required>Water <br>
-                <input type="radio" name="element" value=4 required>Fire <br>
-                <input type="radio" name="element" value=1 required>Air <br>
-                <button class="hide button next">Next</button>
+                <h4>At a party, you are:</h4>
+                <div class="answers">
+                    <input type="radio" name="party" value=3 required>Organizer - Even when it's not my event, I find some way to be helpful. <br>
+                    <input type="radio" name="party" value=2 required>Blooming - I thrive in my group of friends, but don't interact with many others. <br>
+                    <input type="radio" name="party" value=1 required>Social Butterfly - I bounce back and forth between groups. <br>
+                    <input type="radio" name="party" value=4 required>Life of the party - I love being at the center and living my best life. <br>
+                    <button class="hide button next">Next</button>
+                </div>
             </div>
 
             <div class="question hide">
-                <h3>What do you do when you have big project to finish?</h3>
-                <input type="radio" name="project" value=3 required>bluebell <br>
-                <input type="radio" name="project" value=2 required>dogwood <br>
-                <input type="radio" name="project" value=4 required>mistletoe <br>
-                <input type="radio" name="project" value=1 required>cosmos <br>
-                <button class="hide button next">Next</button>
+                <h4>Which element speaks to you the most?</h4>
+                <div class="answers">
+                    <input type="radio" name="element" value=3 required>Earth - I admire constance and stability. <br>
+                    <input type="radio" name="element" value=4 required>Fire - I favor energy and excitement. <br>
+                    <input type="radio" name="element" value=1 required>Air - I appreciate freedom and change. <br>
+                    <input type="radio" name="element" value=2 required>Water - I respect calmness and mutability. <br>
+                    <button class="hide button next">Next</button>
+                </div>
             </div>
 
             <div class="question hide">
-                <h3>Your friends would describe you as:</h3>
-                <input type="radio" name="adjective" value=3 required>bluebell <br>
-                <input type="radio" name="adjective" value=2 required>dogwood <br>
-                <input type="radio" name="adjective" value=4 required>mistletoe <br>
-                <input type="radio" name="adjective" value=1 required>cosmos <br>
-                <input type="submit" class="button" value="Finish Quiz">
+                <h4>When someone in the group asks what to eat, you:</h4>
+                <div class="answers">
+                    <input type="radio" name="project" value=1 required>Wait until someone else comes up with a suggestion. <br>
+                    <input type="radio" name="project" value=2 required>Offer up some choices, but you're okay with anything. <br>
+                    <input type="radio" name="project" value=3 required>Eliminate all the impractical choices that are too small or too expensive. <br>
+                    <input type="radio" name="project" value=4 required>Know exactly where you want to eat and convince everyone else to go. <br>
+                    <button class="hide button next">Next</button>
+                </div>
+            </div>
+
+            <div class="question hide">
+                <h4>Your friends would describe you as:</h4>
+                <div class="answers">
+                    <input type="radio" name="adjective" value=4 required>Leadership - You are strong and confident in all that you do. <br>
+                    <input type="radio" name="adjective" value=1 required>High spirited - You keep the mood light and the vibes good. <br>
+                    <input type="radio" name="adjective" value=3 required>Intelligent - You are a problem solver and a reliable friend. <br>
+                    <input type="radio" name="adjective" value=2 required>Poised - You always know what to say and how to act in any situation. <br>
+                    <input type="submit" class="button" value="Finish Quiz">
+                </div>
             </div>
 
         </form>
 
     <div class="hide" id="cosmos">
-        <h3>You are a cosmos!</h3>
-        <p>Cosmos mean <i>joy in love and life</i>. No matter where you are or who you are with, you light up the room and help others feel at ease.</p>
+        <h4>You are a cosmos!</h4>
+        <p>Cosmos mean <i>joy in love and life</i>. No matter where you are or who you are with, you light up the room and help others feel at ease. You are perfectly happy with going with the flow but you want to be free to explore your own interests.</p>
+        <img class="result-image image-fluid" src="../static/cosmos.jpg">
+        <div class="result-buttons">
+            <button class="button restart">Take the quiz again!</button>
+            <a href="/shop" class="button">Check out our shop</a>
+        </div>
     </div>
     <div class="hide" id="dogwood">
-        <h3>Dogwood</h3>
-        <p>In the language of flowers, dogwood flowers mean <i>love undimished by adversity</i>.</p>
+        <h4>You are a dogwood flower!</h4>
+        <p>In the language of flowers, dogwood flowers mean <i>love undimished by adversity</i>. You are flexible and adapt to whatever is going on in life. Although you have a calm temperment, you will not back down when provoked.</p>
+        <img class="result-image image-fluid" src="../static/dogwood.jpg">
+        <div class="result-buttons">
+            <button class="button restart">Take the quiz again!</button>
+            <a href="/shop" class="button">Check out our shop</a>
+        </div>
     </div>
     <div class="hide" id="bluebell">
-        <h3>Bluebell</h3>
-        <p>Bluebells mean <i>constancy</i>. You are a loyal and trusted friend that other depend on.</p>
+        <h4>You are a bluebell!</h4>
+        <p>Bluebells mean <i>constancy</i>. You are a loyal and trusted friend that others depend on. You often shoulder many responsibilities but you are determined and unwilling to relent. You might be a bit stubborn sometimes, but your stability is something others rely on.</p>
+        <img class="result-image image-fluid" src="../static/bluebell.jpg">
+        <div class="result-buttons">
+            <button class="button restart">Take the quiz again!</button>
+            <a href="/shop" class="button">Check out our shop</a>
+        </div>
     </div>
     <div class="hide" id="mistletoe">
-        <h3>Mistletoe</h3>
+        <h4>You are mistletoe!</h4>
         <p>Best known for inspiring holiday kisses, mistletoe's other meaning is <i>I surmount all obstacles</i>. You are a natural leader and you strive for excellence in all aspects of your life. You are confident and successful in your endeavors and you never let a challenge turn you down.</p>
+        <img class="result-image image-fluid" src="../static/mistletoe.jpeg">
+        <div class="result-buttons">
+            <button class="button restart">Take the quiz again!</button>
+            <a href="/shop" class="button">Check out our shop</a>
+        </div>
     </div>
 
     </div>

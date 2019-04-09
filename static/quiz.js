@@ -7,27 +7,44 @@ $(`input[type='radio']`).on('click', function() {
     $(this).siblings('button').removeClass('hide')
 }) 
 
+$('.start').click( function(event) {
+    event.preventDefault()
+    $(this).parent().addClass('hide')
+    // debugger;
+    $(this).parent().next().removeClass('hide')
+
+})
 
 $('.next').click( function(event) {
     event.preventDefault()
-    $(this).parent().addClass('hide')
-    $(this).parent().next().removeClass('hide')
+    $(this).parent().parent().addClass('hide')
+    // debugger;
+    $(this).parent().parent().next().removeClass('hide')
+    $(this).addClass('hide')
 
+})
+
+$('.restart').click( function(event) {
+    event.preventDefault()
+    $(this).parent().parent().addClass('hide')
+    $('#first, form').removeClass('hide')
 })
 
 let result = "";
 $('#quiz').submit(function(e) {
     e.preventDefault()
+    $(this).children().last().addClass('hide')
     var answers = $(this).serializeArray();
     console.log(answers)
-
     var resultNumber = 0
     for(var answer of answers){
         resultNumber += parseInt(answer.value)
     }
     console.log(resultNumber)
     result = getResults(resultNumber)
+    console.log(result)
     displayResults(result)
+    this.reset()
 })
 
 function getResults(num) {
