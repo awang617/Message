@@ -4,23 +4,23 @@
 <!-- Bootstrap CSS -->
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 <div class="row">
-    <h1>Your Orders</h1>
+    <h2>Your Orders</h2>
 </div>
-<div class="row">
-    {% if orders %}
-    {% for order in orders %}
-    <div class="col-sm-6">
-        <div class="card">
-            <p>Order Date: {{order.order_date.strftime('%m-%d-%Y')}}</p>
-            <p>Order Number: {{order.id}}</p>
-            <a href="/profile/orders/view_details/{{order.id}}"class="button">View Details</a>
-        </div>
+<hr>
+{% if orders %}
+    <div class="row">
+        {% for order in orders %}
+            <div class="col-sm-6">
+                <p>Order Date: {{order.order_date.strftime('%m/%d/%Y')}}</p>
+                <p>Order Number: {{order.id}}</p>
+                <a href="/profile/orders/view_details/{{order.id}}"class="button">View Details</a>
+                <hr>
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
     {% else %}
     <p>Looks like you haven't ordered anything yet!</p>
     <a class="button" href="/shop">Continue Shopping</a>
     {% endif %}
 
-</div>
 {% endblock %}

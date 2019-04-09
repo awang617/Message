@@ -4,6 +4,9 @@
 {% block content %}
 
 <style>
+    h4{
+        margin-top: 20px;
+    }
     .review-form {
         margin-bottom: 20px;
     }
@@ -51,7 +54,7 @@
         </div>
         <div class="col-sm-6">
             <a href="/shop">&#8592; Back</a>
-            <h3>{{product.name}}</h3>
+            <h4><strong>{{product.name}}</strong></h4>
             <p>{{product.description}}</p>
             <p>${{product.price}}</p>
             <p><small>{{product.plant|capitalize}}: <i>{{product.meaning}}</i></small></p>
@@ -66,8 +69,8 @@
 <div class="container reviews">
     <div class="row">
         <div class="col-sm-4">
-                <h2>Reviews</h2>
-                <h3>{{product.average_rating}}</h3>
+                <h4>Reviews</h4>
+                <h4>{{product.average_rating}}</h4>
             <div class="chart-container" style="position: relative">
                 <canvas id="myChart" width="400" height="400"></canvas>
             </div>
@@ -90,18 +93,22 @@
         {% if reviews %}
             <hr>
             {% for review in reviews %}
-                <div class=>
-                    <div class="">
-                    <h5><strong>{{review.title}}</strong></h5>
-                    <p style="margin:0">Written by: {{review.user.fname}} {{review.user.lname}}</p>
-                    <p style="margin:0">Rating: {{review.rating}}</p>
-                    <p style="margin:0"><i>{{review.content}}</i></p>
-                    <p>Post date: {{review.date_posted.strftime('%m/%d/%Y')}}</p>
-                    {% if current_user.id == review.user_id %}
-                    <a href="{{url_for(('edit_review'), origin=review.product.data_name, reviewid=review.id) }}" class="button">Edit</a>
-                    <button type="button" class="button is-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
-                    <hr>
-
+                <div class="row d-flex align-items-center">
+                    <div class="col-4">
+                        <p>Rating</p>
+                        <h3><strong>{{review.rating}}</strong></h3>
+                        <p><i>out of 5</i></p>
+                    </div>
+                    <div class="col-8">
+                        <h5>{{review.title}}</h5>
+                        <p style="margin:0">Written by: {{review.user.fname}} {{review.user.lname}}</p>
+                        <p style="margin:0"><i>{{review.content}}</i></p>
+                        <p>Post date: {{review.date_posted.strftime('%m/%d/%Y')}}</p>
+                        {% if current_user.id == review.user_id %}
+                        <a href="{{url_for(('edit_review'), origin=review.product.data_name, reviewid=review.id) }}" class="button">Edit</a>
+                        <button type="button" class="button is-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                    </div>
+                    
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -125,7 +132,8 @@
                     
                     {% endif%}
                 </div>
-            </div>
+                <hr>
+            <!-- </div> -->
             {% endfor %}
             {% else %}
             

@@ -1,19 +1,31 @@
 {% extends 'profile.html' %}
 
 {% block profile %}
-<h1>Your Reviews</h1>
+<style>
+.rating{
+    text-align:center
+}
+</style>
+
+<h2>Your Reviews</h2>
 
 {% if reviews %}
+<hr>
 {% for review in reviews %}
-    <div class="row">
-        <div class="col card">
+    <div class="row d-flex align-items-center">
+        <div class="col-4 rating">
+            <p>Your rating</p> 
+            <h3><strong>{{review.rating}}</strong></h3>
+            <p><i>out of 5</i></p>
+        </div>
+        <div class="col-8">
             <p>Product name: {{review.product.name}}</p>
             <p>Title: {{review.title}}</p>
-            <p>Your rating: {{review.rating}}</p>
-            <p>Post Date: {{review.date_posted.strftime('%m-%d-%Y')}}</p>
+            <p>Post Date: {{review.date_posted.strftime('%m/%d/%Y')}}</p>
             <a href="/profile/reviews/review_details/{{review.id}}"class="button">Review Details</a>
         </div>
     </div>
+    <hr>
     {% endfor %}
     {% else %}
     <p>You have not written any reviews.</p>

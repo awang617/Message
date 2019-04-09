@@ -2,31 +2,26 @@
 
 {% block profile %}
 <a href="/profile/orders">&#8592; Back</a>
-<h2>Order Details</h2>
-<h3>Order date: {{order.order_date.strftime('%m-%d-%Y')}}</h3>
-<h3>Total: ${{order.total_cost}}</h3>
+<h3>Order Details</h3>
+<p>Order date: {{order.order_date.strftime('%m/%d/%Y')}}</p>
+<p>Total: ${{order.total_cost}}</p>
+<div class="container">
+    <hr>
 {% for detail in details %}
-    
-    <div class="card container" style="padding-top:15px; padding-bottom: 15px">
-        <div class="row">
-            <div class="card-image col-md-4 col-6 d-flex align-items-center">
-                <figure class="image" style="margin:0">
-                    <img src="{{detail.product.image}}" alt="Placeholder image">
-                </figure>
-            </div>
-            <div class="card-content col-md-8 col-6">
-                <div class="media">
-                    <div class="media-content">
-                        <p class="title is-4">{{detail.product.name}}</p>
-                        <p>QTY: {{detail.quantity}}</p>
-                        <p>${{detail.subtotal}}</p>
-                        <a class="button" href="{{ url_for(('add_to_cart'), origin='order', productid=detail.product.id, orderid=order.id) }}">Add to cart</a>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-md-4 col-6">
+            <img src="{{detail.product.image}}" alt="Placeholder image">
+        </div>
+        <div class="card-content col-md-8 col-6">
+            <h5>{{detail.product.name}}</h5>
+            <p>QTY: {{detail.quantity}}</p>
+            <p>${{detail.subtotal}}</p>
+            <a class="button" href="{{ url_for(('add_to_cart'), origin='order', productid=detail.product.id, orderid=order.id) }}">Add to cart</a>
         </div>
     </div>
-{% endfor %}
+    <hr>
+    {% endfor %}
+</div>
 <h3>Shipping Address</h3>
 <p>{{order.recipient_fname}} {{order.recipient_lname}}</p>
 <p>{{order.recipient_street_address}}</p>
