@@ -2,15 +2,36 @@
 
 {% block profile %}
 <a href="/profile/orders">&#8592; Back</a>
-<h1>Order Details</h1>
+<h2>Order Details</h2>
 <h3>Order date: {{order.order_date.strftime('%m-%d-%Y')}}</h3>
 <h3>Total: ${{order.total_cost}}</h3>
 {% for detail in details %}
-    <div>
-        <p>{{detail.product.name}}</p>
-        <p>QTY: {{detail.quantity}}</p>
-        <p>${{detail.subtotal}}</p>
-        <a class="button" href="/add_to_cart/{{detail.product.id}}">Add to cart</a>
+    
+    <div class="card container" style="padding-top:15px; padding-bottom: 15px">
+        <div class="row">
+            <div class="card-image col-md-4 col-6 d-flex align-items-center">
+                <figure class="image" style="margin:0">
+                    <img src="{{detail.product.image}}" alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="card-content col-md-8 col-6">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4">{{detail.product.name}}</p>
+                        <p>QTY: {{detail.quantity}}</p>
+                        <p>${{detail.subtotal}}</p>
+                        <a class="button" href="{{ url_for(('add_to_cart'), origin='order', productid=detail.product.id, orderid=order.id) }}">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endfor %}
+<h3>Shipping Address</h3>
+<p>{{order.recipient_fname}} {{order.recipient_lname}}</p>
+<p>{{order.recipient_street_address}}</p>
+<p>{{order.recipient_city}}</p>
+<p>{{order.recipient_state}}</p>
+<p>{{order.recipient_postal_code}}</p>
+
 {% endblock %}

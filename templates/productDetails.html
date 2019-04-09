@@ -13,7 +13,7 @@
             <p>{{product.description}}</p>
             <p>${{product.price}}</p>
             <p><small>{{product.plant|capitalize}}: <i>{{product.meaning}}</i></small></p>
-            <a href="/add_to_cart/{{product.id}}"class="button">Add to cart</a>
+            <a href="{{ url_for(('add_to_cart'), origin=product.data_name, productid=product.id) }}"class="button">Add to cart</a>
             <a href="/shop" class="button">Continue Shopping</a>
         </div>
     </div>
@@ -32,7 +32,7 @@
             
             <button class="button review-form">Submit a review</button>
             <div class="row hidden review">
-                <div class="">
+                <div class="col">
                     <form method="POST" action="" class="form form-group">
                         {{ form.hidden_tag() }}
                         {% for field in form if field.widget.input_type != 'hidden'%}

@@ -15,7 +15,7 @@
                     <p>{{item.product.name}} ${{item.subtotal}}</p>
                     <p><i>{{item.product.plant}}: {{item.product.meaning}}</i></p>
                     <p>
-                        <a href="/add_to_cart/{{item.product.id}}" class="button">+</a>
+                        <a href="{{ url_for(('add_to_cart'), origin='cart', productid=item.product.id) }}" class="button">+</a>
                         {{item.quantity}}
                         <a href="/subtract_from_cart/{{item.id}}" class="button">-</a>
                     </p>

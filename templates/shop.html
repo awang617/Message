@@ -1,11 +1,31 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<style>
+    .shop-links {
+        margin:10px;
+        color: black;
+    }
+
+    .shop-links:hover {
+        color: black;
+    }
+
+    @media screen and (max-width: 540px){
+        .card-content{
+            padding:10px;
+        }
+    }
+</style>
+
 <div class="container">
     <div class="row justify-content-center">
-        <a href="/shop" class="button">Shop all</a>
-        <a href="/shop/bouquet" class="button">Bouquets</a>
-        <a href="/shop/plant" class="button">Plants</a>
+        <h4>Shop</h4>
+    </div>
+    <div class="row justify-content-center">
+        <a href="/shop" class="shop-links">Shop all</a>
+        <a href="/shop/bouquet" class="shop-links">Bouquets</a>
+        <a href="/shop/plant" class="shop-links">Plants</a>
     </div>
     <div class="row">
         {% block shop %}
@@ -13,4 +33,6 @@
         {% endblock %}
     </div>
 </div>
+
+
 {% endblock %}
