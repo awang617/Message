@@ -324,9 +324,10 @@ def decrement_total(price):
     order.total_cost -= price
     order.save()
 
-@app.route('/add_to_cart/<productid>', methods=["GET", "POST", "PUT"])
+@app.route('/<origin>/add_to_cart/<productid>', methods=["GET", "POST", "PUT"])
+@app.route('/<origin>/add_to_cart/<productid>/<orderid>', methods=["GET", "POST", "PUT"])
 @login_required
-def add_to_cart(productid):
+def add_to_cart(origin, productid, orderid=None):
     user = current_user
     order = models.Order.select(models.Order.id).where(models.Order.user == user.id, models.Order.purchased==False)
     order_details = models.OrderDetails.select(models.Product, models.OrderDetails).join(models.Product).where(models.OrderDetails.order_id == order, models.OrderDetails.product_id == productid)
@@ -337,7 +338,12 @@ def add_to_cart(productid):
         existing_order_details.save()
         increment_total(existing_order_details.product.price)
         flash('Added to your cart!', 'success')
-        return redirect(url_for("cart"))
+        if origin == "cart":
+            return redirect(url_for("cart"))
+        elif origin == "order":
+            return redirect(url_for('view_details', orderid=orderid))
+        else:
+            return redirect(url_for('product_details', data_name=origin))
     else:
         user = current_user
         product = models.Product.select().where(models.Product.id == productid).get()
@@ -346,7 +352,12 @@ def add_to_cart(productid):
             models.OrderDetails.create_order_details(order.id, product.id, product.price)
             increment_total(product.price)
             flash('Added to your cart!', 'success')
-            return redirect(url_for("cart"))
+            if origin == "cart":
+                return redirect(url_for("cart"))
+            elif origin == "order":
+                return redirect(url_for('view_details', orderid=orderid))
+            else:
+                return redirect(url_for('product_details', data_name=origin))
         except:
             raise Exception("failed to add to cart")
 
@@ -361,10 +372,12 @@ def subtract_from_cart(order_details_id):
             existing_order_details.subtotal -= existing_order_details.product.price
             existing_order_details.save()
             decrement_total(existing_order_details.product.price)
+            flash('Removed from your cart.', 'success')
             return redirect(url_for("cart"))
         else:
             decrement_total(existing_order_details.product.price)
             existing_order_details.delete_instance()
+            flash('Removed from your cart.', 'success')
             return redirect(url_for("cart"))
     else:
         flash("there was an error with this request")
@@ -380,7 +393,7 @@ def remove_from_cart(order_details_id):
         remove_order.order.total_cost -= remove_order.subtotal
         remove_order.order.save()
         remove_order.delete_instance()
-        
+        flash('Removed from your cart.', 'success')
         return redirect(url_for("cart"))
     else:
         return ("error")
