@@ -16,7 +16,7 @@ body {
     letter-spacing: 5px;
 }
 
-h1, h2 {
+h1 {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -32,9 +32,15 @@ label{
     text-transform: uppercase;
     font-size: 12px;
     letter-spacing: 1px;
+    border-color: rgb(157, 178, 150)
 }
+
 .form-control{
     font-size: 14px;
+}
+
+.alert {
+    margin-bottom: 0!important;
 }
 
 a {
@@ -51,7 +57,7 @@ a.navbar-item:hover, a:hover {
 }
 
 #history, #landing-quiz, #testimonials {
-    padding: 6em 8em;
+    padding: 10% 15%;
 }
 
 #history h2, #featured h2, #landing-quiz h2, .quiz-direct, #testimonials h2{
@@ -94,6 +100,9 @@ footer a{
 }
 
 @media screen and (max-width: 767px){
+    p{
+        font-size: 12px;
+    }
     #history, #quiz, #testimonials {
         padding:3em;
     }

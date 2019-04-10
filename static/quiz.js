@@ -49,13 +49,13 @@ $('#quiz').submit(function(e) {
 
 function getResults(num) {
     console.log('here')
-    if( 8 < num && num <= 13){
+    if( 8 <= num && num <= 13){
         return "cosmos"
-    }else if (14 < num && num <= 19){
+    }else if (14 <= num && num <= 19){
         return "dogwood"
-    } else if (20 < num && num <= 25){
+    } else if (20 <= num && num <= 25){
         return "bluebell"
-    } else if (26 < num && num <= 32){
+    } else if (26 <= num && num <= 32){
         return "mistletoe"
     }
 }

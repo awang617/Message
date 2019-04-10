@@ -8,4 +8,9 @@ $(document).ready(function() {
         $(".navbar-menu").toggleClass("is-active");
   
     });
+
+    $(".delete").click(function() {
+        $(this).parent().remove()
+    })
+
   });
