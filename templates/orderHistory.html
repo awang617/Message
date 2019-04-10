@@ -1,8 +1,13 @@
 {% extends 'profile.html' %}
 
 {% block profile %}
-<!-- Bootstrap CSS -->
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+
+<style>
+    .date {
+        margin-bottom: .25em;
+    }
+</style>
+
 <div class="row">
     <h2>Your Orders</h2>
 </div>
@@ -11,8 +16,8 @@
     <div class="row">
         {% for order in orders %}
             <div class="col-sm-6">
-                <p>Order Date: {{order.order_date.strftime('%m/%d/%Y')}}</p>
-                <p>Order Number: {{order.id}}</p>
+                <p class="date">Order Date: {{order.order_date.strftime('%m/%d/%Y')}}</p>
+                <p><small>Order Number: {{order.id}}</small></p>
                 <a href="/profile/orders/view_details/{{order.id}}"class="button">View Details</a>
                 <hr>
             </div>
