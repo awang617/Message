@@ -31,6 +31,14 @@ login_manager.init_app(app)
 # if a user is not logged in, redirect them to login view
 login_manager.login_view = 'login'
 
+def cart_quantity(user, order):
+    cartq = 0
+    cart = models.OrderDetails.select().where(models.OrderDetails.order_id == order)
+    for item in cart:
+        cartq += item.quantity
+    return cartq
+
+
 @login_manager.user_loader
 def load_user(userid):
     try: 
@@ -53,11 +61,24 @@ def after_request(response):
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    if current_user.is_authenticated:
+        user=current_user
+        order= models.Order.select().where(models.Order.user_id ==user.id, models.Order.purchased == False).get()
+        cartq = cart_quantity(user.id,order.id)
+    else:
+        cartq=0
+    featured=models.Product.select().order_by(models.Product.average_rating.desc()).limit(4)
+    return render_template("index.html", featured=featured, cartq=cartq)
 
 @app.route('/quiz')
 def quiz():
-    return render_template("quiz.html")
+    if current_user.is_authenticated:
+        user=current_user
+        order= models.Order.select().where(models.Order.user_id ==user.id, models.Order.purchased == False).get()
+        cartq = cart_quantity(user.id,order.id)
+    else:
+        cartq=0
+    return render_template("quiz.html", cartq=cartq)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
