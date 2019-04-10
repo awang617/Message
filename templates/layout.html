@@ -24,7 +24,7 @@
 </head>
   <body>
 
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar sticky-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="{{url_for('index')}}" title="index">Message</a>
         
@@ -40,7 +40,8 @@
                 <!-- <a class="navbar-item" href="{{url_for('index')}}" title="index" >Home</a> -->
                 <a class="navbar-item" href="{{url_for('shop')}}" title="shop">Shop</a>
                 <a class="navbar-item" href="{{url_for('quiz')}}" title="quiz">Quiz</a>
-        
+                <a class="navbar-item" href="/#history" title="history">About Us</a>
+
             </div>
             
             <div class="navbar-end">
@@ -52,7 +53,7 @@
                 <a class="navbar-item" href="{{url_for('signup')}}">Signup</a>
                 {% endif %}
 
-                <a class="navbar-item" href="{{url_for('cart')}}" title="cart">Cart</a>
+                <a class="navbar-item" href="{{url_for('cart')}}" title="cart">Cart({{cartq}})</a>
             </div>
         </div>
     </nav>
@@ -67,21 +68,19 @@
     {% endblock %}
     <footer>
         <div class="container">
-            <div class="row">
-                <div class="col-4">
+            <div class="row ">
+                <div class="col-4 d-flex flex-column justify-content-end">
+                    <img src="../static/facebook_icon.png" alt="" style="width:48px; height:48px;">
+                    <img src="../static/twitter_icon.png" alt="" style="width:48px; height:48px;">
+                </div>
+                <div class="col-4 d-flex justify-content-center">
                     <p>Some info here</p>
                 </div>
 
-                <div class="col-4">
+                <div class="col-4 d-flex justify-content-center">
                     <p>Contact us!</p>
                 </div>
                 
-                <div class="col-4">
-                    <a href="/shop">Shop</a>
-                    <a href="/quiz">Quiz</a>
-                    <a href="/login">Login</a>
-                    <a href="/signup">Signup</a>
-                </div>
 
             </div>
         </div>

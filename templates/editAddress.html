@@ -10,29 +10,29 @@
     
     <div class="row">
         {{ field_error(form.street_address) }}
-        {{form.street_address.label(class="menu-label col-sm-2")}}
-        <div class="col-sm-10">
+        {{form.street_address.label(class="menu-label col-lg-3 col-sm-5")}}
+        <div class="col-lg-9 col-sm-7">
             {{form.street_address(value=user.street_address, class="form-control")}}
         </div>
     </div>
     <div class="row">
         {{ field_error(form.city) }}
-        {{form.city.label(class="menu-label col-sm-2")}}
-        <div class="col-sm-10">
+        {{form.city.label(class="menu-label col-lg-3 col-sm-5")}}
+        <div class="col-lg-9 col-sm-7">
             {{form.city(value=user.city, class="form-control")}}
         </div>
     </div>
     <div class="row">
         {{ field_error(form.state) }}
-        {{form.state.label(class="menu-label col-sm-2")}}
-        <div class="col-sm-2">
+        {{form.state.label(class="menu-label col-lg-3 col-sm-5")}}
+        <div class="col-lg-3 col-4">
             {{form.state(selected=user.state, class="form-control")}}
         </div>
     </div>
     <div class="row">
         {{ field_error(form.postal_code) }}
-        {{form.postal_code.label(class="menu-label col-sm-2")}}
-        <div class="col-sm-10">
+        {{form.postal_code.label(class="menu-label col-lg-3 col-sm-5")}}
+        <div class="col-lg-9 col-sm-7">
             {{form.postal_code(value=user.postal_code, class="form-control")}}
         </div>
     </div>

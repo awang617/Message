@@ -2,12 +2,19 @@
 
 {% block content %}
 <style>
+
+    .cart-container {
+        margin-top: 2em;
+        margin-bottom: 7em;
+    }
+    .product-cart {
+        margin-bottom: 3em;
+    }
     .cart-item, .cart-orders{
         margin-top: 30px;
         margin-bottom: 20px;
     }
     .counter {
-        border: 1px solid #dbdbdb;
         border-radius: 4px;
         display: inline-block;
     }
@@ -18,12 +25,18 @@
 
     }
 
-</style>
+    @media screen and (max-width: 576px){
+        .cart-orders {
+            display: none;
+        }
+    }
 
+</style>
+<div class="cart-container">
 <div class="container">
-    <div class="row">
-        <div class="col-sm-8">
-                <h2>Your Shopping Cart</h2>
+    <div class="row justify-content-center">
+        <div class="product-cart col-md-6 col-sm-8">
+                <h3>Your Shopping Cart</h3>
         {% if cart %}
             {% for item in cart %}
             <div class="cart-item row align-items-center">
@@ -49,11 +62,11 @@
     </div>
 
     <div class="col-sm-4">
-        <h2>Your Order</h2>
+        <h3>Your Order</h3>
         
         {% for item in cart %}
         <div class="cart-orders">
-            <h5><strong>{{item.product.name}}  ${{item.subtotal}}</strong></h5>
+            <h5>{{item.product.name}}  ${{item.subtotal}}</h5>
             <p>QTY: {{item.quantity}}</p>
             <!-- <p>${{item.subtotal}}</p> -->
         </div>
@@ -66,5 +79,6 @@
         {% endif %}
     </div>
     </div>
+</div>
 </div>
 {% endblock %}

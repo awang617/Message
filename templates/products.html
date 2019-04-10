@@ -1,26 +1,33 @@
 {% extends "shop.html" %}
 
 {% block shop %}
+<style>
+    
+    
+</style>
 
 {% for item in product %}
     <div class="col-sm-4 col-6 product-cards">
         <a class="card" href="/shop/product/{{item.data_name}}">
             <div class="card-image">
                 <figure class="image">            
-                    <img src="{{item.image}}" alt="{{product.name}} image">
+                    <img src="{{item.image}}" alt="{{item.name}} image">
                 </figure>
             </div>
             <div class="card-content">
                 <div class="media">
                 <div class="media-content">
-                    <p><strong>{{item.name}}</strong></p>
+                    <p>{{item.name}}</p>
                 </div>
-                        <div class="media-right">
-                            ${{item.price}}
-                        </div>
+                    <div class="media-right">
+                        ${{item.price}}
+                    </div>
                 </div>
-            
+                
             </div>
+            <!-- <div class="content">
+                <a class="button">Add to cart</a>
+            </div> -->
         </a>
     </div>
 {% endfor %}

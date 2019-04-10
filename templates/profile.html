@@ -1,10 +1,18 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+
+<style>
+    .profile-container {
+        margin-top: 2em;
+        margin-bottom: 10em;
+    }
+</style>
+<div class="profile-container">
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="col-sm-4">
-            <h3> Good {{greeting}}, {{user.fname}}</h3>
+            <h3>Good {{greeting}}, {{user.fname}}</h3>
             
             <aside class="menu">
                 <p class="menu-label">
@@ -18,12 +26,13 @@
                 </ul>
             </aside>
         </div>
-        <div class="col-sm-8">
+        <div class="col-md-6 col-sm-8">
             <!-- <div class="container"> -->
                 {% block profile %}
                 {% endblock %}
             <!-- </div> -->
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
