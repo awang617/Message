@@ -8,7 +8,7 @@
         background-size: cover;
     }
     .full-height {
-        height: 90vh;
+        margin: 8em 0;
     }
     .quiz-container{
         padding: 50px 30px;
@@ -35,12 +35,20 @@
     }
 
     .result-buttons {
-        display: flex;
+        display: block;
         text-align: center;
         flex-direction: column;
         padding-right: 30px;
         padding-left: 30px;
     }
+    .button-row {
+        width: 100%;
+    }
+
+    .restart, .shop-redirect {
+        margin-top: 2em;
+    }
+
     
 </style>
 
@@ -70,8 +78,8 @@
                 <div class="answers">
                     <input type="radio" name="color" value=4 required>Warm tones - Strong, fiery colors suit me the most. <br>
                     <input type="radio" name="color" value=3 required>Neutral tones - They are practical and also easy to wear. <br>
-                    <input type="radio" name="color" value=2 required>Bright tones - I love color, the more, the better. <br>
-                    <input type="radio" name="color" value=1 required>Cool tones - Blues and greens help me feel at ease <br>
+                    <input type="radio" name="color" value=2 required>Cool tones - Blues and greens help me feel at ease <br>
+                    <input type="radio" name="color" value=1 required>Bright tones - I love color, the more, the better. <br>
                     <button class="hide button next">Next</button>
                 </div>
             </div>
@@ -149,8 +157,12 @@
         <p>Cosmos mean <i>joy in love and life</i>. No matter where you are or who you are with, you light up the room and help others feel at ease. You are perfectly happy with going with the flow but you want to be free to explore your own interests.</p>
         <img class="result-image image-fluid" src="../static/cosmos.jpg">
         <div class="result-buttons">
-            <button class="button restart">Take the quiz again!</button>
-            <a href="/shop" class="button">Check out our shop</a>
+            <div class="button-row">
+                <button class="button restart">Take the quiz again!</button>
+            </div>
+            <div class="result-buttons">
+                <a href="/shop" class="button shop-redirect">Check out our shop</a>
+            </div>
         </div>
     </div>
     <div class="hide" id="dogwood">
@@ -158,8 +170,12 @@
         <p>In the language of flowers, dogwood flowers mean <i>love undimished by adversity</i>. You are flexible and adapt to whatever is going on in life. Although you have a calm temperment, you will not back down when provoked.</p>
         <img class="result-image image-fluid" src="../static/dogwood.jpg">
         <div class="result-buttons">
-            <button class="button restart">Take the quiz again!</button>
-            <a href="/shop" class="button">Check out our shop</a>
+            <div class="button-row">
+                <button class="button restart">Take the quiz again!</button>
+            </div>
+            <div class="result-buttons">
+                <a href="/shop" class="button shop-redirect">Check out our shop</a>
+            </div>
         </div>
     </div>
     <div class="hide" id="bluebell">
@@ -167,8 +183,12 @@
         <p>Bluebells mean <i>constancy</i>. You are a loyal and trusted friend that others depend on. You often shoulder many responsibilities but you are determined and unwilling to relent. You might be a bit stubborn sometimes, but your stability is something others rely on.</p>
         <img class="result-image image-fluid" src="../static/bluebell.jpg">
         <div class="result-buttons">
-            <button class="button restart">Take the quiz again!</button>
-            <a href="/shop" class="button">Check out our shop</a>
+            <div class="button-row">
+                <button class="button restart">Take the quiz again!</button>
+            </div>
+            <div class="result-buttons">
+                <a href="/shop" class="button shop-redirect">Check out our shop</a>
+            </div>
         </div>
     </div>
     <div class="hide" id="mistletoe">
@@ -176,8 +196,12 @@
         <p>Best known for inspiring holiday kisses, mistletoe's other meaning is <i>I surmount all obstacles</i>. You are a natural leader and you strive for excellence in all aspects of your life. You are confident and successful in your endeavors and you never let a challenge turn you down.</p>
         <img class="result-image image-fluid" src="../static/mistletoe.jpeg">
         <div class="result-buttons">
-            <button class="button restart">Take the quiz again!</button>
-            <a href="/shop" class="button">Check out our shop</a>
+            <div class="button-row">
+                <button class="button restart">Take the quiz again!</button>
+            </div>
+            <div class="result-buttons">
+                <a href="/shop" class="button shop-redirect">Check out our shop</a>
+            </div>
         </div>
     </div>
 
