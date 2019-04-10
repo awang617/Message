@@ -1,26 +1,68 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<style>
+    .confirm-container{
+        padding: 3em 0 10em 0;
+    }
+    .no-gutters{
+        padding-left:0;
+        padding-right:0;
+    }
+    .address-details{
+        padding-bottom: 3em;
+    }
+    .image-fluid{
+        margin-right:auto;
+        margin-left: auto;
+    }
+    .button{
+        margin-bottom: 1em;
+    }
+    .redirect-buttons{
+        text-align: center;
+    }
+    .stripe-button-el {
+        margin-top: 1em auto;
+        background-image: none;
+        box-shadow: none;
+    }
+    .stripe-button-el span{
+        background:rgb(157, 178, 150);
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 12px;
+        text-shadow: none;
+        box-shadow: none;
+        border: 1px solid rgb(157, 178, 150);
+        font-family: 'Montserrat', sans-serif;
+    }
+</style>
+<div class="confirm-container">
 <div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <h2>Confirm your order</h2>
-            <h4>Shipping</h4>
-            <p style="margin: 5px 0">{{order.recipient_fname}} {{order.recipient_lname}}</p>
-            <p style="margin: 5px 0">{{order.recipient_street_address}}</p>
-            <p style="margin: 5px 0">{{order.recipient_city}}</p>
-            <p style="margin: 5px 0">{{order.recipient_state}}</p>
-            <p>{{order.recipient_postal_code}}</p>
-            <a href="/shipping">Edit</a>
-        
-            <h4>Billing</h4>
-            <p style="margin: 5px 0">{{user.fname}} {{user.lname}}</p>
-            <p style="margin: 5px 0">{{user.email}}</p>
-            <p style="margin: 5px 0">{{user.street_address}}</p>
-            <p style="margin: 5px 0">{{user.city}}</p>
-            <p style="margin: 5px 0">{{user.state}}</p>
-            <p style="margin: 5px 0">{{user.postal_code}}</p>
-            <a href="/payment">Edit</a>
+    <div class="row justify-content-center">
+        <div class="col-md-4 col-sm-6">
+            <div class="address-details">
+                <h2>Confirm your order</h2>
+                <h4>Shipping</h4>
+                <p style="margin: 5px 0">{{order.recipient_fname}} {{order.recipient_lname}}</p>
+                <p style="margin: 5px 0">{{order.recipient_street_address}}</p>
+                <p style="margin: 5px 0">{{order.recipient_city}}</p>
+                <p style="margin: 5px 0">{{order.recipient_state}}</p>
+                <p>{{order.recipient_postal_code}}</p>
+                <a href="/shipping" class="button">Edit</a>
+            </div>
+            <div class="address-details">
+                <h4>Billing</h4>
+                <p style="margin: 5px 0">{{user.fname}} {{user.lname}}</p>
+                <p style="margin: 5px 0">{{user.email}}</p>
+                <p style="margin: 5px 0">{{user.street_address}}</p>
+                <p style="margin: 5px 0">{{user.city}}</p>
+                <p style="margin: 5px 0">{{user.state}}</p>
+                <p style="margin: 5px 0">{{user.postal_code}}</p>
+                <a href="/payment" class="button">Edit</a>
+            </div>
         </div>
         <!-- <div class="row"> -->
         <div class="col-sm-6">
@@ -32,26 +74,34 @@
                     <p><strong>{{item.product.name}}</strong> ${{item.subtotal}}</p>
                     <p>QTY: {{item.quantity}}</p>
                 </div>
-                <div class="col-6">
-                    <img src="{{item.product.image}}" style="height:200px; width: 200px">
+                <div class="col-6 d-flex align-items-center">
+                    <img src="{{item.product.image}}" class="image-fluid" style="height:auto; width: 200px">
                 </div>
             </div>
             <hr>
             {% endfor %}
-            <p>Total: ${{order.total_cost}}</p>
-            <form action="/checkout" method="POST">
-                <script
-                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="pk_test_0ZSmd03Ao5L3zGGWFPb784cH00jsfe5W5S"
-                data-amount={{order.total_cost*100}}
-                data-name="Message"
-                data-description="Your order"
-                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                data-locale="auto">
-                </script>
-            </form>
-            <a href="/cart" class="button">Return to Cart</a>
-            <a href="/shop" class="button">Continue Shopping</a>
+            <div class="container no-gutters">
+                <div class="row">
+                <div class="col">
+                    <h5><strong>Total:</strong> ${{order.total_cost}}</h5>
+                    <form action="/checkout" method="POST">
+                        <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="pk_test_0ZSmd03Ao5L3zGGWFPb784cH00jsfe5W5S"
+                        data-amount={{order.total_cost*100}}
+                        data-name="Message"
+                        data-description="Your order"
+                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                        data-locale="auto">
+                        </script>
+                    </form>
+                </div>
+                <div class="redirect-buttons col">
+                    <a href="/cart" class="button">Return to Cart</a>
+                    <a href="/shop" class="button">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
         </div>
             <!-- </div> -->
             
@@ -59,5 +109,5 @@
         
     </div>
 </div>
-
+</div>
 {% endblock %}
