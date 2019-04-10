@@ -3,9 +3,19 @@
 
 {% block content %}
 
-<div class="login">
+<style>
+    .login-box {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+    .menu-label:not(:last-child) {
+        margin-bottom: 0;
+    }
+</style>
 
-    <div class="container">
+<div class="login login-box d-flex align-items-center">
+
+    <div class="container ">
         <div class="row justify-content-center">
             <h2>Sign Up</h2>
         </div>
@@ -15,7 +25,7 @@
                 {{ render_field(field) }}
             {% endfor %}
             <div class="row justify-content-center">
-                <div class="col-6">
+                <div class="col-md-2 col-4">
                     <button type="submit" class="button btn-block" id="submit">Sign Up</button>
                 </div>
             </div>

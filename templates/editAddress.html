@@ -23,11 +23,16 @@
         </div>
     </div>
     <div class="row">
+        <input type="hidden" id="st" value="{{user.state}}"/>
         {{ field_error(form.state) }}
         {{form.state.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-3 col-4">
-            {{form.state(selected=user.state, class="form-control")}}
+            {{form.state(class="form-control hacky")}}
         </div>
+        <script>
+            var els = document.getElementsByClassName("hacky")[0];
+            els.value = document.getElementById('st').value
+        </script>
     </div>
     <div class="row">
         {{ field_error(form.postal_code) }}

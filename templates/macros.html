@@ -1,14 +1,18 @@
 {% macro render_field(field) %}
-<div class="form-group row justify-content-center">
+<div class="form-group">
 
   {% if field.errors %} {% for error in field.errors %}
-  <div class="notification error">{{ error }}</div>
+  <div class="row justify-content-center">
+    <div class="notification error col-6">{{ error }}</div>
+  </div>
   {% endfor %} {% endif %}
+  <div class="row justify-content-center">
   {% if field.widget.input_type != 'hidden' %}
     {{field.label(class="menu-label col-sm-2")}}
   {% endif %}
-  <div class=col-sm-4>
-    {{ field(placeholder = field.label.text, class="form-control") }}
+    <div class=col-sm-4>
+      {{ field(placeholder = field.label.text, class="form-control") }}
+    </div>
   </div>
 </div>
 {% endmacro %}
