@@ -4,7 +4,7 @@ $(document).ready(
 
 
 $(`input[type='radio']`).on('click', function() {
-    $(this).siblings('button').removeClass('hide')
+    $(this).siblings('button').removeAttr('disabled')
 }) 
 
 $('.start').click( function(event) {
