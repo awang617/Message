@@ -480,7 +480,7 @@ def remove_from_cart(order_details_id):
         remove_order.order.total_cost -= remove_order.subtotal
         remove_order.order.save()
         remove_order.delete_instance()
-        flash('Removed from your cart.', 'success')
+        flash('Removed from your cart.', 'danger')
         return redirect(url_for("cart"))
     else:
         return ("error")
