@@ -4,12 +4,14 @@ from peewee import *
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash
 import os
+import psycopg2
 
 from playhouse.db_url import connect
 
 DATABASE = connect(os.environ.get('DATABASE_URL'))
 
-DATABASE = PostgresqlDatabase('message')
+# conn = psycopg2.connect(DATABASE, sslmode='require')
+# DATABASE = PostgresqlDatabase('message')
 
 class User(UserMixin, Model):
     fname = CharField()
