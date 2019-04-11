@@ -31,13 +31,7 @@ login_manager.init_app(app)
 # if a user is not logged in, redirect them to login view
 login_manager.login_view = 'login'
 
-def cart_quantity(user):
-    order= models.Order.select().where(models.Order.user_id ==user.id, models.Order.purchased == False).get()
-    cartq = 0
-    cart = models.OrderDetails.select().where(models.OrderDetails.order_id == order)
-    for item in cart:
-        cartq += item.quantity
-    return cartq
+
 
 
 @login_manager.user_loader
@@ -60,6 +54,59 @@ def after_request(response):
     g.db.close()
     return response
 
+###########################################
+        ## HELPER FUNCTIONS ##
+###########################################
+## calculates the cart quantity to display on every page
+def cart_quantity(user):
+    order= models.Order.select().where(models.Order.user_id ==user.id, models.Order.purchased == False).get()
+    cartq = 0
+    cart = models.OrderDetails.select().where(models.OrderDetails.order_id == order)
+    for item in cart:
+        cartq += item.quantity
+    return cartq
+
+## returns a greeting for the time of day
+def time_of_day(hour):
+    return (
+        "morning" if 5 <= hour <= 11
+        else
+        "afternoon" if 12 <= hour <= 17
+        else
+        "evening" if 18 <= hour <= 22
+        else
+        "night"
+    )
+
+## calculates the average reviews, takes in reviews for a particular product
+def average(reviews):
+    ratings = []
+    for review in reviews:
+        print("from average(), ratings", review.rating)
+        ratings.append(review.rating)
+    if len(ratings)==0:
+        return 0
+    return sum(ratings)/len(ratings)
+
+## increments the price to the cart total
+def increment_total(price):
+    user = current_user
+    order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
+    order.total_cost += price
+    order.save()
+
+## decrements the price from the cart total
+def decrement_total(price):
+    user = current_user
+    order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
+    order.total_cost -= price
+    order.save()
+
+###########################################
+        ## APP ROUTES ##
+###########################################
+
+## HOMEPAGE
 @app.route('/')
 def index():
     if current_user.is_authenticated:
@@ -70,6 +117,7 @@ def index():
     featured=models.Product.select().order_by(models.Product.average_rating.desc()).limit(4)
     return render_template("index.html", featured=featured, cartq=cartq)
 
+## QUIZ PAGE
 @app.route('/quiz')
 def quiz():
     if current_user.is_authenticated:
@@ -79,6 +127,8 @@ def quiz():
         cartq=0
     return render_template("quiz.html", cartq=cartq)
 
+
+## LOGIN PAGE
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = forms.LoginForm()
@@ -96,6 +146,7 @@ def login():
             if check_password_hash(user.password, form.password.data):
                 login_user(user)    # creates a session and logs in the user
                 flash('You have been logged in!', 'success')
+                ## check is the user has an order, if not, create one for them
                 order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False)
                 if order.exists():
                     return redirect(url_for('shop'))
@@ -106,7 +157,7 @@ def login():
                 flash('Email or password incorrect.', 'danger')
     return render_template("login.html", form=form, cartq=cartq)
 
-
+## SIGNUP PAGE
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = forms.RegisterForm()
@@ -124,6 +175,7 @@ def signup():
             password=form.password.data
         )
         user = models.User.get(models.User.email== form.email.data)
+        ## create an order for the user
         models.Order.create_order(user=user)
         login_user(user)
         # redirect user to index
@@ -131,6 +183,8 @@ def signup():
         return redirect(url_for('shop'))
     return render_template("signup.html", form=form, cartq=cartq)
 
+
+## LOG OUT ROUTE
 @app.route('/logout')
 # from login_manager login view, will redirect you to the login page
 @login_required
@@ -139,17 +193,7 @@ def logout():
     flash('You have been logged out.', 'success')
     return redirect(url_for('index'))
 
-def time_of_day(hour):
-    return (
-        "morning" if 5 <= hour <= 11
-        else
-        "afternoon" if 12 <= hour <= 17
-        else
-        "evening" if 18 <= hour <= 22
-        else
-        "night"
-    )
-
+## PROFILE PAGE ROUTE
 @app.route('/profile')
 @login_required
 def profile():
@@ -159,10 +203,13 @@ def profile():
     else:
         cartq=0
     user = current_user
+    ## send a greeting based on time of day
     current_hour = datetime.datetime.now().hour
     greeting = time_of_day(current_hour)
     return render_template("dashboard.html", user=user, greeting=greeting, cartq=cartq)
 
+
+## EDIT PROFILE ROUTE
 @app.route('/profile/edit', methods=["GET", "POST"])
 @login_required
 def edit_profile():
@@ -183,6 +230,7 @@ def edit_profile():
         return redirect(url_for("profile"))
     return render_template("editProfile.html", form=form, user=user, greeting=greeting, cartq=cartq)
 
+## EDIT ADDRESS ROUTE
 @app.route('/profile/address', methods=["GET", "POST"])
 @login_required
 def edit_address():
@@ -204,7 +252,7 @@ def edit_address():
         return redirect(url_for("profile"))
     return render_template("editAddress.html", form=form, user=user, greeting=greeting, cartq=cartq)
 
-
+## ORDER HISTORY ROUTE
 @app.route('/profile/orders', methods=["GET"])
 @login_required
 def order_history():
@@ -219,6 +267,8 @@ def order_history():
     orders = models.Order.select().where(models.Order.user_id == user.id, models.Order.purchased == True)
     return render_template("orderHistory.html", user=user, greeting=greeting, orders=orders, cartq=cartq)
 
+
+## VIEW ORDER DETAILS ROUTE
 @app.route('/profile/orders/view_details/<orderid>', methods=["GET"])
 @login_required
 def view_details(orderid):
@@ -235,6 +285,8 @@ def view_details(orderid):
     details = models.OrderDetails.select().where(models.OrderDetails.order_id == orderid)
     return render_template("viewDetails.html", user=user, greeting=greeting, order=order, details=details, cartq=cartq)
 
+
+## REVIEWS ROUTE
 @app.route('/profile/reviews', methods=["GET"])
 @login_required
 def reviews():
@@ -249,6 +301,8 @@ def reviews():
     reviews = models.Review.select().where(models.Review.user_id == user.id).order_by(models.Review.date_posted.desc())
     return render_template("reviews.html", user=user, greeting=greeting, reviews=reviews, cartq=cartq)
 
+
+## VIEW REVIEW DETAILS ROUTE
 @app.route('/profile/reviews/review_details/<reviewid>', methods=["GET"])
 @login_required
 def review_details(reviewid):
@@ -263,6 +317,10 @@ def review_details(reviewid):
     review = models.Review.get(models.Review.id == reviewid)
     return render_template("reviewDetails.html", user=user, greeting=greeting, review=review, cartq=cartq)
 
+
+## DELETE REVIEW ROUTE
+## redirects based on the page the user came from
+## deletes a review and updates the product's average rating
 @app.route('/<origin>/delete_review/<reviewid>', methods=["GET", "DELETE", "PUT"])
 @login_required
 def delete_review(origin, reviewid):
@@ -271,16 +329,12 @@ def delete_review(origin, reviewid):
     except:
         raise Exception("delete review error")
     if delete_review:
-        print("this review's rating", delete_review.rating)
         product = models.Product.get(models.Product.id == delete_review.product_id)
-        print("current product average", product.average_rating)
         delete_review.delete_instance()
         reviews = models.Review.select().where(models.Review.product_id == product.id)
         avg = "%.2f" % average(reviews)
-        print("variable avg",avg)
         product.average_rating = avg
         product.save()
-        print("new product average", product.average_rating)
         if origin == "profile":
             return redirect(url_for('reviews'))
         else:
@@ -288,6 +342,9 @@ def delete_review(origin, reviewid):
     else:
         return("error")
 
+## EDIT REVIEW ROUTE
+## redirects based on the page the user came from
+## edits a review and updates the product's average rating
 @app.route('/<origin>/edit_review/<reviewid>', methods=["GET", "POST"])
 @login_required
 def edit_review(origin, reviewid):
@@ -301,7 +358,6 @@ def edit_review(origin, reviewid):
     product = models.Product.get(models.Product.id == review.product_id)
     reviews = models.Review.select().where(models.Review.product_id == product.id)
     if form.validate_on_submit():
-        print("validated")
         review.title = form.title.data
         review.rating = form.rating.data
         review.content = form.content.data
@@ -315,7 +371,7 @@ def edit_review(origin, reviewid):
             return redirect(url_for("product_details", data_name=origin))
     return render_template("editReview.html", form=form, cartq=cartq)
 
-
+## SHOP PAGE
 @app.route('/shop', methods=["GET"])
 # @login_required
 def shop():
@@ -327,15 +383,7 @@ def shop():
     product = models.Product.select()
     return render_template("products.html", product=product, cartq=cartq)
 
-def average(reviews):
-    ratings = []
-    for review in reviews:
-        print("from average(), ratings", review.rating)
-        ratings.append(review.rating)
-    if len(ratings)==0:
-        return 0
-    return sum(ratings)/len(ratings)
-
+## SHOP BY A SPECIFIC CATEGORY
 @app.route('/shop/<category>', methods=["GET"])
 # @login_required
 def shop_products(category):
@@ -347,6 +395,9 @@ def shop_products(category):
     product = models.Product.select(models.Product).join(models.Category).where(models.Category.category_name == category)
     return render_template("products.html", product=product, cartq=cartq)
 
+
+## PRODUCT PAGE
+## form creates a new review for this product and updates the average
 @app.route('/shop/product/<data_name>', methods=["GET", "POST"])
 # @login_required
 def product_details(data_name):
@@ -374,6 +425,8 @@ def product_details(data_name):
     # print(product)
     return render_template("productDetails.html", product=product, form=form, reviews=reviews, cartq=cartq)
 
+## GET REQUEST
+## requests the number of ratings for a number for a specific product, returns a string
 @app.route('/rating_votes/<productid>', methods=["GET"])
 def rating_votes(productid):
     reviews = models.Review.select().where(models.Review.product_id == productid)
@@ -399,18 +452,8 @@ def rating_votes(productid):
     return str(data)
 
 
-def increment_total(price):
-    user = current_user
-    order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
-    order.total_cost += price
-    order.save()
-
-def decrement_total(price):
-    user = current_user
-    order = models.Order.select().where(models.Order.user == user.id, models.Order.purchased==False).get()
-    order.total_cost -= price
-    order.save()
-
+## ADD PRODUCT TO CART
+## redirects based on the user's previous page
 @app.route('/<origin>/add_to_cart/<productid>', methods=["GET", "POST", "PUT"])
 @app.route('/<origin>/add_to_cart/<productid>/<orderid>', methods=["GET", "POST", "PUT"])
 @login_required
@@ -418,6 +461,7 @@ def add_to_cart(origin, productid, orderid=None):
     user = current_user
     order = models.Order.select(models.Order.id).where(models.Order.user == user.id, models.Order.purchased==False)
     order_details = models.OrderDetails.select(models.Product, models.OrderDetails).join(models.Product).where(models.OrderDetails.order_id == order, models.OrderDetails.product_id == productid)
+    ## if there is already a detail for this product, append the quantity, subtotal, and order total
     if order_details.exists():
         existing_order_details = order_details.get()
         existing_order_details.quantity += 1
@@ -431,6 +475,7 @@ def add_to_cart(origin, productid, orderid=None):
             return redirect(url_for('view_details', orderid=orderid))
         else:
             return redirect(url_for('product_details', data_name=origin))
+    ## if no detail exists, create a new one, append the order total
     else:
         user = current_user
         product = models.Product.select().where(models.Product.id == productid).get()
@@ -448,12 +493,14 @@ def add_to_cart(origin, productid, orderid=None):
         except:
             raise Exception("failed to add to cart")
 
+## REMOVE ONE PRODUCT FROM THE CART
 @app.route('/subtract_from_cart/<order_details_id>', methods=["GET", "PUT"])
 @login_required
 def subtract_from_cart(order_details_id):
     order_details = models.OrderDetails.select().where(models.OrderDetails.id == order_details_id)
     if order_details.exists():
         existing_order_details = order_details.get()
+        ## if there are more than one of this product in this cart, remove one, decrement the quantity, subtotal, and order total
         if existing_order_details.quantity > 1:
             existing_order_details.quantity -= 1
             existing_order_details.subtotal -= existing_order_details.product.price
@@ -461,6 +508,7 @@ def subtract_from_cart(order_details_id):
             decrement_total(existing_order_details.product.price)
             flash('Removed from your cart.', 'danger')
             return redirect(url_for("cart"))
+        ## if there is one product, delete the detail, decremement the order total
         else:
             decrement_total(existing_order_details.product.price)
             existing_order_details.delete_instance()
@@ -469,6 +517,7 @@ def subtract_from_cart(order_details_id):
     else:
         flash("there was an error with this request")
 
+## REMOVE PRODUCT FROM CART
 @app.route('/remove_from_cart/<order_details_id>', methods=["GET", "DELETE"])
 @login_required
 def remove_from_cart(order_details_id):
@@ -485,6 +534,7 @@ def remove_from_cart(order_details_id):
     else:
         return ("error")
 
+## CART PAGE
 @app.route('/cart', methods=["GET"])
 @login_required
 def cart():
@@ -499,6 +549,7 @@ def cart():
     
     return render_template("cart.html", cart=cart, order=order, cartq=cartq)
 
+## SHIPPING INFO PAGE
 @app.route('/shipping', methods=["GET", "POST"])
 @login_required
 def shipping():
@@ -521,7 +572,7 @@ def shipping():
         return redirect("payment")
     return render_template("shipping.html", order=order, form=form, cartq=cartq)
 
-
+## PAYMENT INFO PAGE
 @app.route('/payment', methods=["GET", "POST"])
 @login_required
 def payment():
@@ -541,6 +592,8 @@ def payment():
         return redirect("confirm_order")
     return render_template("payment.html", user=user, form=form, cartq=cartq)
 
+
+## CONFIRM ORDER PAGE
 @app.route('/confirm_order', methods=["GET","POST"])
 @login_required
 def confirm_order():
@@ -554,7 +607,8 @@ def confirm_order():
     cart = models.OrderDetails.select().where(models.OrderDetails.order_id == order.id)
     return render_template("confirmation.html", user=user, order=order, cart=cart, key=stripe_keys["publishable_key"], cartq=cartq)
 
-
+## CHECKOUT ROUTE
+## change the user's order to purchased = True, set the order date to now, and create a new order for them
 @app.route('/checkout', methods=["GET", "PUT", "POST"])
 @login_required
 def checkout():
@@ -567,6 +621,7 @@ def checkout():
     models.Order.create_order(user=user.id)
     return redirect(url_for("thank_you", orderid=order.id))
 
+## THANK YOU PAGE
 @app.route('/thank_you/<orderid>', methods=["GET", "PUT"])
 @login_required
 def thank_you(orderid):

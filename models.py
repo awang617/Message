@@ -12,6 +12,9 @@ from playhouse.db_url import connect
 
 DATABASE = PostgresqlDatabase('message')
 
+###############
+## USER MODEL##
+###############
 class User(UserMixin, Model):
     fname = CharField()
     lname = CharField()
@@ -44,7 +47,9 @@ class Category(Model):
 
     class Meta:
         database = DATABASE
-
+###################
+## PRODUCT MODEL ##
+###################
 class Product(Model):
     name = CharField(unique=True)
     description = CharField()
@@ -59,6 +64,9 @@ class Product(Model):
     class Meta:
         database = DATABASE
 
+#################
+## ORDER MODEL ##
+#################
 class Order(Model):
     user = ForeignKeyField(model=User, backref='order')
     order_date = DateTimeField(default=datetime.datetime.now())
@@ -84,6 +92,9 @@ class Order(Model):
     class Meta:
         database = DATABASE
 
+###################################################################
+## ORDER DETAILS MODEL. THIS ALSO FUNCTIONS AS THE SHOPPING CART ##
+###################################################################
 class OrderDetails(Model):
     order = ForeignKeyField(model=Order, backref='order_details')
     product = ForeignKeyField(model=Product, backref='order_details')
@@ -104,6 +115,9 @@ class OrderDetails(Model):
     class Meta:
         database = DATABASE
 
+##################
+## REVIEW MODEL ##
+##################
 class Review(Model):
     user = ForeignKeyField(model=User, backref='review')
     product = ForeignKeyField(model=Product, backref='review')
