@@ -71,17 +71,27 @@
     <footer>
         <div class="container">
             <div class="footer-row row">
-                <div class="col-sm-6 d-flex align-items-center">
+                <div class="col-4 d-flex align-items-center">
                     <h5>Follow us</h5>
-                    <a href="https://www.facebook.com" class="social-icons"><img src="{{url_for('static', filename='facebook_icon.png')}}" alt="" style="width:40px; height:40px;"></a>
-                    <a href="https://www.twitter.com" class="social-icons"><img src="{{url_for('static', filename='twitter_icon.png')}}" alt="" style="width:40px; height:40px;"></a>
+                    <a href="https://www.facebook.com" class="social-icons"><img src="{{url_for('static', filename='facebook_icon.png')}}" alt="" style="width:32px; height:32px;"></a>
+                    <a href="https://www.twitter.com" class="social-icons"><img src="{{url_for('static', filename='twitter_icon.png')}}" alt="" style="width:32px; height:32px;"></a>
                 </div>
-                <div class="amberly col-sm-6 d-flex justify-content-end align-items-center">
-                    <a href="https://github.com/awang617"><h5>Made by Amberly Wang</h5></a>
+                <div class="amberly col-4 d-flex justify-content-center align-items-center">
+                    <a href="/shop"><p style="margin-right: 20px">Shop</p></a>
+                    <a href="/quiz"><p style="margin-right: 20px">Quiz</p></a>
+                    <a href="/#history"><p>About Us</p></a>
+                </div>
+                <div class="col-4 text-center">
+                    <label class="menu-label" style="color: white; margin:0">Sign up for our newsletter!</label>
+                    <input type="text" class="form-control">
+                    <input type="submit" class="button" value="submit">
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <h6>Copywrite &copy; message.com 2019</h6>
+            <div class="row">
+                <div class="col text-center">
+                    <h6>Copywrite &copy; message.com 2019</h6>
+                    <a href="https://github.com/awang617"><h5>Made by Amberly Wang</h5></a>
+                </div>
             </div>
         </div>
 
