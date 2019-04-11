@@ -3,8 +3,13 @@ import datetime
 from peewee import *
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash
+import os
 
-DATABASE = SqliteDatabase('message.db')
+from playhouse.db_url import connect
+
+DATABASE = connect(os.environ.get('DATABASE_URL'))
+
+DATABASE = PostgresqlDatabase('message')
 
 class User(UserMixin, Model):
     fname = CharField()

@@ -580,6 +580,10 @@ def thank_you(orderid):
     cart = models.OrderDetails.select().where(models.OrderDetails.order_id == orderid)
     return render_template("thankyou.html", user=user, order=order, cart=cart, cartq=cartq)
 
+if 'ON_HEROKU' in os.environ:
+    print('hitting ')
+    models.initialize()
+
 if __name__ == '__main__':
     models.initialize()
     # try:
