@@ -61,6 +61,7 @@
         <a href="/shop" class="button">Continue Shopping</a>
     </div>
 
+    {% if cart %}
     <div class="col-sm-4">
         <h2>Your Order</h2>
         
@@ -74,7 +75,6 @@
 
         <p>Total: ${{order.total_cost}}</p>
         
-        {% if cart %}
             <a href="/shipping" class="button">Checkout</a>
         {% endif %}
     </div>

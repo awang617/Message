@@ -3,52 +3,7 @@
 {% block content %}
 <link rel="stylesheet" href="{{url_for('static', filename='quiz.css')}}">
 <style>
-    body{
-        background-image: url('../static/quiz-bg.jpg');
-        background-size: cover;
-    }
-    .full-height {
-        margin: 8em 0;
-    }
-    .quiz-container{
-        padding: 50px 30px;
-        /*height: 70vh;*/
-        width: 60%;
-        background-color: white;
-        border: 4px solid #273a84;
-        text-align: center;
-    }
-    .quiz-intro p {
-        text-align: justify;
-    }
-    .answers {
-        text-align: justify;
-    }
     
-    input[type=radio]{
-        margin-right:10px;
-    }
-    
-    .result-image {
-        width: 20vw;
-        height: auto;
-    }
-
-    .result-buttons {
-        display: block;
-        text-align: center;
-        flex-direction: column;
-        padding-right: 30px;
-        padding-left: 30px;
-    }
-    .button-row {
-        width: 100%;
-    }
-
-    .restart, .shop-redirect {
-        margin-top: 2em;
-    }
-
     
 </style>
 
@@ -69,7 +24,7 @@
                     <input type="radio" name="partner" value=4 required>Passionate - Someone who can share my passion for life. <br>
                     <input type="radio" name="partner" value=1 required>Sense of humor - It's important that we have lots of fun together.<br>
                     <input type="radio" name="partner" value=3 required>Dependable - I want someone who will be there through thick and thin.<br>
-                    <button class="hide button next">Next</button>
+                    <button class="button next" disabled>Next</button>
                 </div>
             </div>
 
@@ -80,7 +35,7 @@
                     <input type="radio" name="color" value=3 required>Neutral tones - They are practical and also easy to wear. <br>
                     <input type="radio" name="color" value=2 required>Cool tones - Blues and greens help me feel at ease <br>
                     <input type="radio" name="color" value=1 required>Bright tones - I love color, the more, the better. <br>
-                    <button class="hide button next">Next</button>
+                    <button class="button next" disabled>Next</button>
                 </div>
             </div>
 
@@ -91,7 +46,7 @@
                     <input type="radio" name="hobbies" value=2 required>I can stay home and watch TV or catch up with a friend. <br>
                     <input type="radio" name="hobbies" value=1 required>Go out and explore nature. I hate being cooped up. <br>
                     <input type="radio" name="hobbies" value=4 required>Hang out with all my friends and have a good time together. <br>
-                    <button class="hide button next">Next</button>
+                    <button class="button next" disabled>Next</button>
                 </div>
             </div>
 
@@ -102,7 +57,7 @@
                     <input type="radio" name="strengths" value=1 required>Carefree - I stay relaxed because there's no sense in worrying about everything. <br>
                     <input type="radio" name="strengths" value=3 required>Loyal - I am steadfast in my relationships and in whatever tasks I have. <br>
                     <input type="radio" name="strengths" value=4 required>Driven - I have the ambition to achieve and accomplish all my goals. <br>
-                    <button class="hide button next">Next</button>
+                    <button class="button next" disabled>Next</button>
                 </div>
             </div>
 
@@ -113,7 +68,7 @@
                     <input type="radio" name="party" value=2 required>Blooming - I thrive in my group of friends, but don't interact with many others. <br>
                     <input type="radio" name="party" value=1 required>Social Butterfly - I bounce back and forth between groups. <br>
                     <input type="radio" name="party" value=4 required>Life of the party - I love being at the center and living my best life. <br>
-                    <button class="hide button next">Next</button>
+                    <button class="button next" disabled>Next</button>
                 </div>
             </div>
 
@@ -124,7 +79,7 @@
                     <input type="radio" name="element" value=4 required>Fire - I favor energy and excitement. <br>
                     <input type="radio" name="element" value=1 required>Air - I appreciate freedom and change. <br>
                     <input type="radio" name="element" value=2 required>Water - I respect calmness and mutability. <br>
-                    <button class="hide button next">Next</button>
+                    <button class="button next" disabled>Next</button>
                 </div>
             </div>
 
@@ -135,7 +90,7 @@
                     <input type="radio" name="project" value=2 required>Offer up some choices, but you're okay with anything. <br>
                     <input type="radio" name="project" value=3 required>Eliminate all the impractical choices that are too small or too expensive. <br>
                     <input type="radio" name="project" value=4 required>Know exactly where you want to eat and convince everyone else to go. <br>
-                    <button class="hide button next">Next</button>
+                    <button class="button next" disabled>Next</button>
                 </div>
             </div>
 

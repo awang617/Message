@@ -26,7 +26,9 @@
 
     <nav class="navbar sticky-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="{{url_for('index')}}" title="index">Message</a>
+            <a class="navbar-item" href="{{url_for('index')}}" title="index">
+                <img src="{{url_for('static', filename='LOGO_1.png')}}">
+            </a>
         
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
                 <span aria-hidden="true"></span>
@@ -36,24 +38,24 @@
         </div>
         
         <div id="navbarBasic" class="navbar-menu">
-            <div class="navbar-start">
-                <!-- <a class="navbar-item" href="{{url_for('index')}}" title="index" >Home</a> -->
+            
+            <div class="navbar-end">
                 <a class="navbar-item" href="{{url_for('shop')}}" title="shop">Shop</a>
                 <a class="navbar-item" href="{{url_for('quiz')}}" title="quiz">Quiz</a>
                 <a class="navbar-item" href="/#history" title="history">About Us</a>
-
-            </div>
-            
-            <div class="navbar-end">
                 {% if current_user.is_authenticated %}
-                <a class="navbar-item" href="{{url_for('profile')}}" title="logout">Account</a>
                 <a class="navbar-item" href="{{url_for('logout')}}" title="logout">Logout</a>
+                <a class="navbar-item" href="{{url_for('profile')}}" title="account">
+                    <img src="{{url_for('static', filename='member_icon.png')}}" style="width:20px; height:auto">
+                </a>
                 {% else %}
                 <a class="navbar-item" href="{{url_for('login')}}">Login</a>
                 <a class="navbar-item" href="{{url_for('signup')}}">Signup</a>
                 {% endif %}
 
-                <a class="navbar-item" href="{{url_for('cart')}}" title="cart">Cart ({{cartq}})</a>
+                <a class="navbar-item" href="{{url_for('cart')}}" title="cart">
+                    <img src="{{url_for('static', filename='bag_icon.png')}}" style="width:23px;height:auto;"> ({{cartq}})
+                </a>
             </div>
         </div>
     </nav>
@@ -68,20 +70,18 @@
     {% endblock %}
     <footer>
         <div class="container">
-            <div class="row ">
-                <div class="col-4 d-flex flex-column justify-content-end">
-                    <img src="{{url_for('static', filename='facebook_icon.png')}}" alt="" style="width:48px; height:48px;">
-                    <img src="{{url_for('static', filename='twitter_icon.png')}}" alt="" style="width:48px; height:48px;">
+            <div class="footer-row row">
+                <div class="col-sm-6 d-flex align-items-center">
+                    <h5>Follow us</h5>
+                    <a href="www.facebook.com" class="social-icons"><img src="{{url_for('static', filename='facebook_icon.png')}}" alt="" style="width:40px; height:40px;"></a>
+                    <a href="www.twitter.com" class="social-icons"><img src="{{url_for('static', filename='twitter_icon.png')}}" alt="" style="width:40px; height:40px;"></a>
                 </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p>Some info here</p>
+                <div class="amberly col-sm-6 d-flex justify-content-end align-items-center">
+                    <a href="https://github.com/awang617"><h5>Made by Amberly Wang</h5></a>
                 </div>
-
-                <div class="col-4 d-flex justify-content-center">
-                    <p>Contact us!</p>
-                </div>
-                
-
+            </div>
+            <div class="row justify-content-center">
+                <h6>Copywrite &copy; message.com 2019</h6>
             </div>
         </div>
 
