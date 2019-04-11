@@ -10,6 +10,15 @@
     .name-email {
         padding-top: .5em;
     }
+    .user-labels{
+        margin-bottom: .5em;
+    }
+
+    @media screen and (max-width: 576px){
+        .user-labels{
+            margin: .75em 0;
+        }
+    }
 </style>
 
 <div class="payment-container">
@@ -22,8 +31,8 @@
             <p class="menu-label">Email</p>
         </div>
         <div class="col-10">
-            <p style="margin-bottom: .5em;">{{user.fname}} {{user.lname}}</p>
-            <p style="margin-bottom: .5em;">{{user.email}}</p>
+            <p class="user-labels">{{user.fname}} {{user.lname}}</p>
+            <p class="user-labels">{{user.email}}</p>
         </div>
     </div>
 <form method="POST" action="" class="form form-group">

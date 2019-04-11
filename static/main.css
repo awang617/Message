@@ -91,6 +91,13 @@ a:hover{
     padding-bottom: 4em;
 }
 
+.modal-header {
+    border-bottom: none;
+}
+.modal-content {
+    border: 4px solid #4b5647;
+}
+
 footer {
     background-color: rgb(157, 178, 150);
     color: white;
@@ -99,6 +106,10 @@ footer {
 
 footer a{
     color:white;
+}
+
+footer .modal, footer .modal a {
+    color: black;
 }
 
 footer .container {
@@ -112,6 +123,8 @@ footer .container {
 
 .social-icons {
     margin-left: 15px;
+    width:32px;
+    height: auto;
 }
 
 @media screen and (max-width:1087px){
@@ -130,7 +143,7 @@ footer .container {
 }
 
 @media screen and (max-width: 767px){
-    p{
+    p, h6{
         font-size: 12px;
     }
     #history, #quiz, #testimonials {
@@ -149,6 +162,10 @@ footer .container {
     }
 }
 @media screen and (max-width: 576px){
+    .social-icons {
+        max-width:25px;
+        height: auto;
+    }
     .media-content * {
         margin:0 !important;
     }
