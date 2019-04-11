@@ -317,7 +317,7 @@ def edit_review(origin, reviewid):
 
 
 @app.route('/shop', methods=["GET"])
-@login_required
+# @login_required
 def shop():
     if current_user.is_authenticated:
         user=current_user
@@ -337,7 +337,7 @@ def average(reviews):
     return sum(ratings)/len(ratings)
 
 @app.route('/shop/<category>', methods=["GET"])
-@login_required
+# @login_required
 def shop_products(category):
     if current_user.is_authenticated:
         user=current_user
@@ -348,7 +348,7 @@ def shop_products(category):
     return render_template("products.html", product=product, cartq=cartq)
 
 @app.route('/shop/product/<data_name>', methods=["GET", "POST"])
-@login_required
+# @login_required
 def product_details(data_name):
     if current_user.is_authenticated:
         user=current_user
@@ -480,7 +480,7 @@ def remove_from_cart(order_details_id):
         remove_order.order.total_cost -= remove_order.subtotal
         remove_order.order.save()
         remove_order.delete_instance()
-        flash('Removed from your cart.', 'success')
+        flash('Removed from your cart.', 'danger')
         return redirect(url_for("cart"))
     else:
         return ("error")

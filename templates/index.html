@@ -27,19 +27,32 @@
     </a>
 </div>
 
-<div class="container">
-<section id="history">
-    <h2>About Us</h2>
-    <p>
-        Acacia for <i>secret love</i>, daffodil for <i>new beginnings</i>, wisteria for <i>welcome</i>, and camellia <i>for my destiny is in your hands.</i> In Victorian times, the language of flowers was used to convey romantic expressions but over time, many of these hidden meaning have become forgotten. Some flowers are quite frank in their meanings, a red rose for <i>love</i> and lily for <i>majesty</i>, but others may be unexpected, like cactus for <i>ardent love</i> or peony for <i>anger</i>.
-    </p> 
-    <p>
-        Inspired by the iris flower, <i>Message</i> is here to help you decipher the language of flowers. We have helped countless brides, couples, and pining hearts find a way to communicate through thoughtful bouquets that say more than just words alone. Let us help you find the right flower for what you want to say because every message is different.
-    </p>
+<!-- <div class=""> -->
+<section id="history" class="container">
+    <div class="row justify-content-center">
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h2>About Us</h2>
+            <p>
+                Acacia for <i>secret love</i>, daffodil for <i>new beginnings</i>, wisteria for <i>welcome</i>, and camellia <i>for my destiny is in your hands.</i> In Victorian times, the language of flowers was used to convey romantic expressions but over time, many of these hidden meaning have become forgotten. Some flowers are quite frank in their meanings, a red rose for <i>love</i> and lily for <i>majesty</i>, but others may be unexpected, like cactus for <i>ardent love</i> or peony for <i>anger</i>.
+            </p>
+        </div> 
+        <!-- <div class="row align-items-center"> -->
+        <div class="col-md col-6 align-items-center">
+            <img src="{{url_for('static', filename='about.jpg')}}" class="d-block mx-auto image-fluid about-image"alt="">
+        </div>
+        <div class="col-md-12 col-6">
+            <p>
+                Inspired by the iris flower, <i>Message</i> is here to help you decipher the language of flowers. We have helped countless brides, couples, and pining hearts find a way to communicate through thoughtful bouquets that say more than just words alone. Let us help you find the right flower for what you want to say because every message is different.
+            </p>
+        </div>
+    </div>
+    <!-- </div> -->
 
 </section>
 
-<section id="featured">
+<section id="featured" class="container">
     <h2>Featured Products</h2>
     <div class="row">
         {% for item in featured %}
@@ -76,33 +89,50 @@
     </div>
 </section>
 
-<section id="testimonials">
+<section id="testimonials" class="container">
     <h2>What do our favorite customers say?</h2>
-    <blockquote>
-        <q>
-            Message's bouquets are truly life changing. I bought flowers for my home on my first date with a guy and now we're married! I booked Message all our big anniversaries already.
-        </q>
-        <br> &mdash; Bethany
-    </blockquote>
-    <blockquote>
-        <q>
-            I wasn't sure what to expect at first, but these flowers with their hidden meanings truly do make a difference. Every bouquet is carefully crafted and they make sure to pay attention to your needs. I'm amazed. 
-        </q>
-        <br> &mdash; Marlena
-    </blockquote>
+    <div class="row testimony align-items-center">
+        <div class="col-6">
+            <p>
+                <q>
+                Message's bouquets are truly life changing. I bought flowers for my home on my first date with a guy and now we're married! I booked Message for all our big anniversaries already.
+                </q>
+                <br> &mdash; Bethany
+            </p>
+        </div>
+        <div class="col-6">
+            <img src="{{url_for('static', filename='testimonial_2.jpg')}}" class="testimonial-image image-fluid">
+        </div>
+    </div>
+    <div class="row testimony align-items-center">
+        <div class="col-6 order-sm-1 ">
+            <p>
+                <q>
+                    I wasn't sure what to expect at first, but these flowers with their hidden meanings truly do make a difference. Every bouquet is carefully crafted and they make sure to pay attention to your needs. I'm amazed. 
+                </q>
+                <br> &mdash; Marlena
+            </p>
+        </div>
+        <div class="col-6">
+            <img src="{{url_for('static', filename='testimonial_1.jpg')}}" class="testimonial-image image-fluid">
+        </div>
+    </div>
 </section>
 
 <section id="contact">
     <h2>Contact Us</h2>
-    <p>Have a big event coming up? Interested in something more custom? We are happy to help you with any floral arrangements you could desire. Our florists are experts with the language of flowers and we will make sure your message is delivered.</p>
-    <p>
+    <p class="text-justify">Have a big event coming up? Interested in something more custom? We are happy to help you with any floral arrangements you could desire. Our florists are experts with the language of flowers and we will make sure your message is delivered.</p>
+    <p class="text-center">
         We response to all inquiries within 1-2 business days. We look forward to hearing from you!
     </p>
-    <p>iris-message@email.com</p>
-    <p>444-888-1616</p>
+    <p class="text-center">Email: iris-message@email.com</p>
+    <p class="text-center">Phone: 444-888-1616</p>
+    <p class="text-center">4816 Victoria Lane
+        <br> San Francisco, CA
+    </p>
 </section>
 
-</div>
+<!-- </div> -->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

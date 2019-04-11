@@ -69,8 +69,14 @@ a:hover{
     transition: all 2s;
 }
 
-#history, #landing-quiz, #testimonials, #contact {
+
+#history, #testimonials, #contact {
     padding: 10% 15%;
+}
+
+.about-image {
+    width: 70%;
+    height:auto;
 }
 
 #history h2, #featured h2, #landing-quiz h2, .quiz-direct, #testimonials h2, #contact h2{
@@ -83,12 +89,22 @@ a:hover{
 }
 
 #landing-quiz {
-    background-color: white;
+    background-color: #9db296;
+    padding: 10% 20%
 }
 
 #featured {
     padding-top: 4em;
     padding-bottom: 4em;
+}
+
+.testimony {
+    margin: 2em 0;
+}
+
+.testimonial-image {
+    width: 100%;
+    height: auto;
 }
 
 .modal-header {
@@ -127,7 +143,23 @@ footer .container {
     height: auto;
 }
 
+#account-nav, #cart-nav{
+    display: none;
+}
+
+@media screen and (max-width:1199px){
+    .about-image{
+        width: 100%;
+    }
+}
+
 @media screen and (max-width:1087px){
+    #cart-icon, #account-icon {
+        display: none;
+    }
+    #cart-nav, #account-nav{
+        display: block;
+    }
     .navbar {
         display: block;
     }
@@ -140,14 +172,33 @@ footer .container {
     #navbarBasic{
         width:100%;
     }
+    
+}
+
+@media screen and (max-width:1024px){
+    .about-image{
+        width:80%;
+    }
+}
+
+@media screen and (max-width:990px){
+    #history {
+        padding-right: 0;
+        padding-left: 0;
+    }
 }
 
 @media screen and (max-width: 767px){
     p, h6{
         font-size: 12px;
     }
-    #history, #quiz, #testimonials {
-        padding:3em;
+    #quiz, #testimonials {
+        padding-right:0;
+        padding-left: 0;
+    }
+    #history {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 @media screen and (max-width: 720px){
@@ -159,9 +210,14 @@ footer .container {
     }
     footer h5{
         font-size: 15px;
+        margin-bottom: 0!important;
     }
 }
 @media screen and (max-width: 576px){
+    #history {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
     .social-icons {
         max-width:25px;
         height: auto;
@@ -179,7 +235,10 @@ footer .container {
     .footer-row{
         margin-bottom: 1em;
     }
-    .amberly {
-        margin-top: 15px;
+}
+
+@media screen and (max-width: 470px){
+    .about-image{
+        width:100%
     }
 }
