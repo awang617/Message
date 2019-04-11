@@ -45,16 +45,23 @@
                 <a class="navbar-item" href="/#history" title="history">About Us</a>
                 {% if current_user.is_authenticated %}
                 <a class="navbar-item" href="{{url_for('logout')}}" title="logout">Logout</a>
-                <a class="navbar-item" href="{{url_for('profile')}}" title="account">
+                <a id="account-icon" class="navbar-item" href="{{url_for('profile')}}" title="account">
                     <img src="{{url_for('static', filename='member_icon.png')}}" style="width:20px; height:auto">
+                </a>
+                <a id="account-nav" class="navbar-item" href="{{url_for('profile')}}" title="account">
+                    Account
                 </a>
                 {% else %}
                 <a class="navbar-item" href="{{url_for('login')}}">Login</a>
                 <a class="navbar-item" href="{{url_for('signup')}}">Signup</a>
                 {% endif %}
-
-                <a class="navbar-item" href="{{url_for('cart')}}" title="cart">
-                    <img src="{{url_for('static', filename='bag_icon.png')}}" style="width:23px;height:auto;"> ({{cartq}})
+                <a id="cart-icon" class="navbar-item" href="{{url_for('cart')}}" title="cart">
+                    <img src="{{url_for('static', filename='bag_icon.png')}}" style="width:23px;height:auto;"> 
+                    ({{cartq}})
+                </a>
+                <a id="cart-nav" class="navbar-item" href="{{url_for('cart')}}" title="cart">
+                    Cart
+                    ({{cartq}})
                 </a>
             </div>
         </div>
@@ -79,7 +86,7 @@
                 <div class="amberly col-lg-4 col-6 d-flex justify-content-lg-center justify-content-end align-items-center">
                     <a href="/shop"><p style="margin:0 10px">Shop</p></a>
                     <a href="/quiz"><p style="margin:0 10px">Quiz</p></a>
-                    <a href="/#history"><p style="margin:0 10px">About Us</p></a>
+                    <a href="/#history"><p style="margin:0 10px">About</p></a>
                 </div>
                 <div class="col-lg-4 text-center">
                     <label class="menu-label" style="color: white; margin:0">Sign up for our newsletter!</label>
@@ -115,7 +122,7 @@
             </div>
             <div class="row">
                 <div class="col text-center">
-                    <a href="https://github.com/awang617"><h5>Made by Amberly Wang</h5></a>
+                    <a href="https://github.com/awang617"><h6>Made by Amberly Wang</h6></a>
                     <h6>Copywrite &copy; message.com 2019</h6>
                 </div>
             </div>

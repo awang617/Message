@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    // $(window).on('resize', function(){
+    //     var win = $(this); //this = window
+    // });
 
     // Check for click events on the navbar burger icon
     $(".navbar-burger").click(function() {
