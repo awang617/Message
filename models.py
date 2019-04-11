@@ -8,10 +8,10 @@ import psycopg2
 
 from playhouse.db_url import connect
 
-DATABASE = connect(os.environ.get('DATABASE_URL'))
+# DATABASE = connect(os.environ.get('DATABASE_URL'))
 
 # conn = psycopg2.connect(DATABASE, sslmode='require')
-# DATABASE = PostgresqlDatabase('message')
+DATABASE = PostgresqlDatabase('message')
 
 class User(UserMixin, Model):
     fname = CharField()

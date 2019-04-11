@@ -317,7 +317,7 @@ def edit_review(origin, reviewid):
 
 
 @app.route('/shop', methods=["GET"])
-@login_required
+# @login_required
 def shop():
     if current_user.is_authenticated:
         user=current_user
@@ -337,7 +337,7 @@ def average(reviews):
     return sum(ratings)/len(ratings)
 
 @app.route('/shop/<category>', methods=["GET"])
-@login_required
+# @login_required
 def shop_products(category):
     if current_user.is_authenticated:
         user=current_user
@@ -348,7 +348,7 @@ def shop_products(category):
     return render_template("products.html", product=product, cartq=cartq)
 
 @app.route('/shop/product/<data_name>', methods=["GET", "POST"])
-@login_required
+# @login_required
 def product_details(data_name):
     if current_user.is_authenticated:
         user=current_user
