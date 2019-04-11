@@ -71,24 +71,60 @@
     <footer>
         <div class="container">
             <div class="footer-row row">
-                <div class="col-sm-6 d-flex align-items-center">
+                <div class="col-lg-4 col-6 d-flex align-items-center">
                     <h5>Follow us</h5>
-                    <a href="https://www.facebook.com" class="social-icons"><img src="{{url_for('static', filename='facebook_icon.png')}}" alt="" style="width:40px; height:40px;"></a>
-                    <a href="https://www.twitter.com" class="social-icons"><img src="{{url_for('static', filename='twitter_icon.png')}}" alt="" style="width:40px; height:40px;"></a>
+                    <a href="https://www.facebook.com" class="social-icons image-fluid"><img src="{{url_for('static', filename='facebook_icon.png')}}" alt="" "></a>
+                    <a href="https://www.twitter.com" class="social-icons image-fluid"><img src="{{url_for('static', filename='twitter_icon.png')}}" alt=""></a>
                 </div>
-                <div class="amberly col-sm-6 d-flex justify-content-end align-items-center">
-                    <a href="https://github.com/awang617"><h5>Made by Amberly Wang</h5></a>
+                <div class="amberly col-lg-4 col-6 d-flex justify-content-lg-center justify-content-end align-items-center">
+                    <a href="/shop"><p style="margin:0 10px">Shop</p></a>
+                    <a href="/quiz"><p style="margin:0 10px">Quiz</p></a>
+                    <a href="/#history"><p style="margin:0 10px">About Us</p></a>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <label class="menu-label" style="color: white; margin:0">Sign up for our newsletter!</label>
+                    <div class="row justify-content-lg-around justify-content-center">
+                        <form class="d-flex align-items-center">
+                            <input id="subscribeEmail" type="email" class="form-control" placeholder="Email" required style="margin: 0 5px">
+                            <button type="button" class="subscribe button" value="Subscribe" style="margin: 0 5px">
+                                Subscribe
+                            </button>
+                                
+                            <!-- Modal -->
+                            <div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Thank you for subscribing!</h3>
+                                            <p>We are so excited to have you join us!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="button"><a href="/shop">See our shop</a></button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <h6>Copywrite &copy; message.com 2019</h6>
+            <div class="row">
+                <div class="col text-center">
+                    <a href="https://github.com/awang617"><h5>Made by Amberly Wang</h5></a>
+                    <h6>Copywrite &copy; message.com 2019</h6>
+                </div>
             </div>
         </div>
 
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>

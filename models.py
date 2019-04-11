@@ -10,7 +10,6 @@ from playhouse.db_url import connect
 
 # DATABASE = connect(os.environ.get('DATABASE_URL'))
 
-# conn = psycopg2.connect(DATABASE, sslmode='require')
 DATABASE = PostgresqlDatabase('message')
 
 class User(UserMixin, Model):

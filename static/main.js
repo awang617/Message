@@ -13,4 +13,15 @@ $(document).ready(function() {
         $(this).parent().remove()
     })
 
+    $('.subscribe').click(function(e) {
+        e.preventDefault()
+        // debugger;
+        if($("#subscribeEmail").is(':valid')) {
+            $('#subscribeModal').modal('show');
+            console.log($('#subscriberEmail'))
+            // debugger;
+            $(this).closest("form")[0].reset(); 
+          }
+    })
+
   });
