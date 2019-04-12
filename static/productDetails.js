@@ -1,9 +1,9 @@
+// creating a chart with an ajax call to get the review ratings for a product
 $(document).ready(function() {
     console.log("working")
 
     $('.review-form').on('click', function(event) {
         event.preventDefault();
-        // $(this).siblings('.review').removeClass('hidden')
         $(this).siblings('.review').slideDown()
 
     })
@@ -14,7 +14,6 @@ $(document).ready(function() {
     })
 
     productid = $('[data-id]').attr('data-id')
-    console.log(productid)
     $.ajax({
         method:"GET",
         url: "/rating_votes/"+productid,
@@ -26,15 +25,17 @@ $(document).ready(function() {
     }
 
     function onSuccess(response) {
-        console.log(response)
         let ratings= []
+        // getting rid of the brackets and white spaces
         let str = response.replace(/[\[\]']+/g, '')
         str = str.replace(/\s/g, '')
+        // split based on commas to make an array of strings
         let part = str.split(',')
+        // change the str to int and push to the array
         for(var i=0; i< part.length; i++){
             ratings.push(parseInt(part[i]))
         }
-        console.log(ratings)
+        // render the chart
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'horizontalBar',
