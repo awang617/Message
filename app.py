@@ -264,7 +264,7 @@ def order_history():
     user = current_user
     current_hour = datetime.datetime.now().hour
     greeting = time_of_day(current_hour)
-    orders = models.Order.select().where(models.Order.user_id == user.id, models.Order.purchased == True)
+    orders = models.Order.select().where(models.Order.user_id == user.id, models.Order.purchased == True).order_by(models.Order.order_date.desc())
     return render_template("orderHistory.html", user=user, greeting=greeting, orders=orders, cartq=cartq)
 
 
