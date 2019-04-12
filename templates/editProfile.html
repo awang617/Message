@@ -8,22 +8,22 @@
 <form method="POST" action="" class="form form-group">
     {{ form.hidden_tag() }}
     
+    {{ field_error(form.fname) }}
     <div class=" row">
-        {{ field_error(form.fname) }}
         {{form.fname.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-9 col-sm-7">
             {{form.fname(value=user.fname, class="form-control")}}
         </div>
     </div>
+    {{ field_error(form.lname) }}
     <div class=" row">
-        {{ field_error(form.lname) }}
         {{form.lname.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-9 col-sm-7">
             {{form.lname(value=user.lname, class="form-control")}}
         </div>
     </div>
+    {{ field_error(form.email) }}
     <div class=" row">
-        {{ field_error(form.email) }}
         {{form.email.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-9 col-sm-7">
             {{form.email(value=user.email, class="form-control")}}

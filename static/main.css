@@ -157,7 +157,7 @@ footer .container {
     #cart-icon, #account-icon {
         display: none;
     }
-    #cart-nav, #account-nav{
+    #account-nav, #cart-nav {
         display: block;
     }
     .navbar {
