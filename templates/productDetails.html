@@ -75,6 +75,7 @@
                 <canvas id="myChart" width="400" height="400"></canvas>
             </div>
             
+            {% if current_user.is_authenticated %}
             <button class="button review-form">Submit a review</button>
             <div class="hidden review">
                 <form method="POST" action="" class="form form-group">
@@ -86,6 +87,7 @@
                 </form>
                 <button class="button cancel-review">Cancel</button>
             </div>
+            {% endif %}
         </div>
 
         <div class="col-sm-8">
@@ -141,9 +143,12 @@
                 <hr>
             {% endfor %}
             {% else %}
-            
-            <h3>Be the first to review this product!</h3>
-            
+                {% if current_user.is_authenticated %}
+                    <h3>Be the first to review this product!</h3>
+                {% else %}
+                    <h3>Log in to review this product!</h3>
+                    <button class="button"><a href="/login">Login</a></button>
+                {% endif %}
             {% endif %}
             
         </div>

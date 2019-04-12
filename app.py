@@ -410,7 +410,7 @@ def product_details(data_name):
     user = current_user
     product = models.Product.get(models.Product.data_name == data_name)
     reviews = models.Review.select().where(models.Review.product_id == product.id).order_by(models.Review.date_posted.desc())
-    if form.validate_on_submit():
+    if form.validate_on_submit() and current_user.is_authenticated:
         models.Review.create(
             user=user.id,
             product=product,
