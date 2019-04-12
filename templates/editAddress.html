@@ -8,23 +8,23 @@
 <form method="POST" action="" class="form form-group">
     {{ form.hidden_tag() }}
     
+    {{ field_error(form.street_address) }}
     <div class="row">
-        {{ field_error(form.street_address) }}
         {{form.street_address.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-9 col-sm-7">
             {{form.street_address(value=user.street_address, class="form-control")}}
         </div>
     </div>
+    {{ field_error(form.city) }}
     <div class="row">
-        {{ field_error(form.city) }}
         {{form.city.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-9 col-sm-7">
             {{form.city(value=user.city, class="form-control")}}
         </div>
     </div>
+    {{ field_error(form.state) }}
     <div class="row">
         <input type="hidden" id="st" value="{{user.state}}"/>
-        {{ field_error(form.state) }}
         {{form.state.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-3 col-4">
             {{form.state(class="form-control hacky")}}
@@ -34,8 +34,8 @@
             els.value = document.getElementById('st').value
         </script>
     </div>
+    {{ field_error(form.postal_code) }}
     <div class="row">
-        {{ field_error(form.postal_code) }}
         {{form.postal_code.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-9 col-sm-7">
             {{form.postal_code(value=user.postal_code, class="form-control")}}

@@ -147,6 +147,13 @@ footer .container {
     display: none;
 }
 
+.button:hover{
+    background: #4b5647;
+    color: white;
+    transition: all 2s;
+    border-color: #4b5647;
+}
+
 @media screen and (max-width:1199px){
     .about-image{
         width: 100%;
@@ -157,7 +164,7 @@ footer .container {
     #cart-icon, #account-icon {
         display: none;
     }
-    #cart-nav, #account-nav{
+    #account-nav, #cart-nav {
         display: block;
     }
     .navbar {
@@ -189,7 +196,7 @@ footer .container {
 }
 
 @media screen and (max-width: 767px){
-    p, h6{
+    p, h6, .media-right{
         font-size: 12px;
     }
     #quiz, #testimonials {

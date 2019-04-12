@@ -17,37 +17,37 @@
 <form method="POST" action="" class="form">
     {{ form.hidden_tag() }}
     
+    {{ field_error(form.recipient_fname) }}
     <div class="form-group row">
-        {{ field_error(form.recipient_fname) }}
         {{form.recipient_fname.label(class="col-sm-2 menu-label")}}
         <div class="col-sm-10">
             {{form.recipient_fname(value=order.recipient_fname, class="form-control")}}
         </div>
     </div>
+    {{ field_error(form.recipient_lname) }}
     <div class="form-group row">
-        {{ field_error(form.recipient_lname) }}
         {{form.recipient_lname.label(class="col-sm-2 menu-label")}}
         <div class="col-sm-10">
             {{form.recipient_lname(value=order.recipient_lname, class="form-control")}}
         </div>
     </div>
+    {{ field_error(form.recipient_street_address) }}
     <div class="form-group row">
-        {{ field_error(form.recipient_street_address) }}
         {{form.recipient_street_address.label(class="col-sm-2 menu-label")}}
         <div class="col-sm-10">
             {{form.recipient_street_address(value=order.recipient_street_address, class="form-control")}}
         </div>
     </div>
+    {{ field_error(form.recipient_city) }}
     <div class="form-group row">
-        {{ field_error(form.recipient_city) }}
         {{form.recipient_city.label(class="col-sm-2 menu-label")}}
         <div class="col-sm-10">
             {{form.recipient_city(value=order.recipient_city, class="form-control")}}
         </div>
     </div>
+    {{ field_error(form.recipient_state) }}
     <div class="form-group row">
         <input type="hidden" id="st" value="{{order.recipient_state}}"/>
-        {{ field_error(form.recipient_state) }}
         {{form.recipient_state.label(class="col-sm-2 menu-label")}}
         <div class="col-sm-2">
             {{form.recipient_state(class="hacky form-control")}}
@@ -57,8 +57,8 @@
         var els = document.getElementsByClassName("hacky")[0];
         els.value = document.getElementById('st').value
     </script>
+    {{ field_error(form.recipient_postal_code) }}
     <div class="form-group row">
-        {{ field_error(form.recipient_postal_code) }}
         {{form.recipient_postal_code.label(class="col-sm-2 menu-label")}}
         <div class="col-sm-10">
             {{form.recipient_postal_code(value=order.recipient_postal_code, class="form-control")}}
