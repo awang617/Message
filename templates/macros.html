@@ -26,6 +26,15 @@
   {%endif%}
 {% endmacro%}
 
+{% macro email_error(field) %}
+{% if field.errors %} {% for error in field.errors %}
+  <div class="form-group row justify-content-center">
+    <div class="notification error col-12">{{ error }}</div>
+  </div>
+  {% endfor %}
+  {%endif%}
+{% endmacro%}
+
 {% macro review_field(field) %}
 <div class="form-group row justify-content-center">
 

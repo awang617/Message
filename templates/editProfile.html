@@ -1,37 +1,44 @@
 {% extends "profile.html" %}
-{% from "macros.html" import field_error %}
+{% from "macros.html" import field_error, email_error %}
 
 {% block profile %}
 <h2>Edit Profile</h2>
 <a href="/profile">&#8592; Back</a>
 <div class="container">
 <form method="POST" action="" class="form form-group">
-    {{ form.hidden_tag() }}
+    {{ name_form.hidden_tag() }}
     
-    {{ field_error(form.fname) }}
+    {{ field_error(name_form.fname) }}
     <div class=" row">
-        {{form.fname.label(class="menu-label col-lg-3 col-sm-5")}}
+        {{name_form.fname.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-9 col-sm-7">
-            {{form.fname(value=user.fname, class="form-control")}}
+            {{name_form.fname(value=user.fname, class="form-control")}}
         </div>
     </div>
-    {{ field_error(form.lname) }}
+    {{ field_error(name_form.lname) }}
     <div class=" row">
-        {{form.lname.label(class="menu-label col-lg-3 col-sm-5")}}
+        {{name_form.lname.label(class="menu-label col-lg-3 col-sm-5")}}
         <div class="col-lg-9 col-sm-7">
-            {{form.lname(value=user.lname, class="form-control")}}
-        </div>
-    </div>
-    {{ field_error(form.email) }}
-    <div class=" row">
-        {{form.email.label(class="menu-label col-lg-3 col-sm-5")}}
-        <div class="col-lg-9 col-sm-7">
-            {{form.email(value=user.email, class="form-control")}}
+            {{name_form.lname(value=user.lname, class="form-control")}}
         </div>
     </div>
     
     <button class="button" type="submit">Edit Profile</button>
         <!-- <a type="submit" class="button" id="submit">Submit Review</a> -->
+</form>
+
+<form method="POST" class="form form-group">
+    {{ email_form.hidden_tag() }}
+
+    {{ email_error(email_form.email) }}
+    <div class=" row">
+        {{email_form.email.label(class="menu-label col-lg-3 col-sm-5")}}
+        <div class="col-lg-9 col-sm-7">
+            {{email_form.email(value=user.email, class="form-control")}}
+        </div>
+    </div>
+    <button class="button" type="submit">Edit Email</button>
+
 </form>
 </div>
 {% endblock %}

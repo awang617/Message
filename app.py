@@ -221,14 +221,18 @@ def edit_profile():
     user = current_user
     current_hour = datetime.datetime.now().hour
     greeting = time_of_day(current_hour)
-    form = forms.EditProfileForm()
-    if form.validate_on_submit():
-        user.fname=form.fname.data
-        user.lname=form.lname.data
-        user.email=form.email.data
+    name_form = forms.EditProfileForm()
+    email_form = forms.EditEmailForm()
+    if name_form.validate_on_submit():
+        user.fname=name_form.fname.data
+        user.lname=name_form.lname.data
         user.save()
         return redirect(url_for("profile"))
-    return render_template("editProfile.html", form=form, user=user, greeting=greeting, cartq=cartq)
+    elif email_form.validate_on_submit():
+        user.email=email_form.email.data
+        user.save()
+        return redirect(url_for("profile"))
+    return render_template("editProfile.html", name_form=name_form, email_form=email_form, user=user, greeting=greeting, cartq=cartq)
 
 ## EDIT ADDRESS ROUTE
 @app.route('/profile/address', methods=["GET", "POST"])

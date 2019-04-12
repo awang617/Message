@@ -73,6 +73,8 @@ class EditProfileForm(Form):
             )
         ]
     )
+
+class EditEmailForm(Form):
     email = StringField(
         'Email',
         validators=[
