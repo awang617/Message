@@ -641,9 +641,72 @@ if 'ON_HEROKU' in os.environ:
 
 if __name__ == '__main__':
     models.initialize()
+    # uncomment this try-except block to seed the database, recomment to run the app
     # try:
-    #     bouquet= models.Category.get(models.Category.id ==1)
-    #     plant = models.Category.get(models.Category.id ==2)
+    #     models.Category.create(category_name="bouquet")
+    #     models.Category.create(category_name="plant")
+    #     bouquet = models.Category.get(models.Category.category_name == "bouquet")
+    #     plant = models.Category.get(models.Category.category_name == "plant")
+    #     models.Product.create(
+    #         name="Roses are Red",
+    #         description="Everyone knows red roses means love. This classic bouquet is perfect for romantic occasions.",
+    #         image="https://cdn.azflorist.com/wp-content/uploads/20190128091943/E2-4305D.jpg",
+    #         plant="red rose",
+    #         meaning="love",
+    #         price=40,
+    #         data_name="red-roses",
+    #         category=bouquet
+    #     )
+    #     models.Product.create(
+    #         name="Prettily Presuming",
+    #         description="Be careful when giving or recieving this beautiful bloom, as snapdragons mean presumption. Perhaps there is someone sets themselves too highly, or took you for granted. A snapdragon may snap them into place.",
+    #         image="https://cdn1.harryanddavid.com/wcsstore/HarryAndDavid/images/catalog/17_31841_30E_01ex.jpg",
+    #         plant="snapdragon",
+    #         meaning="Presumption",
+    #         price=35,
+    #         data_name="prettily-presuming",
+    #         category=bouquet
+    #     )
+    #     models.Product.create(
+    #         name="Return of Happiness",
+    #         description="These delicate flowers are perfect if you wish for a return of joy. Send it after an argument has pass or as a homecoming gift.",
+    #         image="https://i.pinimg.com/originals/64/7e/b5/647eb574340a0351ba55e3d1d91fae77.jpg",
+    #         plant="lily of the valley",
+    #         meaning="Return of happiness",
+    #         price=49,
+    #         data_name="return-of-happiness",
+    #         category=bouquet
+    #     )
+    #     models.Product.create(
+    #         name="Cactus",
+    #         description="Don't let its prickly exterior fool you. Cactus means ardent love, and is a great alternative if your partner thinks roses are cliche. Best of all, they are easy to care for and live long lives.",
+    #         image="https://cdn.shopify.com/s/files/1/0130/1052/products/DSC_0340_1024x1024@2x.jpg?v=1517494867",
+    #         plant="cactus",
+    #         meaning="ardent love",
+    #         price="19",
+    #         data_name="cactus",
+    #         category=plant
+    #     )
+    #     models.Product.create(
+    #         name="Prosper",
+    #         description="A gift imbued with the best wishes of prosperity and good health.",
+    #         image="https://cdn.shopify.com/s/files/1/0207/8508/products/2018-Sage-Bush-001_1_1024x1024.jpg?v=1537882781",
+    #         plant="sage",
+    #         meaning="good health and long life",
+    #         price=15,
+    #         data_name="prosper",
+    #         category=plant
+    #     )
+    #     models.Product.create(
+    #         name="Lavender",
+    #         description="Although its scent is soothing its meaning is not. Lavender means mistrust, so be wary who you send one to.",
+    #         image="https://bouqs-production-weblinc.netdna-ssl.com/product_images/lavender/Original/5c3d2db061707040b4002757/detail.jpg?c=1547513264",
+    #         plant="lavender",
+    #         meaning="mistrust",
+    #         price=22,
+    #         data_name="potted-lavender",
+    #         category=plant
+    #     )
     #     models.Product.create(
     #         name="Declare Your Love",
     #         description="Tulips continue blooming even after they are cut, which is perfect for their meaning: declaration of love. They reach out as if eagerly declaring their love. If you want to be assertive in your feelings, this is the perfect arrangement.",
