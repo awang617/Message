@@ -13,6 +13,12 @@ http://iris-message.herokuapp.com/
 - Bulma
 - Chart.js
 
+## Running this Project
+To run this project make sure all dependencies are installed in virtualenv using `pip3 install -r requirements.txt`:
+1. Uncomment the try-except block in `app.py`
+2. Run `python3 app.py`
+3. Open localhost:8000
+
 ## Inspiration
 My inspiration from this project sprung from a book I read once called The Language of Flowers (Vanessa Diffenbaugh). The main character of the book started a florist business called Message, and she used the language of flowers to arrange her bouquets. The idea of using the language of flowers for a floral arrangement business was very intriguing to me and something I wish actually existing. My app, Message, was built as a mockup for how this character might make an online presence for her business.
 
