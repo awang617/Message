@@ -20,7 +20,7 @@ To run this project make sure all dependencies are installed in virtualenv using
 3. Open localhost:8000
 
 Note:
-For testing purposes, please use Stripe API's test credit card number 4242 4242 4242 4242 4242 with CCV number and a valid expiration date. Do not enter a valid credit card number.
+For testing purposes, please use Stripe API's test credit card number 4242 4242 4242 4242 with any CCV number and any valid expiration date. Do not enter a valid credit card number.
 
 ## Inspiration
 My inspiration from this project sprung from a book I read once called The Language of Flowers (Vanessa Diffenbaugh). The main character of the book started a florist business called Message, and she used the language of flowers to arrange her bouquets. The idea of using the language of flowers for a floral arrangement business was very intriguing to me and something I wish actually existing. My app, Message, was built as a mockup for how this character might make an online presence for her business.
