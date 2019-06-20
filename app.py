@@ -650,7 +650,7 @@ if __name__ == '__main__':
     #     models.Product.create(
     #         name="Roses are Red",
     #         description="Everyone knows red roses means love. This classic bouquet is perfect for romantic occasions.",
-    #         image="https://cdn.azflorist.com/wp-content/uploads/20190128091943/E2-4305D.jpg",
+    #         image="https://ibb.co/NxL2wJ2",
     #         plant="red rose",
     #         meaning="love",
     #         price=40,
